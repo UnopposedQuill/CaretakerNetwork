@@ -1,0 +1,9 @@
+1) La red de cuido tiene centros de atencion
+2) Existe servicios de Cuido , puede ser cuido a adulto o niño
+3) Se puede hacer cuidar por horas, dias, mensuales , etc 
+4) Existen empleados y tienen estudios, Ej: Especialidad en niños, persona terminal, etc
+5) Existen categorias que fijan el precio del cuidado y el salario del cuidador.
+6) Hay un Administrador que puede hacer y ver pago de salarios, compra de materiales, 
+atencion de llamadas , asignacion de personal a solicitudes.
+7) Cada Empleado tiene un puesto y un salario 
+8) Cada puesto tiene una lista de actividades a cumplir

@@ -1,0 +1,64 @@
+Red de Cuido:
+
+Una empresa de red de cuido de personas, lo ha contratado para que realice un Sistema que le administrar toda su operación. 
+ La red de cuido se conforma de centros de atención en todo el país.  Cada centro tiene su propio personal.
+
+La red de cuido cuenta con diferentes niveles de servicio, pueden ser por ejemplo cuido de adulto mayor, cuido de menores, 
+cuido por horas, cuido por días, mensuales, nocturnos, etc etc.
+
+Se cuenta con un grupo de personas empleadas, 
+cada una de diferentes categor㼡as y estudios, por ejemplo hay personas que son certificadas para el cuido de adultos mayores, 
+otras para niños, otras tienen especialidad en personas con enfermedades terminales, etc.
+
+Cada persona puede cumplir con una o mas categorías, cada categoría tiene un precio que se le cobra al cliente, 
+y un precio que se le paga al cuidador.
+
+Ademas de los cuidadores, la empresa tiene un grupo de personas 
+que ayudan con la parte administrativa, 
+por ejemplo los pagos de salarios, compra de materiales,
+ atención de llamadas, asignación de personal a solicitudes.
+
+Cada persona tiene su puesto y salario, cada puesto tiene 
+una lista de actividades que debe de cumplir.
+
+Para los cuidadores, se mantiene además de todas sus características, 
+un listado de veces que se han contratado 
+y la calificación del servicio.  Se debe mantener Tambien un horario deseado.
+
+Los clients deben de registrarse primero, son evaluados para poder 
+determinar si se aceptan o no como clients.  
+Los clients pueden perder su oportunidad de continuar como clients, 
+si un cuidador ha puesto quejas recurrentes sobre el cliente.
+
+Se debe tener un muy buen registro del cliente, donde se puedan 
+ver las diferentes enfermedades y tratamientos que recibe.
+
+Una vez que son clients, las personas tienen acceso a revisar 
+los cuidadores y comentarios y/o evaluaciones otorgadas por otros clientes. 
+El sitio debe de contar con características de accesibilidad, 
+ya que el cliente puede ser la persona directa quien está contratando.. 
+
+Un cliente puede hacer la solicitud del cuidador, y el Sistema 
+debe de indicarle si existe o no oportunidad de satisfacer la necesidad; 
+si es possible, entonces se procede con el cobro del servicio por adelantado.
+
+El administrador del lugar, debe de poder ver diferentes
+ tipos de reportes para obtener información sobre cantidad y montos de servicios dados,
+ por tipo de servicio, por persona, por cliente y/o fechas. 
+ Para todos los centros o solo uno.
+
+Debe de poder verse la calificación para poder encontrar los mejores 
+y peores cuidadores por categoría, pagos realizados vrs montos recibidos, .
+Para todos los centros o solo uno.
+
+Se debe contar con al menos tres tipos de usuario, el administrador, 
+el usuario cliente, el usuario tipo clerk.
+
+ 
+
+
+
+
+Debe de entregar además del producto, la documentación de acuerdo con la especificación de arquitectura de la IEEE  SAD, 
+la plantilla se encuentra entre los documentos del curso.  Debe además agregar como anexo la justificación de los patrones 
+utilizados y cómo su solución cumple con los principios vistos en clase tanto para diseño interno como de interfaz
