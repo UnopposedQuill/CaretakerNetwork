@@ -14,11 +14,15 @@ import org.bson.types.ObjectId;
  * @author rober
  */
 public class User {
-   @Id
-   private ObjectId id;
-   
-   private String nombre;
-   private Date fechaNacimiento;
+
+  @Id
+  private ObjectId id;
+
+  private String nombre;
+  private Date fechaNacimiento;
+
+  public User() {
+  }
 
   public User(String nombre, Date fechaNacimiento) {
     this.nombre = nombre;
@@ -48,6 +52,5 @@ public class User {
   public void setFechaNacimiento(Date fechaNacimiento) {
     this.fechaNacimiento = fechaNacimiento;
   }
-   
-   
+
 }

@@ -15,7 +15,6 @@ import dev.morphia.query.UpdateOperator;
 import java.util.Date;
 import java.util.List;
 import models.User;
-import models.Usuario;
 
 /**
  *
@@ -31,7 +30,7 @@ public class Main {
     MongoClient mongoClient = new MongoClient(uri);
     final Datastore datastore = morphia.createDatastore(mongoClient, "heroku_8prjmqnp");
 
-    User usuario = new Usuario("Rob", new Date());
+    User usuario = new User("Rob", new Date());
     datastore.save(usuario);
     List<User> usuarioList = datastore.createQuery(User.class).asList();
     System.out.println(usuarioList.get(0).getFechaNacimiento());
