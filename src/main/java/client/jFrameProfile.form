@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="Your Profile"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jSeparator1" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                              <Component id="jCheckBoxBehalf" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="jLabelDateOfBirthBehalf" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jLabelFullNameBehalf" alignment="1" min="-2" pref="63" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jTextFieldFullNameBehalf" min="-2" pref="227" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="jSpinnerDayBirthBehalf" min="-2" pref="51" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jComboBoxMonthBirthBehalf" min="-2" pref="82" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jSpinnerYearBirthBehalf" min="-2" pref="82" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabelFullName" max="32767" attributes="0"/>
+                                  <Component id="jLabelDateOfBirth" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="44" pref="44" max="-2" attributes="0"/>
+                                      <Component id="jLabelPersonalDetails" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabelCaretakenDetails" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jTextFieldFullName" min="-2" pref="235" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jSpinnerDayBirth" min="-2" pref="47" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jComboBoxMonthBirth" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="jSpinnerYearBirth" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jButtonGoBack" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jButtonApplyChanges" min="-2" pref="73" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
+                          <Component id="jSeparator2" alignment="0" min="-2" pref="10" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabelConfirmPassword" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldConfirmPassword" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabelEmail" min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Component id="jLabelUsername" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabelPassword" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabelAccountDetails" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldPassword" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldEmail" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextFieldUsername" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jButtonSubscriptions" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabelReasonDetail" min="-2" pref="99" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jScrollPane1" min="-2" pref="256" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jComboBoxRequestReason" min="-2" pref="125" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jTextFieldSpecify" min="-2" pref="125" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabelRequestReason" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="94" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="jLabelPersonalDetails" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelFullName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldFullName" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jComboBoxMonthBirth" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jSpinnerDayBirth" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="jLabelDateOfBirth" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jSpinnerYearBirth" min="-2" pref="24" max="-2" attributes="0"/>
+                              <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="jLabelAccountDetails" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelUsername" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldUsername" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelConfirmPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextFieldConfirmPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="jSeparator2" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabelCaretakenDetails" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabelRequestReason" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jCheckBoxBehalf" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelFullNameBehalf" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldFullNameBehalf" alignment="3" min="-2" pref="19" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabelDateOfBirthBehalf" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerDayBirthBehalf" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="jSpinnerYearBirthBehalf" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                                  <Component id="jComboBoxMonthBirthBehalf" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jComboBoxRequestReason" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jTextFieldSpecify" alignment="0" min="-2" pref="24" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jLabelReasonDetail" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jButtonSubscriptions" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                              <Component id="jButtonGoBack" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonApplyChanges" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Component id="jSeparator3" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="jButtonGoBack">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Go Back"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelFullName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Full name"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldFullName">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelUsername">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Username"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldUsername">
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonSubscriptions">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="See your subscriptions"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinnerYearBirth">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="2019" maximum="2019" minimum="1900" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinnerDayBirth">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="1" maximum="31" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelDateOfBirth">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date of Birth"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxMonthBirth">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="12">
+            <StringItem index="0" value="January"/>
+            <StringItem index="1" value="February"/>
+            <StringItem index="2" value="March"/>
+            <StringItem index="3" value="April"/>
+            <StringItem index="4" value="May"/>
+            <StringItem index="5" value="June"/>
+            <StringItem index="6" value="July"/>
+            <StringItem index="7" value="August"/>
+            <StringItem index="8" value="September"/>
+            <StringItem index="9" value="October"/>
+            <StringItem index="10" value="November"/>
+            <StringItem index="11" value="December"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelAccountDetails">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Account Details"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelPersonalDetails">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Personal Details"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelCaretakenDetails">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Caretaken Details"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Email"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldEmail">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelPassword">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Password"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldPassword">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelConfirmPassword">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Confirm Password"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldConfirmPassword">
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator1">
+    </Component>
+    <Component class="javax.swing.JSeparator" name="jSeparator2">
+      <Properties>
+        <Property name="orientation" type="int" value="1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="jCheckBoxBehalf">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="This account is on behalf of:"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxBehalfActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelFullNameBehalf">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="Full Name"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelDateOfBirthBehalf">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Date of Birth"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldFullNameBehalf">
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinnerDayBirthBehalf">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="1" maximum="31" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JSpinner" name="jSpinnerYearBirthBehalf">
+      <Properties>
+        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+          <SpinnerModel initial="2019" maximum="2019" minimum="1900" numberType="java.lang.Integer" stepSize="1" type="number"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxMonthBirthBehalf">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="12">
+            <StringItem index="0" value="January"/>
+            <StringItem index="1" value="February"/>
+            <StringItem index="2" value="March"/>
+            <StringItem index="3" value="April"/>
+            <StringItem index="4" value="May"/>
+            <StringItem index="5" value="June"/>
+            <StringItem index="6" value="July"/>
+            <StringItem index="7" value="August"/>
+            <StringItem index="8" value="September"/>
+            <StringItem index="9" value="October"/>
+            <StringItem index="10" value="November"/>
+            <StringItem index="11" value="December"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelReasonDetail">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reason Details"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxRequestReason">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="Disease"/>
+            <StringItem index="1" value="Old Age Caretaking"/>
+            <StringItem index="2" value="Child Caretaking"/>
+            <StringItem index="3" value="Another"/>
+            <StringItem index="4" value=" "/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxRequestReasonActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabelRequestReason">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reason for Request"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextFieldSpecify">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextAreaReasonElaborate">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JSeparator" name="jSeparator3">
+      <Properties>
+        <Property name="orientation" type="int" value="1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButtonApplyChanges">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Apply Changes"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
