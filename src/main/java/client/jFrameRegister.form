@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGender">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupGenderBehalf">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Create New Account"/>
@@ -45,49 +51,73 @@
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
+                                          <Component id="jTextFieldFullName" min="-2" pref="261" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
                                               <Component id="jSpinnerDayBirth" min="-2" pref="63" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jComboBoxMonthBirth" min="-2" pref="82" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                              <Component id="jSpinnerYearBirth" max="32767" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jRadioButtonFemale" min="-2" max="-2" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="jComboBoxMonthBirth" min="-2" pref="82" max="-2" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                                      <Component id="jSpinnerYearBirth" max="32767" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
-                                          <Component id="jTextFieldFullName" min="-2" pref="261" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+                                      <Component id="jRadioButtonMale" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jSeparator2" min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jLabelCaretakenInformation" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jLabelDateOfBirthBehalf" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="jLabelFullNameBehalf" alignment="1" min="-2" pref="63" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jTextFieldFullNameBehalf" alignment="0" max="32767" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jCheckBoxBehalf" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Component id="jLabelCaretakenInformation" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
                                           </Group>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jSpinnerDayBirthBehalf" min="-2" pref="63" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
+                                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                                  <Component id="jLabelDateOfBirthBehalf" alignment="1" max="32767" attributes="0"/>
+                                                  <Component id="jLabelFullNameBehalf" alignment="1" min="-2" pref="63" max="-2" attributes="0"/>
+                                              </Group>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jComboBoxMonthBirthBehalf" max="32767" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jSpinnerYearBirthBehalf" min="-2" pref="99" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="jTextFieldFullNameBehalf" alignment="0" max="32767" attributes="0"/>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="jCheckBoxBehalf" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                                  </Group>
+                                                  <Group type="102" attributes="0">
+                                                      <Component id="jSpinnerDayBirthBehalf" min="-2" pref="63" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jComboBoxMonthBirthBehalf" max="32767" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="jSpinnerYearBirthBehalf" min="-2" pref="99" max="-2" attributes="0"/>
+                                                  </Group>
+                                              </Group>
                                           </Group>
                                       </Group>
+                                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                                              <Component id="jRadioButtonFemaleBehalf" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jRadioButtonMaleBehalf" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
                               <Component id="jSeparator4" min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -196,6 +226,11 @@
                           <Component id="jSpinnerDayBirth" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="jSpinnerYearBirth" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jRadioButtonMale" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonFemale" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Component id="jSeparator2" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
               </Group>
@@ -235,6 +270,11 @@
                           <Component id="jComboBoxMonthBirthBehalf" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jSpinnerDayBirthBehalf" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
                           <Component id="jSpinnerYearBirthBehalf" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jRadioButtonMaleBehalf" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jRadioButtonFemaleBehalf" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -484,6 +524,46 @@
     <Component class="javax.swing.JSeparator" name="jSeparator4">
       <Properties>
         <Property name="orientation" type="int" value="1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonMale">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGender"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Male"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonFemale">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGender"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Female"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonMaleBehalf">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGenderBehalf"/>
+        </Property>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Male"/>
+        <Property name="enabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection component="jCheckBoxBehalf" name="isSelected" type="method"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonFemaleBehalf">
+      <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupGenderBehalf"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Female"/>
+        <Property name="enabled" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection component="jCheckBoxBehalf" name="isSelected" type="method"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

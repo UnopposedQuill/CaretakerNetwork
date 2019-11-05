@@ -31,6 +31,8 @@ public class jFrameRegister extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    buttonGroupGender = new javax.swing.ButtonGroup();
+    buttonGroupGenderBehalf = new javax.swing.ButtonGroup();
     jPasswordField = new javax.swing.JPasswordField();
     jTextFieldEmail = new javax.swing.JTextField();
     jLabelEmail = new javax.swing.JLabel();
@@ -66,6 +68,10 @@ public class jFrameRegister extends javax.swing.JFrame {
     jSeparator1 = new javax.swing.JSeparator();
     jSeparator2 = new javax.swing.JSeparator();
     jSeparator4 = new javax.swing.JSeparator();
+    jRadioButtonMale = new javax.swing.JRadioButton();
+    jRadioButtonFemale = new javax.swing.JRadioButton();
+    jRadioButtonMaleBehalf = new javax.swing.JRadioButton();
+    jRadioButtonFemaleBehalf = new javax.swing.JRadioButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Create New Account");
@@ -160,6 +166,22 @@ public class jFrameRegister extends javax.swing.JFrame {
 
     jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
+    buttonGroupGender.add(jRadioButtonMale);
+    jRadioButtonMale.setSelected(true);
+    jRadioButtonMale.setText("Male");
+
+    buttonGroupGender.add(jRadioButtonFemale);
+    jRadioButtonFemale.setText("Female");
+
+    buttonGroupGenderBehalf.add(jRadioButtonMaleBehalf);
+    jRadioButtonMaleBehalf.setSelected(true);
+    jRadioButtonMaleBehalf.setText("Male");
+    jRadioButtonMaleBehalf.setEnabled(jCheckBoxBehalf.isSelected());
+
+    buttonGroupGenderBehalf.add(jRadioButtonFemaleBehalf);
+    jRadioButtonFemaleBehalf.setText("Female");
+    jRadioButtonFemaleBehalf.setEnabled(jCheckBoxBehalf.isSelected());
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -180,37 +202,53 @@ public class jFrameRegister extends javax.swing.JFrame {
                       .addComponent(jLabelFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                      .addComponent(jTextFieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
                       .addGroup(layout.createSequentialGroup()
                         .addComponent(jSpinnerDayBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
-                        .addComponent(jSpinnerYearBirth))
-                      .addComponent(jTextFieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addComponent(jRadioButtonFemale)
+                          .addGroup(layout.createSequentialGroup()
+                            .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(12, 12, 12)
+                            .addComponent(jSpinnerYearBirth))))))
+                  .addGroup(layout.createSequentialGroup()
+                    .addGap(56, 56, 56)
+                    .addComponent(jRadioButtonMale)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE))
               .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jLabelCaretakenInformation)
-                    .addGap(176, 176, 176))
-                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                      .addComponent(jLabelDateOfBirthBehalf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                      .addComponent(jLabelFullNameBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                  .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(jTextFieldFullNameBehalf)
-                      .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBoxBehalf)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                      .addGroup(layout.createSequentialGroup()
-                        .addComponent(jSpinnerDayBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelCaretakenInformation)
+                        .addGap(176, 176, 176))
+                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                          .addComponent(jLabelDateOfBirthBehalf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                          .addComponent(jLabelFullNameBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxMonthBirthBehalf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addComponent(jTextFieldFullNameBehalf)
+                          .addGroup(layout.createSequentialGroup()
+                            .addComponent(jCheckBoxBehalf)
+                            .addGap(0, 0, Short.MAX_VALUE))
+                          .addGroup(layout.createSequentialGroup()
+                            .addComponent(jSpinnerDayBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jComboBoxMonthBirthBehalf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                  .addGroup(layout.createSequentialGroup()
+                    .addGap(57, 57, 57)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jRadioButtonFemaleBehalf))
+                      .addComponent(jRadioButtonMaleBehalf))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(layout.createSequentialGroup()
@@ -290,7 +328,11 @@ public class jFrameRegister extends javax.swing.JFrame {
               .addComponent(jLabelDateOfBirth)
               .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(jSpinnerDayBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jSpinnerYearBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+              .addComponent(jSpinnerYearBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jRadioButtonMale)
+              .addComponent(jRadioButtonFemale)))
           .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,6 +366,10 @@ public class jFrameRegister extends javax.swing.JFrame {
               .addComponent(jComboBoxMonthBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(jSpinnerDayBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jRadioButtonMaleBehalf)
+              .addComponent(jRadioButtonFemaleBehalf))
             .addGap(0, 0, Short.MAX_VALUE))
           .addComponent(jSeparator4))
         .addContainerGap())
@@ -363,6 +409,8 @@ public class jFrameRegister extends javax.swing.JFrame {
     this.jSpinnerDayBirthBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
     this.jComboBoxMonthBirthBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
     this.jSpinnerYearBirthBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
+    this.jRadioButtonMaleBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
+    this.jRadioButtonFemaleBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
   }//GEN-LAST:event_jCheckBoxBehalfActionPerformed
   // </editor-fold>
 
@@ -401,6 +449,8 @@ public class jFrameRegister extends javax.swing.JFrame {
 
   //<editor-fold defaultstate="collapsed" desc=" JFrame Variables Declarations ">
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.ButtonGroup buttonGroupGender;
+  private javax.swing.ButtonGroup buttonGroupGenderBehalf;
   private javax.swing.JButton jButtonCancel;
   private javax.swing.JButton jButtonCommitRequest;
   private javax.swing.JCheckBox jCheckBoxBehalf;
@@ -422,6 +472,10 @@ public class jFrameRegister extends javax.swing.JFrame {
   private javax.swing.JLabel jLabelPersonalInformation;
   private javax.swing.JPasswordField jPasswordField;
   private javax.swing.JPasswordField jPasswordFieldConfirm;
+  private javax.swing.JRadioButton jRadioButtonFemale;
+  private javax.swing.JRadioButton jRadioButtonFemaleBehalf;
+  private javax.swing.JRadioButton jRadioButtonMale;
+  private javax.swing.JRadioButton jRadioButtonMaleBehalf;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JSeparator jSeparator1;
   private javax.swing.JSeparator jSeparator2;
