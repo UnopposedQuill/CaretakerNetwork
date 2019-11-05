@@ -35,6 +35,7 @@ public class jFrameLogin extends javax.swing.JFrame {
     jButtonLogin = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setTitle("Login");
 
     jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel1.setText("Caretaker Network - Administrative");
@@ -94,7 +95,13 @@ public class jFrameLogin extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-    // TODO add your handling code here:
+    String staffUsername = this.jTextFieldUsername.getText(),
+           staffPassword = String.valueOf(this.jPasswordField.getPassword());
+    
+    //@TODO: Validar que la combinación sea correcta aquí y agregarlo a un Singleton
+    
+    new jFrameMainMenu(this).setVisible(true);
+    this.setVisible(false);
   }//GEN-LAST:event_jButtonLoginActionPerformed
 
   /**

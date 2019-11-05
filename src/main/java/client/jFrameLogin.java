@@ -37,6 +37,7 @@ public class jFrameLogin extends javax.swing.JFrame {
     jLabel4 = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setTitle("Login");
 
     jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel1.setText("Caretaker Network");

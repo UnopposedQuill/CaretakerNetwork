@@ -11,11 +11,15 @@ package staff;
  */
 public class jFrameManageRequests extends javax.swing.JFrame {
 
+  private jFrameMainMenu frameMainMenu;
+  
 	/**
 	 * Creates new form jFrameGestionarSolicitudCuido
+   * @param frameMainMenu
 	 */
-	public jFrameManageRequests() {
+	public jFrameManageRequests(jFrameMainMenu frameMainMenu) {
 		initComponents();
+    this.frameMainMenu = frameMainMenu;
 	}
 
 	/**
@@ -27,22 +31,212 @@ public class jFrameManageRequests extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    jScrollPane2 = new javax.swing.JScrollPane();
+    jTreeIncomingRequests = new javax.swing.JTree();
+    jScrollPane3 = new javax.swing.JScrollPane();
+    jTreeActiveSubscriptions = new javax.swing.JTree();
+    jScrollPane4 = new javax.swing.JScrollPane();
+    jTreeActiveClients = new javax.swing.JTree();
+    jScrollPane5 = new javax.swing.JScrollPane();
+    jTreeDisposedRequests = new javax.swing.JTree();
+    jButtonDisposeElement = new javax.swing.JButton();
+    jButtonApproveRequest = new javax.swing.JButton();
+    jButtonGoBack = new javax.swing.JButton();
+    jButtonRefreshIncoming = new javax.swing.JButton();
+
+    setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    setTitle("Manage Requests");
+    addWindowListener(new java.awt.event.WindowAdapter() {
+      public void windowClosing(java.awt.event.WindowEvent evt) {
+        formWindowClosing(evt);
+      }
+    });
+
+    javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Incoming Requests");
+    javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("New Accounts");
+    javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Disease");
+    javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Paúl Esteban Gutiérrez Salas");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Subscriptions");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Nocturne");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Andrés Eduardo Gutiérrez Salas");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Daily");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Monthly");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Yearly");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    jTreeIncomingRequests.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+    jScrollPane2.setViewportView(jTreeIncomingRequests);
+
+    treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Active Subscriptions");
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Daily");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Monthly");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Yealy");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Nightcare");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    jTreeActiveSubscriptions.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+    jScrollPane3.setViewportView(jTreeActiveSubscriptions);
+
+    treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Active Clients");
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Disease");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Old Age");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Child Caretaking");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Another");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    jTreeActiveClients.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+    jScrollPane4.setViewportView(jTreeActiveClients);
+
+    treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Disposed Requests");
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("New Accounts");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Old Age");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Child Caring");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Another");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Subscriptions");
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NightCaring");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Daily");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Weekly");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Monthly");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Yearly");
+    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    treeNode3.add(treeNode4);
+    treeNode2.add(treeNode3);
+    treeNode1.add(treeNode2);
+    jTreeDisposedRequests.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+    jScrollPane5.setViewportView(jTreeDisposedRequests);
+
+    jButtonDisposeElement.setText("Dispose Element");
+
+    jButtonApproveRequest.setText("Approve Request");
+
+    jButtonGoBack.setText("Go Back");
+    jButtonGoBack.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonGoBackActionPerformed(evt);
+      }
+    });
+
+    jButtonRefreshIncoming.setText("Refresh Incoming");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 400, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(jScrollPane2)
+          .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+        .addGap(18, 18, 18)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(jButtonApproveRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonDisposeElement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonGoBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+          .addComponent(jButtonRefreshIncoming, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+        .addGap(18, 18, 18)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGap(0, 300, Short.MAX_VALUE)
+      .addGroup(layout.createSequentialGroup()
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jButtonApproveRequest)
+            .addGap(18, 18, 18)
+            .addComponent(jButtonDisposeElement)))
+        .addGap(18, 18, 18)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+          .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+          .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jButtonRefreshIncoming)
+            .addGap(18, 18, 18)
+            .addComponent(jButtonGoBack)))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
+  // <editor-fold defaultstate="collapsed" desc="Event Handlers">
+  private void jButtonGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGoBackActionPerformed
+    //@TODO: Add warning for unsaved changes before going back
+    if (this.frameMainMenu != null) {
+      this.frameMainMenu.setVisible(true);
+    }
+    this.dispose();
+  }//GEN-LAST:event_jButtonGoBackActionPerformed
+
+  private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    if (this.frameMainMenu != null) {
+      this.frameMainMenu.setVisible(true);
+    }
+  }//GEN-LAST:event_formWindowClosing
+
+  //</editor-fold>
+  
 	/**
 	 * @param args the command line arguments
 	 */
@@ -69,16 +263,27 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 			java.util.logging.Logger.getLogger(jFrameManageRequests.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		//</editor-fold>
-		//</editor-fold>
 
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new jFrameManageRequests().setVisible(true);
+				new jFrameManageRequests(null).setVisible(true);
 			}
 		});
 	}
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton jButtonApproveRequest;
+  private javax.swing.JButton jButtonDisposeElement;
+  private javax.swing.JButton jButtonGoBack;
+  private javax.swing.JButton jButtonRefreshIncoming;
+  private javax.swing.JScrollPane jScrollPane2;
+  private javax.swing.JScrollPane jScrollPane3;
+  private javax.swing.JScrollPane jScrollPane4;
+  private javax.swing.JScrollPane jScrollPane5;
+  private javax.swing.JTree jTreeActiveClients;
+  private javax.swing.JTree jTreeActiveSubscriptions;
+  private javax.swing.JTree jTreeDisposedRequests;
+  private javax.swing.JTree jTreeIncomingRequests;
   // End of variables declaration//GEN-END:variables
 }

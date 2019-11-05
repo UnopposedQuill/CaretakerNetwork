@@ -12,6 +12,7 @@ package client;
 public class jFrameRegister extends javax.swing.JFrame {
 
   private jFrameLogin login;
+  
   /**
    * Creates new form jFrameRegistro
    * @param login The invoking Frame
