@@ -10,5 +10,8 @@ package models.CareService;
  * @author rober2
  */
 public class FactoryCareSuscription {
+  public enum TipoSuscripcion {
+    PORMES, NOCTURNO, PORHORA
+  }
     
 }

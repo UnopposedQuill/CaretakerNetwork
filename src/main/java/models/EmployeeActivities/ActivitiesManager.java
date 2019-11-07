@@ -7,7 +7,6 @@ package models.EmployeeActivities;
 
 import java.util.ArrayList;
 import java.util.List;
-import models.Activity;
 import models.Employee;
 
 /**
