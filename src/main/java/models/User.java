@@ -17,16 +17,16 @@ public class User {
 
   @Id
   private ObjectId id;
-
-  private String nombre;
-  private Date fechaNacimiento;
-
+  private String name;
+  private Date birthday;
+  private Location location;
+  
   public User() {
   }
 
   public User(String nombre, Date fechaNacimiento) {
-    this.nombre = nombre;
-    this.fechaNacimiento = fechaNacimiento;
+    this.name = nombre;
+    this.birthday = fechaNacimiento;
   }
 
   public ObjectId getId() {
@@ -38,19 +38,19 @@ public class User {
   }
 
   public String getNombre() {
-    return nombre;
+    return name;
   }
 
   public void setNombre(String nombre) {
-    this.nombre = nombre;
+    this.name = nombre;
   }
 
   public Date getFechaNacimiento() {
-    return fechaNacimiento;
+    return birthday;
   }
 
   public void setFechaNacimiento(Date fechaNacimiento) {
-    this.fechaNacimiento = fechaNacimiento;
+    this.birthday = fechaNacimiento;
   }
 
 }

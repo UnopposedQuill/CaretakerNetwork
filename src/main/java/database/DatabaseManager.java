@@ -8,19 +8,33 @@ package database;
 import com.mongodb.MongoClient;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author rober
  */
 public class DatabaseManager {
-
-    public DatabaseManager() {
-        final Morphia morphia = new Morphia();
-        morphia.mapPackage("dev.morphia.example");
-        final Datastore datastore = morphia.createDatastore(new MongoClient(), "morphia_example");
-        datastore.ensureIndexes();
+  public static enum DatabaseTypes {
+    NOSQL,SQL,GRAPH
+  }
+  DatabaseInterface database;
+  
+  public DatabaseManager() {
+    
+  }
+  public DatabaseManager(String databaseType) {
+    if(databaseType.equals(DatabaseTypes.NOSQL)) {
+      database = new DatabaseNoSQL();
+    } else {
+      try {
+        throw new Exception();
+      } catch (Exception ex) {
+        Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
     
-    
+  }
+
 }

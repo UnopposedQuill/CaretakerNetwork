@@ -1,16 +1,22 @@
 Red de Cuido:
 
-Una empresa de red de cuido de personas, lo ha contratado para que realice un Sistema que le administrar toda su operación. 
- La red de cuido se conforma de centros de atención en todo el país.  Cada centro tiene su propio personal.
+Una empresa de red de cuido de personas, lo ha contratado para que 
+realice un Sistema que le administrar toda su operación. 
+ La red de cuido se conforma de centros de atención en todo el país.  
+ Cada centro tiene su propio personal.
 
-La red de cuido cuenta con diferentes niveles de servicio, pueden ser por ejemplo cuido de adulto mayor, cuido de menores, 
+La red de cuido cuenta con diferentes niveles de servicio, 
+pueden ser por ejemplo cuido de adulto mayor, cuido de menores, 
 cuido por horas, cuido por días, mensuales, nocturnos, etc etc.
 
 Se cuenta con un grupo de personas empleadas, 
-cada una de diferentes categor㼡as y estudios, por ejemplo hay personas que son certificadas para el cuido de adultos mayores, 
-otras para niños, otras tienen especialidad en personas con enfermedades terminales, etc.
+cada una de diferentes categorias y estudios, por ejemplo hay personas 
+que son certificadas para el cuido de adultos mayores, 
+otras para niños, otras tienen especialidad en personas con enfermedades 
+terminales, etc.
 
-Cada persona puede cumplir con una o mas categorías, cada categoría tiene un precio que se le cobra al cliente, 
+Cada persona puede cumplir con una o mas categorías, cada categoría 
+tiene un precio que se le cobra al cliente, 
 y un precio que se le paga al cuidador.
 
 Ademas de los cuidadores, la empresa tiene un grupo de personas 
@@ -43,7 +49,8 @@ debe de indicarle si existe o no oportunidad de satisfacer la necesidad;
 si es possible, entonces se procede con el cobro del servicio por adelantado.
 
 El administrador del lugar, debe de poder ver diferentes
- tipos de reportes para obtener información sobre cantidad y montos de servicios dados,
+ tipos de reportes para obtener información sobre cantidad y 
+ montos de servicios dados,
  por tipo de servicio, por persona, por cliente y/o fechas. 
  Para todos los centros o solo uno.
 
