@@ -5,19 +5,19 @@
  */
 package models.CareService;
 
-import java.util.Date;
-
 /**
  *
  * @author rober2
  */
-public abstract class Suscription {
-    private enum EstadoSuscripcion{
-       SOLICITADA, ENCURSO, FINALIZADA
-    }
+public class FactoryCareService {
+  public enum TipoSuscripcion {
+    PORMES, NOCTURNO, PORHORA,NINOS,ADULTOS,PERSONALIZADO
+  }
+
+  public FactoryCareService() {
+  }
     
-    private String nombre;
-    private Date initDate;
-    private Date endDate;
-    
+  
+  
+  
 }

@@ -11,22 +11,15 @@ import java.util.Date;
  *
  * @author rober2
  */
-public abstract class CareService {
-
-  public enum CareServiceState {
-
+public class ServiceByCustom extends CareService{
+  
+  public ServiceByCustom(Date initDate,Date endDate) {
+    
   }
-  private String nombre;
-  private Date inicialDate;
-  private Date endDate;
-  private CareServiceState estate;
-  private String description;
-  private int price;
-
-  public CareService() {
-  }
- 
+  
+  @Override
   public boolean suscribe() {
-    return false;
+    return super.suscribe(); //To change body of generated methods, choose Tools | Templates.
   }
+  
 }

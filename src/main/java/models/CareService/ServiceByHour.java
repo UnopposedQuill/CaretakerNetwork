@@ -9,6 +9,12 @@ package models.CareService;
  *
  * @author rober2
  */
-public class ServiceByHour {
+public class ServiceByHour extends CareService{
+
+  @Override
+  public boolean suscribe() {
+    return super.suscribe(); //To change body of generated methods, choose Tools | Templates.
+  }
+  
   
 }

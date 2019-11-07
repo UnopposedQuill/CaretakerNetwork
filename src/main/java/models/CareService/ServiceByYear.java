@@ -9,6 +9,11 @@ package models.CareService;
  *
  * @author rober2
  */
-public class ServiceByYear {
+public class ServiceByYear extends CareService{
+
+  @Override
+  public boolean suscribe() {
+    return super.suscribe(); //To change body of generated methods, choose Tools | Templates.
+  }
   
 }
