@@ -5,13 +5,17 @@
  */
 package models;
 
+import dev.morphia.annotations.Id;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author rober2
  */
 public class Clinic {
+  @Id
+  private ObjectId id;
   private String name;
   private List<Employee> employees;
   private Location location;

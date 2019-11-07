@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models.CareService;
+package FacadeClinicia;
 
 /**
  *
  * @author rober2
  */
-public class FactoryCareSuscription {
-    
+public class FacadeClinica {
+  
 }

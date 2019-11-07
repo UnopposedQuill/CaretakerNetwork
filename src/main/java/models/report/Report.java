@@ -15,8 +15,8 @@ import java.util.List;
 public class Report {
     private Date fechaIncial;
     private Date fechaFinal;
-    private int inputPrice;
-    private int inputNumberServices;
+    private boolean inputPrice;
+    private boolean inputNumberServices;
     private String tipoServicio;
     private String employyeSelected;
     private String clientSelected;
@@ -24,6 +24,22 @@ public class Report {
     private List<String> columns;
     private List<String> rows;
 
+  public boolean isInputPrice() {
+    return inputPrice;
+  }
+
+  public void setInputPrice(boolean inputPrice) {
+    this.inputPrice = inputPrice;
+  }
+
+  public boolean isInputNumberServices() {
+    return inputNumberServices;
+  }
+
+  public void setInputNumberServices(boolean inputNumberServices) {
+    this.inputNumberServices = inputNumberServices;
+  }
+  
   public Date getFechaIncial() {
     return fechaIncial;
   }
@@ -38,22 +54,6 @@ public class Report {
 
   public void setFechaFinal(Date fechaFinal) {
     this.fechaFinal = fechaFinal;
-  }
-
-  public int getInputPrice() {
-    return inputPrice;
-  }
-
-  public void setInputPrice(int inputPrice) {
-    this.inputPrice = inputPrice;
-  }
-
-  public int getInputNumberServices() {
-    return inputNumberServices;
-  }
-
-  public void setInputNumberServices(int inputNumberServices) {
-    this.inputNumberServices = inputNumberServices;
   }
 
   public String getTipoServicio() {

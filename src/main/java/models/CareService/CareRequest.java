@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models.EmployeeActivities;
+package models.CareService;
 
 /**
  *
  * @author rober2
  */
-public interface ActivityInterface {
-    public String getDescripcion();
-    public int getPrecio();
+public class CareRequest {
+  
 }

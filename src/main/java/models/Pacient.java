@@ -5,10 +5,12 @@
  */
 package models;
 
+import dev.morphia.annotations.Id;
 import java.util.Date;
 import java.util.List;
-import models.CareService.Suscription;
+import models.CareService.CareService;
 import models.CareService.Treatment;
+import org.bson.types.ObjectId;
 
 
 /**
@@ -16,8 +18,9 @@ import models.CareService.Treatment;
  * @author rober2
  */
 public class Pacient extends User {
-  
-  private List<Suscription> suscriptions;
+   @Id
+  private ObjectId id;
+  private List<CareService> suscriptions;
   private List<Treatment> sessions;
   public Pacient() {
   }
@@ -26,11 +29,11 @@ public class Pacient extends User {
     super(nombre, fechaNacimiento);
   }
 
-  public List<Suscription> getSuscriptions() {
+  public List<CareService> getSuscriptions() {
     return suscriptions;
   }
 
-  public void setSuscriptions(List<Suscription> suscriptions) {
+  public void setSuscriptions(List<CareService> suscriptions) {
     this.suscriptions = suscriptions;
   }
 
