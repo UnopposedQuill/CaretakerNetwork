@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package staff.administrator;
+package gui.staff.administrator;
 
-import staff.jFrameMainMenu;
+import gui.staff.jFrameMainMenu;
 
 /**
  *
@@ -196,11 +196,12 @@ public class jFrameAddStaff extends javax.swing.JFrame {
           .addComponent(jLabelFullName)
           .addComponent(jTextFieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabelDateOfBirth)
-          .addComponent(jComboBoxMonthBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jSpinnerDayBirthBehalf)
-          .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jSpinnerDayBirthBehalf, javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addComponent(jLabelDateOfBirth)
+            .addComponent(jComboBoxMonthBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jRadioButtonFemale)

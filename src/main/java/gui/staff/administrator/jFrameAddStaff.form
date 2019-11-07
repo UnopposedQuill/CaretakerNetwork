@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroupAccountType">
     </Component>
@@ -143,11 +143,13 @@
                   <Component id="jTextFieldFullName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabelDateOfBirth" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBoxMonthBirthBehalf" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSpinnerDayBirthBehalf" alignment="1" max="32767" attributes="0"/>
                   <Component id="jSpinnerYearBirthBehalf" alignment="1" pref="24" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabelDateOfBirth" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxMonthBirthBehalf" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">

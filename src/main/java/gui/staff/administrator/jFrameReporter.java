@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package staff.administrator;
+package gui.staff.administrator;
 
-import staff.jFrameMainMenu;
+import gui.staff.jFrameMainMenu;
 
 /**
  *

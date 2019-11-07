@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package staff;
+package gui.staff;
 
-import staff.administrator.jFrameAddStaff;
-import staff.administrator.jFrameReporter;
+import gui.staff.administrator.jFrameAddStaff;
+import gui.staff.administrator.jFrameReporter;
 
 /**
  *
