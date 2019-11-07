@@ -11,9 +11,11 @@ import dev.morphia.Datastore;
 import dev.morphia.Morphia;
 import dev.morphia.query.Query;
 import dev.morphia.query.UpdateOperations;
-import dev.morphia.query.UpdateOperator;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import models.User;
 
 /**
@@ -24,33 +26,19 @@ public class Main {
 
   public static void main(String[] args) {
 
-    final Morphia morphia = new Morphia();
-    morphia.mapPackage("models");
-    MongoClientURI uri = new MongoClientURI("mongodb://heroku_8prjmqnp:k6cum7ua12dcnei86ckg78h8g0@ds339348.mlab.com:39348/heroku_8prjmqnp");
-    MongoClient mongoClient = new MongoClient(uri);
-    final Datastore datastore = morphia.createDatastore(mongoClient, "heroku_8prjmqnp");
-
-    User usuario = new User("Rob", new Date());
-    datastore.save(usuario);
-    List<User> usuarioList = datastore.createQuery(User.class).asList();
-    System.out.println(usuarioList.get(0).getFechaNacimiento());
+    DatabaseNoSQL database = new DatabaseNoSQL();
+    User usuario = new User("Atun", new Date());
     
-    UpdateOperations<User> ops = datastore.
-        createUpdateOperations(User.class).
-        set("nombre", "Alberto");
+    List<User> listUser = database.getAll(User.class);
+    //database.delete(listUser.get(0));
+    for (User user : listUser) {
+      System.out.println(user.getNombre());
+    }
     
     
-   
-    
-    Query qry = datastore.createQuery(User.class);
-   
-    
-  //  datastore.delete(qry);
-    
-  //  datastore.update(qry, ops);
-    
-    
-    System.out.println(usuarioList.get(0).getFechaNacimiento());
+    List<String> listString = new ArrayList<>();
+    listString.add("aaa");
+    listString.add("cccc");
     
   }
 }
