@@ -18,8 +18,9 @@ import java.util.List;
 public class DatabaseNoSQL implements DatabaseInterface {
 
   final private Datastore datastore;
-
-  public DatabaseNoSQL() {
+  private static DatabaseNoSQL database;
+  
+  private DatabaseNoSQL() {
     final Morphia morphia = new Morphia();
     morphia.mapPackage("models");
     MongoClientURI uri = new MongoClientURI("mongodb://heroku_8prjmqnp:k6cum7ua12dcnei86ckg78h8g0@ds339348.mlab.com:39348/heroku_8prjmqnp");
@@ -27,7 +28,23 @@ public class DatabaseNoSQL implements DatabaseInterface {
     this.datastore = morphia.createDatastore(mongoClient, "heroku_8prjmqnp");
 
   }
+  
+   public DatabaseNoSQL(String nombre) {
+    final Morphia morphia = new Morphia();
+    morphia.mapPackage("models");
+    MongoClientURI uri = new MongoClientURI("mongodb://heroku_8prjmqnp:k6cum7ua12dcnei86ckg78h8g0@ds339348.mlab.com:39348/heroku_8prjmqnp");
+    MongoClient mongoClient = new MongoClient(uri);
+    this.datastore = morphia.createDatastore(mongoClient, "heroku_8prjmqnp");
 
+  }
+  
+  public static DatabaseNoSQL getNoSQLInstance() {
+    if(database == null) {
+      database = new DatabaseNoSQL();
+    }
+    return database;
+  }
+  
   @Override
   public <T> List<T> getAll(Class<T> type) {
     return this.datastore.createQuery(type).asList();
@@ -57,5 +74,8 @@ public class DatabaseNoSQL implements DatabaseInterface {
     this.datastore.save(t);
     return true;
   }
-
+  
+  public Datastore getDataStore() {
+    return this.datastore;
+  }
 }

@@ -13,19 +13,21 @@ import org.bson.types.ObjectId;
  * @author rober2
  */
 public class Location {
-   @Id
-  private ObjectId id;
+    @Id
+  private String id = ObjectId.get().toString();
   private String location;
   private String country;
   private String region;
 
-  public ObjectId getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(ObjectId id) {
+  public void setId(String id) {
     this.id = id;
   }
+
+ 
 
   public String getLocation() {
     return location;

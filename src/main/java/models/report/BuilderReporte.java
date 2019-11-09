@@ -5,8 +5,14 @@
  */
 package models.report;
 
+
+import database.DatabaseNoSQL;
+import dev.morphia.Datastore;
+import dev.morphia.query.Query;
 import java.util.Date;
-import jdk.javadoc.doclet.Reporter;
+import models.CareService.CareService;
+import models.Employee;
+import models.Pacient;
 
 /**
  *
@@ -19,8 +25,6 @@ public class BuilderReporte {
   public BuilderReporte() {
     report = new Report();
   }
-  
-  
   
   public BuilderReporte setDateRange(Date inicialDate, Date endDate) {
     this.report.setFechaFinal(inicialDate);
@@ -51,6 +55,17 @@ public class BuilderReporte {
  
   
   public Report build() {
+    DatabaseNoSQL instance = DatabaseNoSQL.getNoSQLInstance();
+    Datastore datastore = instance.getDataStore();
+    Query<Employee> employees = datastore.createQuery(Employee.class);
+    Query<Pacient> pacients= datastore.createQuery(Pacient.class);
+    Query<CareService> typesServices = datastore.createQuery(CareService.class);
+    typesServices.filter("price >=",1000);
+    
+    
+    
+    
+    
     return report;
   }
   

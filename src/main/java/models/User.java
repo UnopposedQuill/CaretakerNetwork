@@ -16,7 +16,7 @@ import org.bson.types.ObjectId;
 public class User {
 
   @Id
-  private ObjectId id;
+  private String id = ObjectId.get().toString();
   private String name;
   private Date birthday;
   private Location location;
@@ -29,16 +29,42 @@ public class User {
     this.birthday = fechaNacimiento;
   }
 
-  public ObjectId getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(ObjectId id) {
+  public void setId(String id) {
     this.id = id;
   }
 
-  public String getNombre() {
+  public String getName() {
     return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Date getBirthday() {
+    return birthday;
+  }
+
+  public void setBirthday(Date birthday) {
+    this.birthday = birthday;
+  }
+
+  public Location getLocation() {
+    return location;
+  }
+
+  public void setLocation(Location location) {
+    this.location = location;
+  }
+
+
+  
+  public String getNombre() {
+    return this.name;
   }
 
   public void setNombre(String nombre) {
@@ -53,4 +79,8 @@ public class User {
     this.birthday = fechaNacimiento;
   }
 
+  @Override
+  public String toString() {
+    return "User{" + "id=" + id + ", name=" + name + ", birthday=" + birthday + ", location=" + location + '}';
+  }  
 }

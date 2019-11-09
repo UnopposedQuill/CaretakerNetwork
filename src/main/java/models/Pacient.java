@@ -9,6 +9,7 @@ import dev.morphia.annotations.Id;
 import java.util.Date;
 import java.util.List;
 import models.CareService.CareService;
+import models.CareService.Disease;
 import models.CareService.Treatment;
 import org.bson.types.ObjectId;
 
@@ -19,9 +20,10 @@ import org.bson.types.ObjectId;
  */
 public class Pacient extends User {
    @Id
-  private ObjectId id;
+  private String id = ObjectId.get().toString();
   private List<CareService> suscriptions;
   private List<Treatment> sessions;
+  private List<Disease> disease;
   public Pacient() {
   }
   

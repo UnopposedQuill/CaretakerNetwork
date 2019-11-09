@@ -15,7 +15,7 @@ import org.bson.types.ObjectId;
  */
 public class Clinic {
   @Id
-  private ObjectId id;
+  private String id = ObjectId.get().toString();
   private String name;
   private List<Employee> employees;
   private Location location;

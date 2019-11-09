@@ -5,14 +5,16 @@
  */
 package models.CareService;
 
+import java.util.List;
+
 /**
  *
- * @author rober2
+ * @author rober
  */
-public class CareRequest {
-  public static enum StateRequest {
+public class Disease {
+  private String name;
+  private List<Treatment> treatments;
   
-  }
   
   
 }

@@ -15,6 +15,8 @@ import dev.morphia.query.UpdateOperations;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import models.CareService.CareService;
+import models.CareService.ServiceByHour;
 
 import models.User;
 
@@ -26,19 +28,32 @@ public class Main {
 
   public static void main(String[] args) {
 
-    DatabaseNoSQL database = new DatabaseNoSQL();
-    User usuario = new User("Atun", new Date());
-    
+    DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
+
+    Datastore data = database.getDataStore();
+    User usuario = new User("Salmon", new Date());
+    CareService care = new ServiceByHour();
+    care.setInicialDate(new Date());
+    care.setEndDate(new Date());
+    care.setNombre("Servicion Alfonoso");
+    database.save(care);
+
     List<User> listUser = database.getAll(User.class);
-    //database.delete(listUser.get(0));
-    for (User user : listUser) {
-      System.out.println(user.getNombre());
+    List<ServiceByHour> listService = database.getAll(ServiceByHour.class);
+    System.out.println(listService.size());
+    for (CareService careservice : listService) {
+
+      System.out.println("hola");
+      System.out.println(listService.size());
+      System.out.println(careservice.toString());
+
     }
-    
-    
-    List<String> listString = new ArrayList<>();
-    listString.add("aaa");
-    listString.add("cccc");
-    
+
+//    database.save(usuario);
+//    
+//    List<String> listString = new ArrayList<>();
+//    listString.add("aaa");
+//    listString.add("cccc");
+//    
   }
 }
