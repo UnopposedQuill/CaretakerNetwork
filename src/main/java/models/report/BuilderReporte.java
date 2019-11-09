@@ -62,7 +62,7 @@ public class BuilderReporte {
     Query<CareService> typesServices = datastore.createQuery(CareService.class);
     typesServices.filter("price >=",1000);
     
-    
+ 
     
     
     
