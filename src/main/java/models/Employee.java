@@ -20,5 +20,13 @@ public class Employee extends User{
     private List<Activity> activities;
     private Job job;
     private String employeeCode; 
-    
+    private String privilegio;
+
+    public static enum Privilegios{
+      Administrativo, Backoffice
+    }
+
+
+
+
 }

@@ -20,6 +20,9 @@ public class User {
   private String name;
   private Date birthday;
   private Location location;
+  private String correo;
+  private String gender;
+  private String password;
   
   public User() {
   }

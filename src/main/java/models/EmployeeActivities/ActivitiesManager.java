@@ -16,7 +16,7 @@ import models.Employee;
 public class ActivitiesManager {
   
   
-  
+  private List<Activity> activities;
   /** This is the manager for activities you need to give a employee and they get back the activities
    * 
    * @param employee 
@@ -26,7 +26,6 @@ public class ActivitiesManager {
   }
   
   public List<Activity> getActivities(Employee employee) {
-    List<Activity> activities = new ArrayList<>();
     
     return activities; 
   }
