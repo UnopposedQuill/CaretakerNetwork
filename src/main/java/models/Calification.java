@@ -5,11 +5,16 @@
  */
 package models;
 
+import dev.morphia.annotations.Id;
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author rober2
  */
 public class Calification {
+  @Id
+  private String id = ObjectId.get().toString();
   private String comment;
   private String calification;
 
@@ -23,6 +28,14 @@ public class Calification {
 
   public String getComment() {
     return comment;
+  }
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
   }
 
   public void setComment(String comment) {

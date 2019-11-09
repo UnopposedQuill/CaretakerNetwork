@@ -8,6 +8,7 @@ package models;
 import dev.morphia.annotations.Id;
 import java.rmi.StubNotFoundException;
 import java.util.List;
+import models.CareService.CareService;
 import models.EmployeesStudies.Qualification;
 import org.bson.types.ObjectId;
 
@@ -18,10 +19,11 @@ import org.bson.types.ObjectId;
 public class CareTaker {
 
   @Id
-  private ObjectId id;
+  private String id = ObjectId.get().toString();
   private String careTakerOverview;
   private List<Calification> scores;
   private List<Qualification> especialities;
+  private List<CareService> careServices;
 
   public CareTaker() {
   }
@@ -29,17 +31,27 @@ public class CareTaker {
   public Qualification categorize() {
     return null;
   }
-  
-  
-  
-  
-  public ObjectId getId() {
+
+  public String getId() {
     return id;
   }
 
-  public void setId(ObjectId id) {
+  public void setId(String id) {
     this.id = id;
   }
+
+  public List<CareService> getCareServices() {
+    return careServices;
+  }
+
+  public void setCareServices(List<CareService> careServices) {
+    this.careServices = careServices;
+  }
+  
+  
+  
+  
+
 
   public String getCareTakerOverview() {
     return careTakerOverview;

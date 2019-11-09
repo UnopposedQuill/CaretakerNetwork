@@ -103,6 +103,10 @@ public class Report {
   public void setRows(List<String> rows) {
     this.rows = rows;
   }
+  
+  public boolean generarReporte() {
+    return true;
+  }
     
     
     

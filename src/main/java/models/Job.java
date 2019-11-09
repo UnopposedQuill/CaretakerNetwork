@@ -14,7 +14,7 @@ import org.bson.types.ObjectId;
  */
 public class Job {
     @Id
-    private ObjectId id;
+    private String id = ObjectId.get().toString();
     private String name;
     private String description;
     private String responsabilities;

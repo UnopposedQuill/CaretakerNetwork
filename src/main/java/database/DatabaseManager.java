@@ -26,7 +26,7 @@ public class DatabaseManager {
   }
   public DatabaseManager(String databaseType) {
     if(databaseType.equals(DatabaseTypes.NOSQL)) {
-      database = new DatabaseNoSQL();
+      database = DatabaseNoSQL.getNoSQLInstance();
     } else {
       try {
         throw new Exception();
