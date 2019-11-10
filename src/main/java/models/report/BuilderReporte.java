@@ -11,6 +11,7 @@ import dev.morphia.Datastore;
 import dev.morphia.query.Query;
 import java.util.Date;
 import models.CareService.CareService;
+import models.CareService.ServiceByHour;
 import models.Employee;
 import models.Pacient;
 
@@ -55,15 +56,26 @@ public class BuilderReporte {
  
   
   public Report build() {
+    
+    /*
+    El administrador del lugar, debe de poder ver diferentes
+    tipos de reportes para obtener información sobre cantidad y 
+    montos de servicios dados,
+    por tipo de servicio, por persona, por cliente y/o fechas. 
+    Para todos los centros o solo uno.
+    */    
     DatabaseNoSQL instance = DatabaseNoSQL.getNoSQLInstance();
     Datastore datastore = instance.getDataStore();
-    Query<Employee> employees = datastore.createQuery(Employee.class);
     Query<Pacient> pacients= datastore.createQuery(Pacient.class);
-    Query<CareService> typesServices = datastore.createQuery(CareService.class);
-    typesServices.filter("price >=",1000);
     
- 
+    String parameterPrice = "price";
+    pacients.filter(parameterPrice+">=",1000);
     
+    String parameterStartDate = "initDate";
+    pacients.filter(parameterStartDate+">=",1000);
+
+    String parameterEndDate = "endDate";
+    pacients.filter(parameterEndDate+">=",1000);
     
     
     return report;

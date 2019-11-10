@@ -10,10 +10,7 @@ package models.CareService;
  * @author rober2
  */
 public class FactoryCareService {
-  public enum TipoSuscripcion {
-    PORMES, NOCTURNO, PORHORA,NINOS,ADULTOS,PERSONALIZADO
-  }
-
+ 
   public FactoryCareService() {
   }
     

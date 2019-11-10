@@ -8,6 +8,7 @@ package models;
 import dev.morphia.annotations.Id;
 import java.util.List;
 import models.EmployeeActivities.Activity;
+import models.Schedules.ScheduleManager;
 import org.bson.types.ObjectId;
 
 /**
@@ -21,7 +22,7 @@ public class Employee extends User{
     private Job job;
     private String employeeCode; 
     private String privilegio;
-
+    private ScheduleManager scheduleManager;
     public static enum Privilegios{
       Administrativo, Backoffice
     }
