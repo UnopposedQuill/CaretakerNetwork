@@ -233,6 +233,7 @@ public class jFrameRequest extends javax.swing.JFrame {
                 "N/A",
                 500,
                 null));
+        break;
       }
       case "Monthly":{
         initialDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerInitialHour.getValue());
@@ -248,7 +249,7 @@ public class jFrameRequest extends javax.swing.JFrame {
                 "N/A",
                 500,
                 null));
-        
+        break;
       }
       case "Yearly":{
         initialDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerInitialHour.getValue());
@@ -272,8 +273,8 @@ public class jFrameRequest extends javax.swing.JFrame {
         break;
       }
     }
-    
-    dbns.updateByID(ClientRequest.class, this.loggedUser.getId(), "suscriptions", this.loggedUser.getPacient().getSuscriptions());
+    System.out.println(this.loggedUser.getPacient().getSuscriptions());
+    dbns.updateByID(ClientRequest.class, this.loggedUser.getId(), "pacient.suscriptions", this.loggedUser.getPacient().getSuscriptions());
     
     // I need to add it to the subscriptions Frame
     if (this.frameSubscriptions != null) {
