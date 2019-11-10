@@ -5,9 +5,6 @@
  */
 package models;
 
-import dev.morphia.annotations.Id;
-import dev.morphia.annotations.Property;
-import dev.morphia.annotations.Reference;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,8 +26,8 @@ public class Pacient extends User {
   private List<Disease> disease = new ArrayList<>();
   private User guardian;
 
-  public Pacient(List<Disease> disease, User guardian, String name, Date birthday, Location location, String correo, String gender, String password) {
-    super(name, birthday, location, correo, gender, password);
+  public Pacient(List<Disease> disease, User guardian, String name, String username, Date birthday, Location location, String correo, String gender, String password) {
+    super(name, username, birthday, location, correo, gender, password);
     this.disease = disease;
     this.guardian = guardian;
   }
@@ -57,8 +54,8 @@ public class Pacient extends User {
     super(nombre, fechaNacimiento);
   }
 
-  public Pacient(List<CareService> suscriptions, List<Treatment> sessions, List<Disease> disease, User guardian, String name, Date birthday, Location location, String correo, String gender, String password) {
-    super(name, birthday, location, correo, gender, password);
+  public Pacient(List<CareService> suscriptions, List<Treatment> sessions, List<Disease> disease, User guardian, String name, String username, Date birthday, Location location, String correo, String gender, String password) {
+    super(name, username, birthday, location, correo, gender, password);
     this.suscriptions = suscriptions;
     this.sessions = sessions;
     this.disease = disease;

@@ -122,7 +122,7 @@
         <Component class="javax.swing.JTree" name="jTreeActiveClients">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="Active Clients&#xa;  Disease&#xa;    null&#xa;  Old Age&#xa;    null&#xa;  Child Caretaking&#xa;    null&#xa;  Another&#xa;    null&#xa;"/>
+              <TreeModel code="Active Clients"/>
             </Property>
           </Properties>
         </Component>
@@ -153,6 +153,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Approve Request"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonApproveRequestActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonGoBack">
       <Properties>

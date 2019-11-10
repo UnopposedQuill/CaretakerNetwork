@@ -6,10 +6,12 @@
 package gui.staff;
 
 import database.DatabaseNoSQL;
-import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 import models.CareService.CareService;
 import models.CareService.ClientRequest;
 
@@ -107,22 +109,6 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     jScrollPane3.setViewportView(jTreeActiveSubscriptions);
 
     treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Active Clients");
-    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Disease");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode2.add(treeNode3);
-    treeNode1.add(treeNode2);
-    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Old Age");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode2.add(treeNode3);
-    treeNode1.add(treeNode2);
-    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Child Caretaking");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode2.add(treeNode3);
-    treeNode1.add(treeNode2);
-    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Another");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode2.add(treeNode3);
-    treeNode1.add(treeNode2);
     jTreeActiveClients.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
     jScrollPane4.setViewportView(jTreeActiveClients);
 
@@ -169,6 +155,11 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     jButtonDisposeElement.setText("Dispose Element");
 
     jButtonApproveRequest.setText("Approve Request");
+    jButtonApproveRequest.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonApproveRequestActionPerformed(evt);
+      }
+    });
 
     jButtonGoBack.setText("Go Back");
     jButtonGoBack.addActionListener(new java.awt.event.ActionListener() {
@@ -250,13 +241,28 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     // Repopulate all the trees
     // Declare database endpoint
     DatabaseNoSQL dbns = database.DatabaseNoSQL.getNoSQLInstance();
+    DefaultTreeModel dtm = new DefaultTreeModel(new DefaultMutableTreeNode("Incoming Requests", true), true);
+    
+    // Incoming Subscriptions
+    dtm.insertNodeInto(new DefaultMutableTreeNode("Subscriptions", true), (DefaultMutableTreeNode)dtm.getRoot(), 0);
+    dbns.getAll(CareService.class).stream().filter((x)->(x.getEstate() == CareService.CareServiceState.AGENDADO)).forEach((x)->{
+      DefaultMutableTreeNode subscriptionNode = new DefaultMutableTreeNode("Subscriptions", true);
+      subscriptionNode.add(new DefaultMutableTreeNode(x.getId(), false));
+      subscriptionNode.add(new DefaultMutableTreeNode(x.getName(), false));
+      subscriptionNode.add(new DefaultMutableTreeNode(x.getUsername(), false));
+      subscriptionNode.add(new DefaultMutableTreeNode(x.getType(), false));
+      subscriptionNode.add(new DefaultMutableTreeNode(x.getDescription(), false));
+      
+      dtm.insertNodeInto(subscriptionNode, (MutableTreeNode)dtm.getChild(dtm.getRoot(), 0), 0);
+    });
     
     //Incoming Requests
-    DefaultTreeModel dtm = new DefaultTreeModel(new DefaultMutableTreeNode("Incoming Requests", true), true);
     dtm.insertNodeInto(new DefaultMutableTreeNode("New Accounts", true), (DefaultMutableTreeNode)dtm.getRoot(), 0);
     dbns.getAll(ClientRequest.class).stream().filter((x)->(x.getState() == ClientRequest.StateRequest.ENCURSO)).forEach((x)->{
       DefaultMutableTreeNode clientNode = new DefaultMutableTreeNode("Client", true);
+      clientNode.add(new DefaultMutableTreeNode(x.getId(), false));
       clientNode.add(new DefaultMutableTreeNode(x.getPacient().getName(), false));
+      clientNode.add(new DefaultMutableTreeNode(x.getPacient().getUsername(), false));
       clientNode.add(new DefaultMutableTreeNode(x.getPacient().getLocation().getLocation(), false));
       DefaultMutableTreeNode diseasesSubnode = new DefaultMutableTreeNode("Diseases", true);
       x.getPacient().getDisease().forEach((y)->{
@@ -268,20 +274,49 @@ public class jFrameManageRequests extends javax.swing.JFrame {
       
     });
     
-    // Incoming Subscriptions
-    dtm.insertNodeInto(new DefaultMutableTreeNode("Subscriptions", true), (DefaultMutableTreeNode)dtm.getRoot(), 0);
-    dbns.getAll(CareService.class).stream().filter((x)->(x.getEstate() == CareService.CareServiceState.AGENDADO)).forEach((x)->{
-      DefaultMutableTreeNode subscriptionNode = new DefaultMutableTreeNode("Subscriptions", true);
-      subscriptionNode.add(new DefaultMutableTreeNode(x.getNombre(), false));
-      subscriptionNode.add(new DefaultMutableTreeNode(x.getType(), false));
-      subscriptionNode.add(new DefaultMutableTreeNode(x.getDescription(), false));
-      
-      dtm.insertNodeInto(subscriptionNode, (MutableTreeNode)dtm.getChild(dtm.getRoot(), 0), 0);
-    });
+    
     
     // Commit Refresh
     this.jTreeIncomingRequests.setModel(dtm);
   }//GEN-LAST:event_jButtonRefreshIncomingActionPerformed
+
+  private void jButtonApproveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApproveRequestActionPerformed
+    if (this.jTreeIncomingRequests.getSelectionCount() > 0) {
+      // I need to check if the request selected is a client or a subscription
+      DefaultTreeModel dtmIncomingRequests =  (DefaultTreeModel)this.jTreeIncomingRequests.getModel(),
+          dtmAcceptedClients = (DefaultTreeModel) this.jTreeActiveClients.getModel(),
+          dtmAcceptedSubscriptions = (DefaultTreeModel) this.jTreeActiveSubscriptions.getModel();
+      
+      TreePath currentSelectionPath = this.jTreeIncomingRequests.getSelectionPath();
+      DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) currentSelectionPath.getLastPathComponent(),
+          clientsNode = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 0),
+          subscriptionsNode = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 1);
+      
+      if (selectedNode.isNodeAncestor(clientsNode)) {
+        System.out.println("Moving client request to accepted");
+        // @TODO: Move client request from incoming to active client, then update using its id
+        
+        // While I haven't reached to the main node, I need to keep going towards the parent
+        while (!selectedNode.toString().equals("Client")) {
+          selectedNode = selectedNode.getPreviousNode();
+        }
+        
+        // I reached the main node, I move to the active clients
+        //((DefaultMutableTreeNode)dtmAcceptedClients.getRoot()).insert(selectedNode, 0);
+        dtmIncomingRequests.removeNodeFromParent(selectedNode);
+        dtmAcceptedClients.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedClients.getRoot()), 0);
+        
+      }else if (selectedNode.isNodeAncestor(subscriptionsNode)) {
+        // @TODO: Move subscription request from incoming to active subscrition, then update using its id
+        System.out.println("Moving subscription request to accepted");
+      }
+    }
+    else{
+      JOptionPane.showMessageDialog(null, "Please select at least 1 element");
+    }
+    
+    
+  }//GEN-LAST:event_jButtonApproveRequestActionPerformed
 
   //</editor-fold>
   

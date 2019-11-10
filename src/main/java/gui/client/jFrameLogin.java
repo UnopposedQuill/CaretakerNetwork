@@ -5,6 +5,10 @@
  */
 package gui.client;
 
+import database.DatabaseNoSQL;
+import javax.swing.JOptionPane;
+import models.CareService.ClientRequest;
+
 /**
  *
  * @author Esteban
@@ -118,9 +122,24 @@ public class jFrameLogin extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-    // @TODO: Verify login information before switching UI
-    new jFrameMainMenu(this).setVisible(true);
-    this.setVisible(false);
+    // Mount database access
+    DatabaseNoSQL databaseNoSQL = DatabaseNoSQL.getNoSQLInstance();
+    
+    //Verify login
+    boolean success = databaseNoSQL.getAll(ClientRequest.class).stream().anyMatch(
+      (x)->{
+        // Both username and password match?
+        return x.getState() == ClientRequest.StateRequest.ACEPTADO &&
+            x.getPacient().getUsername().equals(this.jTextFieldUsername.getText()) &&
+            x.getPacient().matchesPassword(String.valueOf(this.jPasswordField.getPassword()));
+      }
+    );
+    
+    // Something matched, switch ui
+    if (success) {
+      new jFrameMainMenu(this).setVisible(true);
+      this.setVisible(false);
+    }
   }//GEN-LAST:event_jButtonLoginActionPerformed
 
   private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed

@@ -39,9 +39,9 @@ public class Main {
     DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
     List<Disease> diseases = new ArrayList<>();
     Disease d = new Disease("Alefdgsdgrgia");
-    Pacient pacient = new Pacient(diseases, new User("SiGsdfgsdfguardian", new Date()), "aaaarto", new Date(), new Location(),"asdff@asdasdf.com" , "Mujer", "1234");
+    Pacient pacient = new Pacient(diseases, new User("SiGsdfgsdfguardian", new Date()), "aaaarto", "Usernameiojqwij", new Date(), new Location(),"asdff@asdasdf.com" , "Mujer", "1234");
     
-    ServiceByHour c = new ServiceByHour("Asaaao", new Date(), new Date(), CareService.CareServiceState.FINALIZADO, "asdfa", 23, new Clinic());
+    ServiceByHour c = new ServiceByHour("Asaaao", "Usernameiojqwij", new Date(), new Date(), CareService.CareServiceState.FINALIZADO, "asdfa", 23, new Clinic());
     List<CareService> lc = new ArrayList<>();
     lc.add(c);
     pacient.setSuscriptions(lc);

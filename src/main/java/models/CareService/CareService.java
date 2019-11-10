@@ -19,7 +19,8 @@ public abstract class CareService {
   
   @Id
   private String id = ObjectId.get().toString();
-  private String nombre;
+  private String name;
+  private String username;
   private Date initDate;
   private Date endDate;
   private CareServiceState estate;
@@ -39,8 +40,9 @@ public abstract class CareService {
 
   }
 
-  public CareService(String nombre, Date initDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
-    this.nombre = nombre;
+  public CareService(String name, String username, Date initDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
+    this.name = name;
+    this.username = username;
     this.initDate = initDate;
     this.endDate = endDate;
     this.estate = estate;
@@ -69,14 +71,15 @@ public abstract class CareService {
     this.type = type;
   }
 
-  public String getNombre() {
-    return nombre;
+  public String getName() {
+    return name;
   }
 
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
+  public void setName(String name) {
+    this.name = name;
   }
 
+  
   public Date getInicialDate() {
     return initDate;
   }
@@ -125,9 +128,33 @@ public abstract class CareService {
     this.clinic = clinic;
   }
 
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public CareTaker getCareTaker() {
+    return careTaker;
+  }
+
+  public void setCareTaker(CareTaker careTaker) {
+    this.careTaker = careTaker;
+  }
+
   @Override
   public String toString() {
-    return "CareService{" + "nombre=" + nombre + ", inicialDate=" + initDate + ", endDate=" + endDate + ", estate=" + estate + ", description=" + description + ", price=" + price + ", clinic=" + clinic + ", type=" + type + '}';
+    return "CareService{" + "name=" + name + ", inicialDate=" + initDate + ", endDate=" + endDate + ", estate=" + estate + ", description=" + description + ", price=" + price + ", clinic=" + clinic + ", type=" + type + '}';
   }
   
   

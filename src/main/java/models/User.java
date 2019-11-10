@@ -20,18 +20,20 @@ public class User {
   private String name;
   private Date birthday;
   private Location location;
-  private String correo;
+  private String email;
+  private String username;
   private String gender;
   private String password;
   
   public User() {
   }
 
-  public User(String name, Date birthday, Location location, String correo, String gender, String password) {
+  public User(String name, String username, Date birthday, Location location, String email, String gender, String password) {
     this.name = name;
+    this.username = username;
     this.birthday = birthday;
     this.location = location;
-    this.correo = correo;
+    this.email = email;
     this.gender = gender;
     this.password = password;
   }
@@ -73,24 +75,38 @@ public class User {
     this.location = location;
   }
 
+  public String getEmail() {
+    return email;
+  }
 
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
   
-  public String getNombre() {
-    return this.name;
+  public boolean matchesPassword(String password){
+    return password.contains(this.password);
   }
-
-  public void setNombre(String nombre) {
-    this.name = nombre;
-  }
-
-  public Date getFechaNacimiento() {
-    return birthday;
-  }
-
-  public void setFechaNacimiento(Date fechaNacimiento) {
-    this.birthday = fechaNacimiento;
-  }
-
+  
   @Override
   public String toString() {
     return "User{" + "id=" + id + ", name=" + name + ", birthday=" + birthday + ", location=" + location + '}';

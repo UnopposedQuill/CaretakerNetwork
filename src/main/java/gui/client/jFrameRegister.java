@@ -7,14 +7,11 @@ package gui.client;
 
 import database.DatabaseNoSQL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import models.CareService.CareService;
 import models.CareService.ClientRequest;
 import models.CareService.Disease;
-import models.CareService.Treatment;
 import models.Location;
 import models.Pacient;
 import models.User;
@@ -432,6 +429,7 @@ public class jFrameRegister extends javax.swing.JFrame {
       
       User guardian = new User(
           this.jTextFieldFullName.getText(),
+          null,
           new GregorianCalendar(
               (int)this.jSpinnerYearBirth.getValue(),
               this.jComboBoxMonthBirth.getSelectedIndex(),
@@ -448,6 +446,7 @@ public class jFrameRegister extends javax.swing.JFrame {
               diseases,
               guardian,
               this.jTextFieldFullNameBehalf.getText(),
+              this.jTextFieldUsername.getText(),
               new GregorianCalendar(
                   (int)this.jSpinnerYearBirthBehalf.getValue(),
                   this.jComboBoxMonthBirthBehalf.getSelectedIndex(),
@@ -475,6 +474,7 @@ public class jFrameRegister extends javax.swing.JFrame {
               diseases,
               null,
               this.jTextFieldFullName.getText(),
+              this.jTextFieldUsername.getText(),
               new GregorianCalendar(
                   (int)this.jSpinnerYearBirth.getValue(),
                   this.jComboBoxMonthBirth.getSelectedIndex(),
