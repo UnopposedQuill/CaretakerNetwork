@@ -5,14 +5,25 @@
  */
 package models.CareService;
 
+import java.util.Calendar;
+
 /**
  *
  * @author rober2
  */
 public class CareRequest {
-  public static enum StateRequest {
   
+  public static enum StateRequest {
+    RECHAZADO, ENCURSO, ACEPTADO 
   }
+  Calendar c = Calendar.getInstance();
+
+  @Override
+  protected Object clone() throws CloneNotSupportedException {
+    return super.clone(); //To change body of generated methods, choose Tools | Templates.
+  }
+  
+  
   
   
 }

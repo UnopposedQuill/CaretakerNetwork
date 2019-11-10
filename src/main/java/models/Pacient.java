@@ -23,14 +23,41 @@ public class Pacient extends User {
   private String id = ObjectId.get().toString();
   private List<CareService> suscriptions;
   private List<Treatment> sessions;
-  private List<Disease> diseases;
+  private List<Disease> disease;
+  private User guardian;
+
   public Pacient() {
   }
+
+  public void setDisease(List<Disease> disease) {
+    this.disease = disease;
+  }
+
+  public User getGuardian() {
+    return guardian;
+  }
+
+  public void setGuardian(User guardian) {
+    this.guardian = guardian;
+  }
+
   
   public Pacient(String nombre, Date fechaNacimiento) {
     super(nombre, fechaNacimiento);
   }
 
+    public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public List<Disease> getDisease() {
+    return disease;
+  }
+  
   public List<CareService> getSuscriptions() {
     return suscriptions;
   }
