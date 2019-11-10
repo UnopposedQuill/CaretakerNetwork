@@ -125,6 +125,15 @@ public abstract class CareService {
     this.clinic = clinic;
   }
 
+  public CareTaker getCareTaker() {
+    return careTaker;
+  }
+
+  public void setCareTaker(CareTaker careTaker) {
+    this.careTaker = careTaker;
+  }
+
+  
   @Override
   public String toString() {
     return "CareService{" + "nombre=" + nombre + ", inicialDate=" + initDate + ", endDate=" + endDate + ", estate=" + estate + ", description=" + description + ", price=" + price + ", clinic=" + clinic + ", type=" + type + '}';

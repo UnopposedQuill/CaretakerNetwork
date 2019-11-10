@@ -7,6 +7,7 @@ package models.report;
 
 import java.util.Date;
 import java.util.List;
+import models.CareService.CareService;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Report {
     private Date fechaFinal;
     private boolean inputPrice;
     private boolean inputNumberServices;
-    private String tipoServicio;
+    private CareService.CareServiceType tipoServicio;
     private String employyeSelected;
     private String clientSelected;
     private String nombreCentro;
@@ -56,13 +57,15 @@ public class Report {
     this.fechaFinal = fechaFinal;
   }
 
-  public String getTipoServicio() {
+  public CareService.CareServiceType getTipoServicio() {
     return tipoServicio;
   }
 
-  public void setTipoServicio(String tipoServicio) {
+  public void setTipoServicio(CareService.CareServiceType tipoServicio) {
     this.tipoServicio = tipoServicio;
   }
+
+  
 
   public String getEmployyeSelected() {
     return employyeSelected;
@@ -103,6 +106,13 @@ public class Report {
   public void setRows(List<String> rows) {
     this.rows = rows;
   }
+
+  @Override
+  public String toString() {
+    return "Report{" + "fechaIncial=" + fechaIncial + ", fechaFinal=" + fechaFinal + ", inputPrice=" + inputPrice + ", inputNumberServices=" + inputNumberServices + ", tipoServicio=" + tipoServicio + ", employyeSelected=" + employyeSelected + ", clientSelected=" + clientSelected + ", nombreCentro=" + nombreCentro + ", columns=" + columns + ", rows=" + rows + '}';
+  }
+  
+  
   
   public boolean generarReporte() {
     return true;

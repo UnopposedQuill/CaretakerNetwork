@@ -5,10 +5,15 @@
  */
 package models.EmployeesStudies;
 
+import models.CareService.CareService;
+
 /**
  *
  * @author rober2
  */
 public interface Qualification {
-    
+     
+    public int getPrecio();
+    public CareService.CareServiceType getCategoria();
+
 }
