@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
+import models.CareService.CareService;
 import models.CareService.ClientRequest;
 
 /**
@@ -246,11 +247,14 @@ public class jFrameManageRequests extends javax.swing.JFrame {
   }//GEN-LAST:event_formWindowClosing
 
   private void jButtonRefreshIncomingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshIncomingActionPerformed
-    // TODO add your handling code here:
     // Repopulate all the trees
+    // Declare database endpoint
     DatabaseNoSQL dbns = database.DatabaseNoSQL.getNoSQLInstance();
-    DefaultTreeModel dtm = (DefaultTreeModel) this.jTreeIncomingRequests.getModel();
-    dbns.getAll(ClientRequest.class).forEach((x)->{
+    
+    //Incoming Requests
+    DefaultTreeModel dtm = new DefaultTreeModel(new DefaultMutableTreeNode("Incoming Requests", true), true);
+    dtm.insertNodeInto(new DefaultMutableTreeNode("New Accounts", true), (DefaultMutableTreeNode)dtm.getRoot(), 0);
+    dbns.getAll(ClientRequest.class).stream().filter((x)->(x.getState() == ClientRequest.StateRequest.ENCURSO)).forEach((x)->{
       DefaultMutableTreeNode clientNode = new DefaultMutableTreeNode("Client", true);
       clientNode.add(new DefaultMutableTreeNode(x.getPacient().getName(), false));
       clientNode.add(new DefaultMutableTreeNode(x.getPacient().getLocation().getLocation(), false));
@@ -263,6 +267,20 @@ public class jFrameManageRequests extends javax.swing.JFrame {
       dtm.insertNodeInto(clientNode, (MutableTreeNode)dtm.getChild(dtm.getRoot(), 0), 0);
       
     });
+    
+    // Incoming Subscriptions
+    dtm.insertNodeInto(new DefaultMutableTreeNode("Subscriptions", true), (DefaultMutableTreeNode)dtm.getRoot(), 0);
+    dbns.getAll(CareService.class).stream().filter((x)->(x.getEstate() == CareService.CareServiceState.AGENDADO)).forEach((x)->{
+      DefaultMutableTreeNode subscriptionNode = new DefaultMutableTreeNode("Subscriptions", true);
+      subscriptionNode.add(new DefaultMutableTreeNode(x.getNombre(), false));
+      subscriptionNode.add(new DefaultMutableTreeNode(x.getType(), false));
+      subscriptionNode.add(new DefaultMutableTreeNode(x.getDescription(), false));
+      
+      dtm.insertNodeInto(subscriptionNode, (MutableTreeNode)dtm.getChild(dtm.getRoot(), 0), 0);
+    });
+    
+    // Commit Refresh
+    this.jTreeIncomingRequests.setModel(dtm);
   }//GEN-LAST:event_jButtonRefreshIncomingActionPerformed
 
   //</editor-fold>
