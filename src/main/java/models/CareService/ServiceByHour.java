@@ -19,6 +19,7 @@ public class ServiceByHour extends CareService{
   
   public ServiceByHour(String nombre, Date initDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
     super(nombre, initDate, endDate, estate, description, price, clinic);
+    super.setType(CareServiceType.PORHORA);
   }
 
   
