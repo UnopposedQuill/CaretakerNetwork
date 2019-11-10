@@ -16,7 +16,6 @@ import org.bson.types.ObjectId;
  * @author rober2
  */
 public class Employee extends User{
-    @Id
     private String id = ObjectId.get().toString();
     private List<Activity> activities;
     private Job job;

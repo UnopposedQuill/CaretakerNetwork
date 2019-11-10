@@ -7,6 +7,7 @@ package models.CareService;
 
 import dev.morphia.annotations.Id;
 import java.util.Date;
+import models.CareTaker;
 import models.Clinic;
 import org.bson.types.ObjectId;
 
@@ -25,12 +26,13 @@ public abstract class CareService {
   private String description;
   private int price;
   private Clinic clinic;
+  private CareTaker careTaker;
   private CareServiceType type;
   public enum CareServiceState {
     AGENDADO,ENCURSO,FINALIZADO
   }
   public enum CareServiceType {
-    PORMES, NOCTURNO, PORHORA,NINOS,ADULTOS,PERSONALIZADO
+    PORMES, NOCTURNO, PORHORA,NINOS,ADULTOS,PERSONALIZADO,ANIO
   }
 
   public CareService() {
@@ -49,6 +51,22 @@ public abstract class CareService {
   
   public boolean suscribe() {
     return false;
+  }
+
+  public Date getInitDate() {
+    return initDate;
+  }
+
+  public void setInitDate(Date initDate) {
+    this.initDate = initDate;
+  }
+
+  public CareServiceType getType() {
+    return type;
+  }
+
+  public void setType(CareServiceType type) {
+    this.type = type;
   }
 
   public String getNombre() {

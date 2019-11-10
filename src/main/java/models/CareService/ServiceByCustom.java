@@ -6,16 +6,27 @@
 package models.CareService;
 
 import java.util.Date;
+import models.Clinic;
 
 /**
  *
  * @author rober2
  */
 public class ServiceByCustom extends CareService{
+
+  public ServiceByCustom() {
+  }
   
   public ServiceByCustom(Date initDate,Date endDate) {
     
   }
+
+  public ServiceByCustom(String nombre, Date initDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
+    super(nombre, initDate, endDate, estate, description, price, clinic);
+    super.setType(CareServiceType.PERSONALIZADO);
+  }
+
+  
   
   @Override
   public boolean suscribe() {

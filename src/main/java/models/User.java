@@ -27,6 +27,15 @@ public class User {
   public User() {
   }
 
+  public User(String name, Date birthday, Location location, String correo, String gender, String password) {
+    this.name = name;
+    this.birthday = birthday;
+    this.location = location;
+    this.correo = correo;
+    this.gender = gender;
+    this.password = password;
+  }
+  
   public User(String nombre, Date fechaNacimiento) {
     this.name = nombre;
     this.birthday = fechaNacimiento;
