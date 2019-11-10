@@ -5,10 +5,20 @@
  */
 package models.EmployeesStudies;
 
+import models.CareService.CareService;
+
 /**
  *
  * @author rober2
  */
-public class Experience {
+public class Experience extends Qualification{
+
+  public int getPrecio() {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
+
+  public CareService.CareServiceType getCategoria() {
+    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+  }
     
 }
