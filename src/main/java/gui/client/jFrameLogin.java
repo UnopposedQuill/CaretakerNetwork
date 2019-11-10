@@ -42,6 +42,8 @@ public class jFrameLogin extends javax.swing.JFrame {
     jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel1.setText("Caretaker Network");
 
+    jTextFieldUsername.setToolTipText("Your Username");
+
     jLabel2.setText("Username");
 
     jLabel3.setText("Password");
@@ -116,7 +118,9 @@ public class jFrameLogin extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
-    // TODO add your handling code here:
+    // @TODO: Verify login information before switching UI
+    new jFrameMainMenu(this).setVisible(true);
+    this.setVisible(false);
   }//GEN-LAST:event_jButtonLoginActionPerformed
 
   private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed

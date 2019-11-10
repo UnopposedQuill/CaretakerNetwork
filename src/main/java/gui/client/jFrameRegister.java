@@ -5,6 +5,9 @@
  */
 package gui.client;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Esteban
@@ -37,7 +40,7 @@ public class jFrameRegister extends javax.swing.JFrame {
     jTextFieldEmail = new javax.swing.JTextField();
     jLabelEmail = new javax.swing.JLabel();
     jLabel3 = new javax.swing.JLabel();
-    jButtonCommitRequest = new javax.swing.JButton();
+    jButtonAcceptRequest = new javax.swing.JButton();
     jPasswordFieldConfirm = new javax.swing.JPasswordField();
     jLabel5 = new javax.swing.JLabel();
     jTextFieldUsername = new javax.swing.JTextField();
@@ -46,12 +49,7 @@ public class jFrameRegister extends javax.swing.JFrame {
     jComboBoxMonthBirth = new javax.swing.JComboBox<>();
     jSpinnerDayBirth = new javax.swing.JSpinner();
     jSpinnerYearBirth = new javax.swing.JSpinner();
-    jComboBoxRequestReason = new javax.swing.JComboBox<>();
     jLabel4 = new javax.swing.JLabel();
-    jTextFieldSpecify = new javax.swing.JTextField();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    jTextAreaReasonElaborate = new javax.swing.JTextArea();
-    jLabel7 = new javax.swing.JLabel();
     jButtonCancel = new javax.swing.JButton();
     jTextFieldFullName = new javax.swing.JTextField();
     jLabelFullName = new javax.swing.JLabel();
@@ -72,6 +70,10 @@ public class jFrameRegister extends javax.swing.JFrame {
     jRadioButtonFemale = new javax.swing.JRadioButton();
     jRadioButtonMaleBehalf = new javax.swing.JRadioButton();
     jRadioButtonFemaleBehalf = new javax.swing.JRadioButton();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    jTableDiseases = new javax.swing.JTable();
+    jButtonRemoveDisease = new javax.swing.JButton();
+    jButtonAddDisease = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Create New Account");
@@ -87,10 +89,10 @@ public class jFrameRegister extends javax.swing.JFrame {
     jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     jLabel3.setText("Password");
 
-    jButtonCommitRequest.setText("Commit Request");
-    jButtonCommitRequest.addActionListener(new java.awt.event.ActionListener() {
+    jButtonAcceptRequest.setText("Accept Request");
+    jButtonAcceptRequest.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jButtonCommitRequestActionPerformed(evt);
+        jButtonAcceptRequestActionPerformed(evt);
       }
     });
 
@@ -107,22 +109,7 @@ public class jFrameRegister extends javax.swing.JFrame {
 
     jSpinnerYearBirth.setModel(new javax.swing.SpinnerNumberModel(2019, 1900, 2019, 1));
 
-    jComboBoxRequestReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disease", "Old Age Caretaking", "Child Caretaking", "Another", " " }));
-    jComboBoxRequestReason.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jComboBoxRequestReasonActionPerformed(evt);
-      }
-    });
-
     jLabel4.setText("Reason for Request");
-
-    jTextFieldSpecify.setEnabled(false);
-
-    jTextAreaReasonElaborate.setColumns(20);
-    jTextAreaReasonElaborate.setRows(5);
-    jScrollPane1.setViewportView(jTextAreaReasonElaborate);
-
-    jLabel7.setText("Elaborate Reason");
 
     jButtonCancel.setText("Cancel Request");
     jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -182,6 +169,43 @@ public class jFrameRegister extends javax.swing.JFrame {
     jRadioButtonFemaleBehalf.setText("Female");
     jRadioButtonFemaleBehalf.setEnabled(jCheckBoxBehalf.isSelected());
 
+    jTableDiseases.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null},
+        {null},
+        {null},
+        {null}
+      },
+      new String [] {
+        "Disease"
+      }
+    ) {
+      Class[] types = new Class [] {
+        java.lang.String.class
+      };
+
+      public Class getColumnClass(int columnIndex) {
+        return types [columnIndex];
+      }
+    });
+    jTableDiseases.setColumnSelectionAllowed(true);
+    jScrollPane1.setViewportView(jTableDiseases);
+    jTableDiseases.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+    jButtonRemoveDisease.setText("Remove Disease");
+    jButtonRemoveDisease.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonRemoveDiseaseActionPerformed(evt);
+      }
+    });
+
+    jButtonAddDisease.setText("Add Disease");
+    jButtonAddDisease.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAddDiseaseActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -220,10 +244,15 @@ public class jFrameRegister extends javax.swing.JFrame {
               .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                   .addGroup(layout.createSequentialGroup()
+                    .addGap(57, 57, 57)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelCaretakenInformation)
-                        .addGap(176, 176, 176))
+                      .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(jRadioButtonFemaleBehalf))
+                      .addComponent(jRadioButtonMaleBehalf))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                  .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                           .addComponent(jLabelDateOfBirthBehalf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -237,20 +266,25 @@ public class jFrameRegister extends javax.swing.JFrame {
                           .addGroup(layout.createSequentialGroup()
                             .addComponent(jSpinnerDayBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBoxMonthBirthBehalf, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxMonthBirthBehalf, 0, 87, Short.MAX_VALUE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                  .addGroup(layout.createSequentialGroup()
-                    .addGap(57, 57, 57)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jRadioButtonFemaleBehalf))
-                      .addComponent(jRadioButtonMaleBehalf))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabelCaretakenInformation)
+                            .addGap(176, 176, 176))
+                          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jButtonCancel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButtonAcceptRequest)))))
+                    .addGap(18, 18, 18)))
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addComponent(jLabel4))
               .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,25 +306,11 @@ public class jFrameRegister extends javax.swing.JFrame {
               .addGroup(layout.createSequentialGroup()
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBoxRequestReason, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldSpecify, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                      .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButtonCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCommitRequest)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                      .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addGap(79, 79, 79)))
-                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addGap(79, 79, 79)))))
-            .addGap(0, 12, Short.MAX_VALUE))
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jButtonAddDisease)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButtonRemoveDisease))
+                  .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)))))
           .addComponent(jSeparator1))
         .addContainerGap())
     );
@@ -338,20 +358,7 @@ public class jFrameRegister extends javax.swing.JFrame {
         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addGroup(layout.createSequentialGroup()
-            .addComponent(jLabel4)
-            .addGap(18, 18, 18)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addComponent(jComboBoxRequestReason, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jTextFieldSpecify, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(9, 9, 9)
-            .addComponent(jLabel7)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jButtonCancel)
-              .addComponent(jButtonCommitRequest)))
+          .addComponent(jSeparator4)
           .addGroup(layout.createSequentialGroup()
             .addComponent(jLabelCaretakenInformation)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -370,8 +377,18 @@ public class jFrameRegister extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jRadioButtonMaleBehalf)
               .addComponent(jRadioButtonFemaleBehalf))
-            .addGap(0, 0, Short.MAX_VALUE))
-          .addComponent(jSeparator4))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jButtonCancel)
+              .addComponent(jButtonAcceptRequest)))
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel4)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jButtonAddDisease)
+              .addComponent(jButtonRemoveDisease))))
         .addContainerGap())
     );
 
@@ -379,17 +396,13 @@ public class jFrameRegister extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   // <editor-fold defaultstate="collapsed" desc=" Event Handlers ">
-  private void jButtonCommitRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCommitRequestActionPerformed
+  private void jButtonAcceptRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAcceptRequestActionPerformed
     //@TODO: Implement commit request and handle errors before disposing
     if(this.login != null){
       this.login.setVisible(true);
     }
     this.dispose();
-  }//GEN-LAST:event_jButtonCommitRequestActionPerformed
-
-  private void jComboBoxRequestReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRequestReasonActionPerformed
-    this.jTextFieldSpecify.setEnabled(this.jComboBoxRequestReason.getSelectedItem().toString().equals("Another"));
-  }//GEN-LAST:event_jComboBoxRequestReasonActionPerformed
+  }//GEN-LAST:event_jButtonAcceptRequestActionPerformed
 
   private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
     if(this.login != null){
@@ -412,6 +425,29 @@ public class jFrameRegister extends javax.swing.JFrame {
     this.jRadioButtonMaleBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
     this.jRadioButtonFemaleBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
   }//GEN-LAST:event_jCheckBoxBehalfActionPerformed
+
+  private void jButtonRemoveDiseaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveDiseaseActionPerformed
+    int rowsSelected = this.jTableDiseases.getSelectedRowCount();
+    if (rowsSelected > 0) {
+      int optionSelected = JOptionPane.showConfirmDialog(null, "This will delete ".concat(String.valueOf(rowsSelected)).concat(" rows"), "Confirm", JOptionPane.OK_CANCEL_OPTION);
+      //0 for OK, 2 for Cancel
+      if (optionSelected == 0) {
+        DefaultTableModel dtm = (DefaultTableModel)this.jTableDiseases.getModel();
+        for (int i = this.jTableDiseases.getSelectedRows().length-1; i >= 0; i--) {
+          int selectedRow = this.jTableDiseases.getSelectedRows()[i];
+          dtm.removeRow(selectedRow);
+        }
+      }
+    }
+    else{
+      JOptionPane.showMessageDialog(null, "Please select at least one row to delete");
+    }
+  }//GEN-LAST:event_jButtonRemoveDiseaseActionPerformed
+
+  private void jButtonAddDiseaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDiseaseActionPerformed
+    DefaultTableModel dtm = (DefaultTableModel) this.jTableDiseases.getModel();
+    dtm.addRow(new Object[]{""});
+  }//GEN-LAST:event_jButtonAddDiseaseActionPerformed
   // </editor-fold>
 
   /**
@@ -451,17 +487,17 @@ public class jFrameRegister extends javax.swing.JFrame {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.ButtonGroup buttonGroupGender;
   private javax.swing.ButtonGroup buttonGroupGenderBehalf;
+  private javax.swing.JButton jButtonAcceptRequest;
+  private javax.swing.JButton jButtonAddDisease;
   private javax.swing.JButton jButtonCancel;
-  private javax.swing.JButton jButtonCommitRequest;
+  private javax.swing.JButton jButtonRemoveDisease;
   private javax.swing.JCheckBox jCheckBoxBehalf;
   private javax.swing.JComboBox<String> jComboBoxMonthBirth;
   private javax.swing.JComboBox<String> jComboBoxMonthBirthBehalf;
-  private javax.swing.JComboBox<String> jComboBoxRequestReason;
   private javax.swing.JLabel jLabel3;
   private javax.swing.JLabel jLabel4;
   private javax.swing.JLabel jLabel5;
   private javax.swing.JLabel jLabel6;
-  private javax.swing.JLabel jLabel7;
   private javax.swing.JLabel jLabelAccountInformation;
   private javax.swing.JLabel jLabelCaretakenInformation;
   private javax.swing.JLabel jLabelDateOfBirth;
@@ -484,11 +520,10 @@ public class jFrameRegister extends javax.swing.JFrame {
   private javax.swing.JSpinner jSpinnerDayBirthBehalf;
   private javax.swing.JSpinner jSpinnerYearBirth;
   private javax.swing.JSpinner jSpinnerYearBirthBehalf;
-  private javax.swing.JTextArea jTextAreaReasonElaborate;
+  private javax.swing.JTable jTableDiseases;
   private javax.swing.JTextField jTextFieldEmail;
   private javax.swing.JTextField jTextFieldFullName;
   private javax.swing.JTextField jTextFieldFullNameBehalf;
-  private javax.swing.JTextField jTextFieldSpecify;
   private javax.swing.JTextField jTextFieldUsername;
   // End of variables declaration//GEN-END:variables
   //</editor-fold>

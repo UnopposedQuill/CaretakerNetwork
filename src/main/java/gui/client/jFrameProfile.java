@@ -5,6 +5,11 @@
  */
 package gui.client;
 
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Esteban
@@ -32,7 +37,6 @@ public class jFrameProfile extends javax.swing.JFrame {
     jTextFieldFullName = new javax.swing.JTextField();
     jLabelUsername = new javax.swing.JLabel();
     jTextFieldUsername = new javax.swing.JTextField();
-    jButtonSubscriptions = new javax.swing.JButton();
     jSpinnerYearBirth = new javax.swing.JSpinner();
     jSpinnerDayBirth = new javax.swing.JSpinner();
     jLabelDateOfBirth = new javax.swing.JLabel();
@@ -55,14 +59,13 @@ public class jFrameProfile extends javax.swing.JFrame {
     jSpinnerDayBirthBehalf = new javax.swing.JSpinner();
     jSpinnerYearBirthBehalf = new javax.swing.JSpinner();
     jComboBoxMonthBirthBehalf = new javax.swing.JComboBox<>();
-    jLabelReasonDetail = new javax.swing.JLabel();
-    jComboBoxRequestReason = new javax.swing.JComboBox<>();
-    jLabelRequestReason = new javax.swing.JLabel();
-    jTextFieldSpecify = new javax.swing.JTextField();
-    jScrollPane1 = new javax.swing.JScrollPane();
-    jTextAreaReasonElaborate = new javax.swing.JTextArea();
+    jLabelClientDetails = new javax.swing.JLabel();
     jSeparator3 = new javax.swing.JSeparator();
     jButtonApplyChanges = new javax.swing.JButton();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    jTableDiseases = new javax.swing.JTable();
+    jButtonAddDisease = new javax.swing.JButton();
+    jButtonRemoveDisease = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Your Profile");
@@ -72,8 +75,6 @@ public class jFrameProfile extends javax.swing.JFrame {
     jLabelFullName.setText("Full name");
 
     jLabelUsername.setText("Username");
-
-    jButtonSubscriptions.setText("See your subscriptions");
 
     jSpinnerYearBirth.setModel(new javax.swing.SpinnerNumberModel(2019, 1900, 2019, 1));
 
@@ -116,26 +117,48 @@ public class jFrameProfile extends javax.swing.JFrame {
 
     jComboBoxMonthBirthBehalf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
-    jLabelReasonDetail.setText("Reason Details");
-
-    jComboBoxRequestReason.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disease", "Old Age Caretaking", "Child Caretaking", "Another", " " }));
-    jComboBoxRequestReason.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jComboBoxRequestReasonActionPerformed(evt);
-      }
-    });
-
-    jLabelRequestReason.setText("Reason for Request");
-
-    jTextFieldSpecify.setEnabled(false);
-
-    jTextAreaReasonElaborate.setColumns(20);
-    jTextAreaReasonElaborate.setRows(5);
-    jScrollPane1.setViewportView(jTextAreaReasonElaborate);
+    jLabelClientDetails.setText("Client Details");
 
     jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
     jButtonApplyChanges.setText("Apply Changes");
+
+    jTableDiseases.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null},
+        {null},
+        {null},
+        {null}
+      },
+      new String [] {
+        "Disease"
+      }
+    ) {
+      Class[] types = new Class [] {
+        java.lang.String.class
+      };
+
+      public Class getColumnClass(int columnIndex) {
+        return types [columnIndex];
+      }
+    });
+    jTableDiseases.setColumnSelectionAllowed(true);
+    jScrollPane1.setViewportView(jTableDiseases);
+    jTableDiseases.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+    jButtonAddDisease.setText("Add Disease");
+    jButtonAddDisease.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAddDiseaseActionPerformed(evt);
+      }
+    });
+
+    jButtonRemoveDisease.setText("Remove Disease");
+    jButtonRemoveDisease.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonRemoveDiseaseActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -190,44 +213,38 @@ public class jFrameProfile extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
               .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabelConfirmPassword)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldConfirmPassword))
-              .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                  .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jLabelUsername)
-                  .addComponent(jLabelPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jLabelAccountDetails)
-                  .addComponent(jTextFieldPassword)
-                  .addComponent(jTextFieldEmail)
-                  .addComponent(jTextFieldUsername, javax.swing.GroupLayout.Alignment.TRAILING)))
               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelClientDetails)
+                .addGap(132, 132, 132))
+              .addGroup(layout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jButtonSubscriptions)
-                    .addGap(35, 35, 35))
-                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jLabelReasonDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(104, 104, 104))
-                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jButtonAddDisease)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jButtonRemoveDisease)
+                    .addGap(0, 119, Short.MAX_VALUE))
+                  .addGroup(layout.createSequentialGroup()
+                    .addGap(41, 41, 41)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                      .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(jLabelUsername)
+                      .addComponent(jLabelPassword))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                       .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBoxRequestReason, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldSpecify, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(19, 19, 19))
-                  .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(jLabelRequestReason)
-                    .addGap(94, 94, 94)))))))
+                        .addComponent(jLabelAccountDetails)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                      .addComponent(jTextFieldEmail)
+                      .addComponent(jTextFieldUsername)
+                      .addComponent(jTextFieldPassword)))
+                  .addGroup(layout.createSequentialGroup()
+                    .addComponent(jLabelConfirmPassword)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextFieldConfirmPassword))
+                  .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))))
         .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -275,9 +292,9 @@ public class jFrameProfile extends javax.swing.JFrame {
         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jLabelCaretakenDetails)
-              .addComponent(jLabelRequestReason))
+              .addComponent(jLabelClientDetails))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(layout.createSequentialGroup()
@@ -291,28 +308,25 @@ public class jFrameProfile extends javax.swing.JFrame {
                   .addComponent(jLabelDateOfBirthBehalf)
                   .addComponent(jSpinnerDayBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                   .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jComboBoxMonthBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                  .addComponent(jComboBoxMonthBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(jButtonGoBack)
+                  .addComponent(jButtonApplyChanges)))
               .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jComboBoxRequestReason, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jTextFieldSpecify, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelReasonDetail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jButtonSubscriptions, javax.swing.GroupLayout.Alignment.TRAILING)
-              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButtonGoBack)
-                .addComponent(jButtonApplyChanges))))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                  .addComponent(jButtonAddDisease)
+                  .addComponent(jButtonRemoveDisease)))))
           .addComponent(jSeparator3))
-        .addGap(36, 36, 36))
+        .addContainerGap())
     );
 
     pack();
   }// </editor-fold>//GEN-END:initComponents
 
+  //<editor-fold defaultstate="collapsed" desc="Event Handlers">
   private void jCheckBoxBehalfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxBehalfActionPerformed
     this.jTextFieldFullNameBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
     this.jSpinnerDayBirthBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
@@ -320,10 +334,30 @@ public class jFrameProfile extends javax.swing.JFrame {
     this.jSpinnerYearBirthBehalf.setEnabled(this.jCheckBoxBehalf.isSelected());
   }//GEN-LAST:event_jCheckBoxBehalfActionPerformed
 
-  private void jComboBoxRequestReasonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRequestReasonActionPerformed
-    this.jTextFieldSpecify.setEnabled(this.jComboBoxRequestReason.getSelectedItem().toString().equals("Another"));
-  }//GEN-LAST:event_jComboBoxRequestReasonActionPerformed
+  private void jButtonAddDiseaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddDiseaseActionPerformed
+    DefaultTableModel dtm = (DefaultTableModel) this.jTableDiseases.getModel();
+    dtm.addRow(new Object[]{""});
+  }//GEN-LAST:event_jButtonAddDiseaseActionPerformed
 
+  private void jButtonRemoveDiseaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveDiseaseActionPerformed
+    int rowsSelected = this.jTableDiseases.getSelectedRowCount();
+    if (rowsSelected > 0) {
+      int optionSelected = JOptionPane.showConfirmDialog(null, "This will delete ".concat(String.valueOf(rowsSelected)).concat(" rows"), "Confirm", JOptionPane.OK_CANCEL_OPTION);
+      //0 for OK, 2 for Cancel
+      if (optionSelected == 0) {
+        DefaultTableModel dtm = (DefaultTableModel)this.jTableDiseases.getModel();
+        for (int i = this.jTableDiseases.getSelectedRows().length-1; i >= 0; i--) {
+          int selectedRow = this.jTableDiseases.getSelectedRows()[i];
+          dtm.removeRow(selectedRow);
+        }
+      }
+    }
+    else{
+      JOptionPane.showMessageDialog(null, "Please select at least one row to delete");
+    }
+  }//GEN-LAST:event_jButtonRemoveDiseaseActionPerformed
+  //</editor-fold>
+  
   /**
    * @param args the command line arguments
    */
@@ -359,16 +393,18 @@ public class jFrameProfile extends javax.swing.JFrame {
     });
   }
 
+  //<editor-fold defaultstate="collapsed" desc="Private variables">
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton jButtonAddDisease;
   private javax.swing.JButton jButtonApplyChanges;
   private javax.swing.JButton jButtonGoBack;
-  private javax.swing.JButton jButtonSubscriptions;
+  private javax.swing.JButton jButtonRemoveDisease;
   private javax.swing.JCheckBox jCheckBoxBehalf;
   private javax.swing.JComboBox<String> jComboBoxMonthBirth;
   private javax.swing.JComboBox<String> jComboBoxMonthBirthBehalf;
-  private javax.swing.JComboBox<String> jComboBoxRequestReason;
   private javax.swing.JLabel jLabelAccountDetails;
   private javax.swing.JLabel jLabelCaretakenDetails;
+  private javax.swing.JLabel jLabelClientDetails;
   private javax.swing.JLabel jLabelConfirmPassword;
   private javax.swing.JLabel jLabelDateOfBirth;
   private javax.swing.JLabel jLabelDateOfBirthBehalf;
@@ -377,8 +413,6 @@ public class jFrameProfile extends javax.swing.JFrame {
   private javax.swing.JLabel jLabelFullNameBehalf;
   private javax.swing.JLabel jLabelPassword;
   private javax.swing.JLabel jLabelPersonalDetails;
-  private javax.swing.JLabel jLabelReasonDetail;
-  private javax.swing.JLabel jLabelRequestReason;
   private javax.swing.JLabel jLabelUsername;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JSeparator jSeparator1;
@@ -388,13 +422,13 @@ public class jFrameProfile extends javax.swing.JFrame {
   private javax.swing.JSpinner jSpinnerDayBirthBehalf;
   private javax.swing.JSpinner jSpinnerYearBirth;
   private javax.swing.JSpinner jSpinnerYearBirthBehalf;
-  private javax.swing.JTextArea jTextAreaReasonElaborate;
+  private javax.swing.JTable jTableDiseases;
   private javax.swing.JTextField jTextFieldConfirmPassword;
   private javax.swing.JTextField jTextFieldEmail;
   private javax.swing.JTextField jTextFieldFullName;
   private javax.swing.JTextField jTextFieldFullNameBehalf;
   private javax.swing.JTextField jTextFieldPassword;
-  private javax.swing.JTextField jTextFieldSpecify;
   private javax.swing.JTextField jTextFieldUsername;
   // End of variables declaration//GEN-END:variables
+  //</editor-fold>
 }

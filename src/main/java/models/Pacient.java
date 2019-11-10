@@ -23,7 +23,7 @@ public class Pacient extends User {
   private String id = ObjectId.get().toString();
   private List<CareService> suscriptions;
   private List<Treatment> sessions;
-  private List<Disease> disease;
+  private List<Disease> diseases;
   public Pacient() {
   }
   
