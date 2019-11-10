@@ -7,6 +7,7 @@ package gui.client;
 
 import database.DatabaseNoSQL;
 import java.util.ArrayList;
+import java.util.List;
 import models.CareService.ClientRequest;
 import models.Pacient;
 
@@ -128,22 +129,20 @@ public class jFrameLogin extends javax.swing.JFrame {
     
     //Verify login
     ClientRequest loggedUser = null;
-    ArrayList<ClientRequest> acceptedUsers = new ArrayList<>(databaseNoSQL.getAll(ClientRequest.class).stream().filter((x)->x.getState() == ClientRequest.StateRequest.ACEPTADO).toArray(););
-    
-        .forEach((x)->{
-          acceptedUsers.add(x);
-        });
-    for (ClientRequest acceptedUser : acceptedUsers) {
-      if (acceptedUser.getPacient().getGuardian() == null) {
-        if (acceptedUser.getPacient().getUsername().equals(this.jTextFieldUsername.getText()) &&
-            acceptedUser.getPacient().matchesPassword(String.valueOf(this.jPasswordField.getPassword()))) {
-          loggedUser = acceptedUser;
-          break;
-        }
-      } else {
-        if (acceptedUser.getPacient().getGuardian().getUsername().equals(this.jTextFieldUsername.getText()) &&
-            acceptedUser.getPacient().getGuardian().matchesPassword(String.valueOf(this.jPasswordField.getPassword()))) {
-          loggedUser = acceptedUser;
+    List <ClientRequest> users = databaseNoSQL.getAll(ClientRequest.class);
+    for (ClientRequest user : users) {
+      if (user.getState() == ClientRequest.StateRequest.ACEPTADO) {
+        if (user.getPacient().getGuardian() == null) {
+          if (user.getPacient().getUsername().equals(this.jTextFieldUsername.getText()) &&
+              user.getPacient().matchesPassword(String.valueOf(this.jPasswordField.getPassword()))) {
+            loggedUser = user;
+            break;
+          }
+        } else {
+          if (user.getPacient().getGuardian().getUsername().equals(this.jTextFieldUsername.getText()) &&
+              user.getPacient().getGuardian().matchesPassword(String.valueOf(this.jPasswordField.getPassword()))) {
+            loggedUser = user;
+          }
         }
       }
     }
