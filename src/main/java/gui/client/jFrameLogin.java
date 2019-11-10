@@ -128,7 +128,7 @@ public class jFrameLogin extends javax.swing.JFrame {
     
     //Verify login
     ClientRequest loggedUser = null;
-    ArrayList<ClientRequest> acceptedUsers = new ArrayList<ClientRequest>(databaseNoSQL.getAll(ClientRequest.class).stream().filter((x)->x.getState() == ClientRequest.StateRequest.ACEPTADO).toArray());
+    ArrayList<ClientRequest> acceptedUsers = new ArrayList<>(databaseNoSQL.getAll(ClientRequest.class).stream().filter((x)->x.getState() == ClientRequest.StateRequest.ACEPTADO).toArray(););
     
         .forEach((x)->{
           acceptedUsers.add(x);
