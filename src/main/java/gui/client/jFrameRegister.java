@@ -12,6 +12,7 @@ import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.CareService.CareService;
+import models.CareService.ClientRequest;
 import models.CareService.Disease;
 import models.CareService.Treatment;
 import models.Location;
@@ -441,19 +442,22 @@ public class jFrameRegister extends javax.swing.JFrame {
           String.valueOf(this.jPasswordField.getPassword())
       );
       
-      dbns.save(new Pacient(new ArrayList<>(),
-          new ArrayList<>(),
-          diseases,
-          guardian,
-          this.jTextFieldFullNameBehalf.getText(),
-          new GregorianCalendar(
-              (int)this.jSpinnerYearBirthBehalf.getValue(),
-              this.jComboBoxMonthBirthBehalf.getSelectedIndex(),
-              (int)this.jSpinnerDayBirthBehalf.getValue()).getTime(),
-          location,
-          null,
-          this.jRadioButtonMaleBehalf.isSelected() ? "Male": "Female",
-          null
+      dbns.save(new ClientRequest(new Pacient(
+              new ArrayList<>(),
+              new ArrayList<>(),
+              diseases,
+              guardian,
+              this.jTextFieldFullNameBehalf.getText(),
+              new GregorianCalendar(
+                  (int)this.jSpinnerYearBirthBehalf.getValue(),
+                  this.jComboBoxMonthBirthBehalf.getSelectedIndex(),
+                  (int)this.jSpinnerDayBirthBehalf.getValue()).getTime(),
+              location,
+              null,
+              this.jRadioButtonMaleBehalf.isSelected() ? "Male": "Female",
+              null
+            )
+          ,ClientRequest.StateRequest.ENCURSO
         )
       );
     }else{
@@ -465,19 +469,22 @@ public class jFrameRegister extends javax.swing.JFrame {
         diseases.add(new Disease(this.jTableDiseases.getValueAt(i, 0).toString()));
       }
       
-      dbns.save(new Pacient(new ArrayList<>(),
-          new ArrayList<>(),
-          diseases,
-          null,
-          this.jTextFieldFullName.getText(),
-          new GregorianCalendar(
-              (int)this.jSpinnerYearBirth.getValue(),
-              this.jComboBoxMonthBirth.getSelectedIndex(),
-              (int)this.jSpinnerDayBirth.getValue()).getTime(),
-          location,
-          this.jTextFieldEmail.getText(),
-          this.jRadioButtonMale.isSelected() ? "Male": "Female",
-          String.valueOf(this.jPasswordField.getPassword())
+      dbns.save(new ClientRequest(new Pacient(
+              new ArrayList<>(),
+              new ArrayList<>(),
+              diseases,
+              null,
+              this.jTextFieldFullName.getText(),
+              new GregorianCalendar(
+                  (int)this.jSpinnerYearBirth.getValue(),
+                  this.jComboBoxMonthBirth.getSelectedIndex(),
+                  (int)this.jSpinnerDayBirth.getValue()).getTime(),
+              location,
+              this.jTextFieldEmail.getText(),
+              this.jRadioButtonMale.isSelected() ? "Male": "Female",
+              String.valueOf(this.jPasswordField.getPassword())
+            )
+          ,ClientRequest.StateRequest.ENCURSO
         )
       );
     }
