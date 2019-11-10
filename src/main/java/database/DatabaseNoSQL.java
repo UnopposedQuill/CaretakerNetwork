@@ -9,6 +9,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
 import dev.morphia.Datastore;
 import dev.morphia.Morphia;
+import dev.morphia.query.Query;
+import dev.morphia.query.UpdateOperations;
 import java.util.List;
 
 /**
@@ -58,10 +60,21 @@ public class DatabaseNoSQL implements DatabaseInterface {
 
   @Override
   public <T> boolean update(Class<T> type, List<String> names, List<String> values) {
-    this.datastore.createUpdateOperations(type).set(names.get(0), values);
+    for (int i = 0; i < names.size(); i++) {
+      this.datastore.createUpdateOperations(type).set(names.get(i), values.get(i));
+    }
     return true;
   }
 
+  @Override
+  public <T> boolean updateByID(Class<T> type, String id, String field, Object value) {
+    Query<T> query = datastore.createQuery(type).field("_id").equal(id);
+    UpdateOperations<T> ops = datastore.createUpdateOperations(type).set(field, value);
+    
+    datastore.update(query, ops);
+    return true;
+  }
+  
   @Override
   public <T> boolean delete(T t) {
     this.datastore.delete(t);

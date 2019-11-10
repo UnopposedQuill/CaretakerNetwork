@@ -28,7 +28,8 @@ public class Main {
 
   public static void main(String[] args) {
 
-    DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
+    // DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
+    /*
     Employee e = new Employee(Employee.Privilegios.ADMINISTRATIVO, "AAAAaaa", "huiqdnqwbname", new Date(), new Location(), "asdfasf", "Hombre", "123f132");
     database.save(e);
         
@@ -40,7 +41,8 @@ public class Main {
     
     Report report = reportBuilder.setByEmployee("aaa").setByPacient("rto").
         setDateRange(calendar.getTime(), calendar2.getTime()).build();
-    
+    */
+
 //    List<Disease> diseases = new ArrayList<>();
 //    Disease d = new Disease("Alefdgsdgrgia");
 //    Pacient pacient = new Pacient(diseases, new User("SiGsdfgsdfguardian", new Date()), "aaaarto", "Usernameiojqwij", new Date(), new Location(),"asdff@asdasdf.com" , "Mujer", "1234");

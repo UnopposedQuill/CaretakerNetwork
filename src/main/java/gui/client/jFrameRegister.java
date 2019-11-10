@@ -429,7 +429,7 @@ public class jFrameRegister extends javax.swing.JFrame {
       
       User guardian = new User(
           this.jTextFieldFullName.getText(),
-          null,
+          this.jTextFieldUsername.getText(),
           new GregorianCalendar(
               (int)this.jSpinnerYearBirth.getValue(),
               this.jComboBoxMonthBirth.getSelectedIndex(),
@@ -446,7 +446,7 @@ public class jFrameRegister extends javax.swing.JFrame {
               diseases,
               guardian,
               this.jTextFieldFullNameBehalf.getText(),
-              this.jTextFieldUsername.getText(),
+              null,
               new GregorianCalendar(
                   (int)this.jSpinnerYearBirthBehalf.getValue(),
                   this.jComboBoxMonthBirthBehalf.getSelectedIndex(),

@@ -129,9 +129,14 @@ public class jFrameLogin extends javax.swing.JFrame {
     boolean success = databaseNoSQL.getAll(ClientRequest.class).stream().anyMatch(
       (x)->{
         // Both username and password match?
-        return x.getState() == ClientRequest.StateRequest.ACEPTADO &&
+        // I need to check if its a guardian or non guardian pacient
+        
+        return x.getState() == ClientRequest.StateRequest.ACEPTADO && x.getPacient().getGuardian() == null ? 
             x.getPacient().getUsername().equals(this.jTextFieldUsername.getText()) &&
-            x.getPacient().matchesPassword(String.valueOf(this.jPasswordField.getPassword()));
+            x.getPacient().matchesPassword(String.valueOf(this.jPasswordField.getPassword()))
+            :
+            x.getPacient().getGuardian().getUsername().equals(this.jTextFieldUsername.getText()) &&
+            x.getPacient().getGuardian().matchesPassword(String.valueOf(this.jPasswordField.getPassword()));
       }
     );
     

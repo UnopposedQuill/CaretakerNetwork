@@ -282,6 +282,9 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 
   private void jButtonApproveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApproveRequestActionPerformed
     if (this.jTreeIncomingRequests.getSelectionCount() > 0) {
+      
+      // Declare database endpoint
+      DatabaseNoSQL dbns = database.DatabaseNoSQL.getNoSQLInstance();
       // I need to check if the request selected is a client or a subscription
       DefaultTreeModel dtmIncomingRequests =  (DefaultTreeModel)this.jTreeIncomingRequests.getModel(),
           dtmAcceptedClients = (DefaultTreeModel) this.jTreeActiveClients.getModel(),
@@ -302,7 +305,8 @@ public class jFrameManageRequests extends javax.swing.JFrame {
         }
         
         // I reached the main node, I move to the active clients
-        //((DefaultMutableTreeNode)dtmAcceptedClients.getRoot()).insert(selectedNode, 0);
+        dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "state", ClientRequest.StateRequest.ACEPTADO);
+        
         dtmIncomingRequests.removeNodeFromParent(selectedNode);
         dtmAcceptedClients.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedClients.getRoot()), 0);
         
@@ -355,6 +359,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 		});
 	}
 
+  //<editor-fold defaultstate="">
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonApproveRequest;
   private javax.swing.JButton jButtonDisposeElement;
