@@ -32,6 +32,15 @@ public class User {
     this.birthday = fechaNacimiento;
   }
 
+  public User(String name, Date birthday, Location location, String correo, String gender, String password) {
+    this.name = name;
+    this.birthday = birthday;
+    this.location = location;
+    this.correo = correo;
+    this.gender = gender;
+    this.password = password;
+  }
+
   public String getId() {
     return id;
   }

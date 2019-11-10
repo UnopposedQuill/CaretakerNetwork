@@ -46,10 +46,20 @@ public class Pacient extends User {
     super(nombre, fechaNacimiento);
   }
 
-    public String getId() {
+  public Pacient(List<CareService> suscriptions, List<Treatment> sessions, List<Disease> disease, User guardian, String name, Date birthday, Location location, String correo, String gender, String password) {
+    super(name, birthday, location, correo, gender, password);
+    this.suscriptions = suscriptions;
+    this.sessions = sessions;
+    this.disease = disease;
+    this.guardian = guardian;
+  }
+  
+   @Override
+  public String getId() {
     return id;
   }
 
+   @Override
   public void setId(String id) {
     this.id = id;
   }
