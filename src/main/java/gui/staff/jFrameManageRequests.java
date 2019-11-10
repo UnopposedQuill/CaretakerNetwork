@@ -5,6 +5,13 @@
  */
 package gui.staff;
 
+import database.DatabaseNoSQL;
+import java.util.ArrayList;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.MutableTreeNode;
+import models.CareService.ClientRequest;
+
 /**
  *
  * @author Esteban
@@ -54,14 +61,12 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 
     javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Incoming Requests");
     javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("New Accounts");
-    javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Disease");
-    javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Paúl Esteban Gutiérrez Salas");
-    treeNode3.add(treeNode4);
+    javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
     treeNode2.add(treeNode3);
     treeNode1.add(treeNode2);
     treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Subscriptions");
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Nocturne");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Andrés Eduardo Gutiérrez Salas");
+    javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Andrés Eduardo Gutiérrez Salas");
     treeNode3.add(treeNode4);
     treeNode2.add(treeNode3);
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Daily");
@@ -172,6 +177,11 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     });
 
     jButtonRefreshIncoming.setText("Refresh Incoming");
+    jButtonRefreshIncoming.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonRefreshIncomingActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -234,6 +244,26 @@ public class jFrameManageRequests extends javax.swing.JFrame {
       this.frameMainMenu.setVisible(true);
     }
   }//GEN-LAST:event_formWindowClosing
+
+  private void jButtonRefreshIncomingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshIncomingActionPerformed
+    // TODO add your handling code here:
+    // Repopulate all the trees
+    DatabaseNoSQL dbns = database.DatabaseNoSQL.getNoSQLInstance();
+    DefaultTreeModel dtm = (DefaultTreeModel) this.jTreeIncomingRequests.getModel();
+    dbns.getAll(ClientRequest.class).forEach((x)->{
+      DefaultMutableTreeNode clientNode = new DefaultMutableTreeNode("Client", true);
+      clientNode.add(new DefaultMutableTreeNode(x.getPacient().getName(), false));
+      clientNode.add(new DefaultMutableTreeNode(x.getPacient().getLocation().getLocation(), false));
+      DefaultMutableTreeNode diseasesSubnode = new DefaultMutableTreeNode("Diseases", true);
+      x.getPacient().getDisease().forEach((y)->{
+        diseasesSubnode.add(new DefaultMutableTreeNode(y.getName(), false));
+      });
+      clientNode.add(diseasesSubnode);
+      clientNode.add(new DefaultMutableTreeNode(x.getPacient().getGuardian() == null ? null : x.getPacient().getGuardian().getName(), false));
+      dtm.insertNodeInto(clientNode, (MutableTreeNode)dtm.getChild(dtm.getRoot(), 0), 0);
+      
+    });
+  }//GEN-LAST:event_jButtonRefreshIncomingActionPerformed
 
   //</editor-fold>
   

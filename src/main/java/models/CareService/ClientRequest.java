@@ -20,12 +20,12 @@ public class ClientRequest {
   private Pacient pacient;
   private StateRequest state;
 
+  public ClientRequest() { }
+  
   public ClientRequest(Pacient pacient, StateRequest state) {
     this.pacient = pacient;
     this.state = state;
   }
-
-  
   
   public Pacient getPacient() {
     return pacient;

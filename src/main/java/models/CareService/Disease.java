@@ -19,6 +19,8 @@ public class Disease {
     this.name = name;
   }
 
+  public Disease() { }
+
   public String getName() {
     return name;
   }

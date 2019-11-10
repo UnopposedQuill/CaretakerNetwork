@@ -90,7 +90,7 @@
         <Component class="javax.swing.JTree" name="jTreeIncomingRequests">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="Incoming Requests&#xa; New Accounts&#xa;   Disease&#xa;    Pa&#xfa;l Esteban Guti&#xe9;rrez Salas&#xa; Subscriptions&#xa;  Nocturne&#xa;    Andr&#xe9;s Eduardo Guti&#xe9;rrez Salas&#xa;  Daily&#xa;    null&#xa;  Monthly&#xa;    null&#xa;  Yearly&#xa;    null"/>
+              <TreeModel code="Incoming Requests&#xa; New Accounts&#xa;   null&#xa; Subscriptions&#xa;  Nocturne&#xa;    Andr&#xe9;s Eduardo Guti&#xe9;rrez Salas&#xa;  Daily&#xa;    null&#xa;  Monthly&#xa;    null&#xa;  Yearly&#xa;    null"/>
             </Property>
           </Properties>
         </Component>
@@ -166,6 +166,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Refresh Incoming"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRefreshIncomingActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
