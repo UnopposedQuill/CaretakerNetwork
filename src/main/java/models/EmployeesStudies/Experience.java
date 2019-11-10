@@ -11,14 +11,12 @@ import models.CareService.CareService;
  *
  * @author rober2
  */
-public class Experience implements Qualification{
+public class Experience extends Qualification{
 
-  @Override
   public int getPrecio() {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }
 
-  @Override
   public CareService.CareServiceType getCategoria() {
     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   }

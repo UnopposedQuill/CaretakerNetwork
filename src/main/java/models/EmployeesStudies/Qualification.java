@@ -11,9 +11,12 @@ import models.CareService.CareService;
  *
  * @author rober2
  */
-public interface Qualification {
-     
-    public int getPrecio();
-    public CareService.CareServiceType getCategoria();
+public abstract class Qualification {
+    private String nombre;
+    private String descripcion;
+    private CareService.CareServiceType type;
+    
+    public int getPrice(){ return 0; }
+    public CareService.CareServiceType getCategory(){ return null; }
 
 }
