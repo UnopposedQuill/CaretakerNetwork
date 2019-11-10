@@ -21,8 +21,8 @@ public class ServiceByCustom extends CareService{
     
   }
 
-  public ServiceByCustom(String nombre, String username, Date initDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
-    super(nombre, username, initDate, endDate, estate, description, price, clinic);
+  public ServiceByCustom(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
+    super(initDate, initialDate, endDate, estate, description, price, clinic);
     super.setType(CareServiceType.PERSONALIZADO);
   }
 

@@ -17,8 +17,8 @@ public class ServiceByYear extends CareService{
   public ServiceByYear() {
   }
   
-  public ServiceByYear(String nombre, String username, Date initDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
-    super(nombre, username, initDate, endDate, estate, description, price, clinic);
+  public ServiceByYear(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
+    super(initDate, initialDate, endDate, estate, description, price, clinic);
     super.setType(CareServiceType.ANIO);
   }
 

@@ -19,9 +19,8 @@ public abstract class CareService {
   
   @Id
   private String id = ObjectId.get().toString();
-  private String name;
-  private String username;
   private Date initDate;
+  private Date initialDate;
   private Date endDate;
   private CareServiceState estate;
   private String description;
@@ -40,10 +39,9 @@ public abstract class CareService {
 
   }
 
-  public CareService(String name, String username, Date initDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
-    this.name = name;
-    this.username = username;
+  public CareService(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
     this.initDate = initDate;
+    this.initialDate = initialDate;
     this.endDate = endDate;
     this.estate = estate;
     this.description = description;
@@ -70,15 +68,6 @@ public abstract class CareService {
   public void setType(CareServiceType type) {
     this.type = type;
   }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
   
   public Date getInicialDate() {
     return initDate;
@@ -135,15 +124,7 @@ public abstract class CareService {
   public void setId(String id) {
     this.id = id;
   }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
+  
   public CareTaker getCareTaker() {
     return careTaker;
   }
@@ -152,9 +133,17 @@ public abstract class CareService {
     this.careTaker = careTaker;
   }
 
+  public Date getInitialDate() {
+    return initialDate;
+  }
+
+  public void setInitialDate(Date initialDate) {
+    this.initialDate = initialDate;
+  }
+
   @Override
   public String toString() {
-    return "CareService{" + "name=" + name + ", inicialDate=" + initDate + ", endDate=" + endDate + ", estate=" + estate + ", description=" + description + ", price=" + price + ", clinic=" + clinic + ", type=" + type + '}';
+    return "CareService{" + ", inicialDate=" + initDate + ", endDate=" + endDate + ", estate=" + estate + ", description=" + description + ", price=" + price + ", clinic=" + clinic + ", type=" + type + '}';
   }
   
   

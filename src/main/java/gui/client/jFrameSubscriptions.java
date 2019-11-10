@@ -5,9 +5,14 @@
  */
 package gui.client;
 
+import database.DatabaseNoSQL;
+import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import javax.swing.table.TableColumn;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import models.CareService.CareService;
+import models.CareService.ClientRequest;
 
 /**
  *
@@ -15,11 +20,15 @@ import javax.swing.table.TableColumn;
  */
 public class jFrameSubscriptions extends javax.swing.JFrame {
 
+  private ClientRequest loggedUser;
+  
   /**
    * Creates new form jFrameSubscriptions
+   * @param pacient
    */
-  public jFrameSubscriptions() {
+  public jFrameSubscriptions(ClientRequest pacient) {
     initComponents();
+    this.loggedUser = pacient;
   }
 
   /**
@@ -37,24 +46,24 @@ public class jFrameSubscriptions extends javax.swing.JFrame {
     jButtonRemoveSubscription = new javax.swing.JButton();
     jButtonCancel = new javax.swing.JButton();
     jButtonCommitChanges = new javax.swing.JButton();
-    jButtonEndedSubscriptions = new javax.swing.JButton();
+    jButtonRefreshData = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Your Subscriptions");
 
     jTableSubscripciones.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-        {null, null, null, null}
+        {null, null, null, null, null}
       },
       new String [] {
-        "Subscription Type", "Date Requested", "Date Accepted", "Price"
+        "Subscription Type", "Date Requested", "Date Accepted", "Price", "Status"
       }
     ) {
       Class[] types = new Class [] {
-        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+        java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
       };
       boolean[] canEdit = new boolean [] {
-        true, false, true, false
+        false, false, false, false, false
       };
 
       public Class getColumnClass(int columnIndex) {
@@ -65,20 +74,37 @@ public class jFrameSubscriptions extends javax.swing.JFrame {
         return canEdit [columnIndex];
       }
     });
+    jTableSubscripciones.setColumnSelectionAllowed(true);
     jScrollPane1.setViewportView(jTableSubscripciones);
+    jTableSubscripciones.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
     if (jTableSubscripciones.getColumnModel().getColumnCount() > 0) {
       jTableSubscripciones.getColumnModel().getColumn(0).setCellEditor(this.getSubscriptionCellEditor());
     }
 
     jButtonAddSubscription.setText("Add Subscription");
+    jButtonAddSubscription.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAddSubscriptionActionPerformed(evt);
+      }
+    });
 
     jButtonRemoveSubscription.setText("Remove Subscription");
+    jButtonRemoveSubscription.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonRemoveSubscriptionActionPerformed(evt);
+      }
+    });
 
     jButtonCancel.setText("Cancel");
 
     jButtonCommitChanges.setText("Commit Changes");
 
-    jButtonEndedSubscriptions.setText("View Finalized Subscriptions");
+    jButtonRefreshData.setText("Refresh Data");
+    jButtonRefreshData.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonRefreshDataActionPerformed(evt);
+      }
+    });
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -86,32 +112,32 @@ public class jFrameSubscriptions extends javax.swing.JFrame {
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(jButtonRemoveSubscription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 654, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jButtonRemoveSubscription, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
           .addComponent(jButtonAddSubscription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jButtonCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jButtonCommitChanges, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jButtonEndedSubscriptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+          .addComponent(jButtonRefreshData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        .addContainerGap())
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(13, Short.MAX_VALUE)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+        .addContainerGap()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
             .addComponent(jButtonAddSubscription)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(jButtonRemoveSubscription)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jButtonEndedSubscriptions)
+            .addComponent(jButtonRefreshData)
             .addGap(18, 18, 18)
             .addComponent(jButtonCancel)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(jButtonCommitChanges))
-          .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE))
         .addContainerGap())
     );
 
@@ -119,7 +145,31 @@ public class jFrameSubscriptions extends javax.swing.JFrame {
   }// </editor-fold>//GEN-END:initComponents
 
   // <editor-fold defaultstate="collapsed" desc="Event Handlers">
-  
+  private void jButtonAddSubscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSubscriptionActionPerformed
+    new jFrameRequest(this, this.loggedUser).setVisible(true);
+  }//GEN-LAST:event_jButtonAddSubscriptionActionPerformed
+
+  private void jButtonRemoveSubscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveSubscriptionActionPerformed
+    int rowsSelected = this.jTableSubscripciones.getSelectedRowCount();
+    if (rowsSelected > 0) {
+      int optionSelected = JOptionPane.showConfirmDialog(null, "This will terminate ".concat(String.valueOf(rowsSelected)).concat(" subscriptions"), "Confirm", JOptionPane.OK_CANCEL_OPTION);
+      //0 for OK, 2 for Cancel
+      if (optionSelected == 0) {
+        DefaultTableModel dtm = (DefaultTableModel)this.jTableSubscripciones.getModel();
+        for (int i = 0; i < this.jTableSubscripciones.getSelectedRows().length; i++) {
+          dtm.setValueAt(CareService.CareServiceState.FINALIZADO, this.jTableSubscripciones.getSelectedRows()[i], 4);
+        }
+      }
+    }
+    else{
+      JOptionPane.showMessageDialog(null, "Please select at least one row to delete");
+    }
+  }//GEN-LAST:event_jButtonRemoveSubscriptionActionPerformed
+
+  private void jButtonRefreshDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshDataActionPerformed
+    this.updateSubscriptionData();
+  }//GEN-LAST:event_jButtonRefreshDataActionPerformed
+
   // </editor-fold>
   
   // <editor-fold defaultstate="collapsed" desc="Private methods">
@@ -144,6 +194,45 @@ public class jFrameSubscriptions extends javax.swing.JFrame {
     return new DefaultCellEditor(subscriptionComboBox);
   }
   // </editor-fold>
+  
+  //<editor-fold defaultstate="collapsed" desc="Slots">
+  public void updateSubscriptionData(){
+    // Updating endpoint
+    DatabaseNoSQL dbns = database.DatabaseNoSQL.getNoSQLInstance();
+    
+    // Update client
+    this.loggedUser = (ClientRequest)
+        dbns.getAll(ClientRequest.class).stream()
+            .filter((x)->x.getId().equals(this.loggedUser.getId())).toArray()[0];
+    
+    // Get his subscriptions
+    ArrayList <CareService> subscriptions = new ArrayList(this.loggedUser.getPacient().getSuscriptions());
+    Object [][] data = new Object[subscriptions.size()][5];
+    
+    // Fill data
+    for (int i = 0; i < subscriptions.size(); i++) {
+      CareService subscription = subscriptions.get(i);
+      data[i][0] = subscription.getType().toString();
+      data[i][1] = subscription.getInitDate();
+      data[i][2] = "N/A";
+      data[i][3] = subscription.getPrice();
+      data[i][4] = subscription.getEstate();
+    }
+    
+    // Columns information
+    String [] columns = {
+      "Subscription Type",
+      "Date Requested",
+      "Date Accepted",
+      "Price",
+      "State"
+    };
+    
+    // Commit data
+    DefaultTableModel dtm = new DefaultTableModel(data, columns);
+    this.jTableSubscripciones.setModel(dtm);
+  }
+  //</editor-fold>
   
   /**
    * @param args the command line arguments
@@ -175,18 +264,21 @@ public class jFrameSubscriptions extends javax.swing.JFrame {
     /* Create and display the form */
     java.awt.EventQueue.invokeLater(new Runnable() {
       public void run() {
-        new jFrameSubscriptions().setVisible(true);
+        new jFrameSubscriptions(null).setVisible(true);
       }
     });
   }
 
+  //<editor-fold defaultstate="collapsed" desc="Private Variables">
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddSubscription;
   private javax.swing.JButton jButtonCancel;
   private javax.swing.JButton jButtonCommitChanges;
-  private javax.swing.JButton jButtonEndedSubscriptions;
+  private javax.swing.JButton jButtonRefreshData;
   private javax.swing.JButton jButtonRemoveSubscription;
   private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JTable jTableSubscripciones;
   // End of variables declaration//GEN-END:variables
+  
+  //</editor-fold>
 }
