@@ -19,19 +19,32 @@ public abstract class CareService {
   @Id
   private String id = ObjectId.get().toString();
   private String nombre;
-  private Date inicialDate;
+  private Date initDate;
   private Date endDate;
   private CareServiceState estate;
   private String description;
   private int price;
   private Clinic clinic;
-  private FactoryCareService.TipoSuscripcion type;
-  
+  private CareServiceType type;
   public enum CareServiceState {
-
+    AGENDADO,ENCURSO,FINALIZADO
   }
+  public enum CareServiceType {
+    PORMES, NOCTURNO, PORHORA,NINOS,ADULTOS,PERSONALIZADO
+  }
+
   public CareService() {
 
+  }
+
+  public CareService(String nombre, Date initDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
+    this.nombre = nombre;
+    this.initDate = initDate;
+    this.endDate = endDate;
+    this.estate = estate;
+    this.description = description;
+    this.price = price;
+    this.clinic = clinic;
   }
   
   public boolean suscribe() {
@@ -47,11 +60,11 @@ public abstract class CareService {
   }
 
   public Date getInicialDate() {
-    return inicialDate;
+    return initDate;
   }
 
   public void setInicialDate(Date inicialDate) {
-    this.inicialDate = inicialDate;
+    this.initDate = inicialDate;
   }
 
   public Date getEndDate() {
@@ -96,7 +109,7 @@ public abstract class CareService {
 
   @Override
   public String toString() {
-    return "CareService{" + "nombre=" + nombre + ", inicialDate=" + inicialDate + ", endDate=" + endDate + ", estate=" + estate + ", description=" + description + ", price=" + price + ", clinic=" + clinic + ", type=" + type + '}';
+    return "CareService{" + "nombre=" + nombre + ", inicialDate=" + initDate + ", endDate=" + endDate + ", estate=" + estate + ", description=" + description + ", price=" + price + ", clinic=" + clinic + ", type=" + type + '}';
   }
   
   

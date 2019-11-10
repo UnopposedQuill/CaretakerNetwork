@@ -58,7 +58,6 @@ public class ScheduleManager {
       }
     }
     return false;
-
   }  
 
   public List<Schedule> getSchedulues() {

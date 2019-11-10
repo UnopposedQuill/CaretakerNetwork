@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import models.CareService.CareService;
+import models.CareService.FactoryCareService;
 import models.CareService.ServiceByHour;
+import models.Clinic;
 
 import models.User;
 
@@ -29,31 +31,14 @@ public class Main {
   public static void main(String[] args) {
 
     DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
+    ServiceByHour c = new ServiceByHour("Alfonso", new Date(), new Date(), CareService.CareServiceState.AGENDADO, "asdfasdf", 123123, new Clinic());
+    database.save(c);
 
-    Datastore data = database.getDataStore();
-    User usuario = new User("Salmon", new Date());
-    CareService care = new ServiceByHour();
-    care.setInicialDate(new Date());
-    care.setEndDate(new Date());
-    care.setNombre("Servicion Alfonoso");
-    database.save(care);
-
-    List<User> listUser = database.getAll(User.class);
-    List<ServiceByHour> listService = database.getAll(ServiceByHour.class);
-    System.out.println(listService.size());
-    for (CareService careservice : listService) {
-
-      System.out.println("hola");
-      System.out.println(listService.size());
-      System.out.println(careservice.toString());
-
+    List<ServiceByHour> byHour = database.getAll(ServiceByHour.class);
+    
+    for (ServiceByHour serviceByHour : byHour) {
+      System.out.println(serviceByHour.getNombre());
     }
 
-//    database.save(usuario);
-//    
-//    List<String> listString = new ArrayList<>();
-//    listString.add("aaa");
-//    listString.add("cccc");
-//    
   }
 }
