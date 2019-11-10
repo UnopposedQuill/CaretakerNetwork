@@ -29,7 +29,7 @@ public class Main {
   public static void main(String[] args) {
 
     DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
-    Employee e = new Employee(Employee.Privilegios.ADMINISTRATIVO, "AAAAaaa", new Date(), new Location(), "asdfasf", "Hombre", "123f132");
+    Employee e = new Employee(Employee.Privilegios.ADMINISTRATIVO, "AAAAaaa", "huiqdnqwbname", new Date(), new Location(), "asdfasf", "Hombre", "123f132");
     database.save(e);
         
     BuilderReport reportBuilder = new BuilderReport();

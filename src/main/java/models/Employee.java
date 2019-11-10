@@ -5,7 +5,6 @@
  */
 package models;
 
-import dev.morphia.annotations.Id;
 import java.util.Date;
 import java.util.List;
 import models.EmployeeActivities.Activity;
@@ -30,8 +29,8 @@ public class Employee extends User{
   public Employee() {
   }
 
-  public Employee(List<Activity> activities, Job job, String employeeCode, Privilegios privilegio, ScheduleManager scheduleManager, String name, Date birthday, Location location, String correo, String gender, String password) {
-    super(name, birthday, location, correo, gender, password);
+  public Employee(List<Activity> activities, Job job, String employeeCode, Privilegios privilegio, ScheduleManager scheduleManager, String name, String username, Date birthday, Location location, String correo, String gender, String password) {
+    super(name, username, birthday, location, correo, gender, password);
     this.activities = activities;
     this.job = job;
     this.employeeCode = employeeCode;
@@ -39,8 +38,8 @@ public class Employee extends User{
     this.scheduleManager = scheduleManager;
   }
 
-  public Employee(Privilegios privilegio, String name, Date birthday, Location location, String correo, String gender, String password) {
-    super(name, birthday, location, correo, gender, password);
+  public Employee(Privilegios privilegio, String name, String username, Date birthday, Location location, String correo, String gender, String password) {
+    super(name, username, birthday, location, correo, gender, password);
     this.privilegio = privilegio;
   }
 
@@ -52,10 +51,12 @@ public class Employee extends User{
     this.privilegio = privilegio;
   }
 
+    @Override
   public String getId() {
     return id;
   }
 
+    @Override
   public void setId(String id) {
     this.id = id;
   }
