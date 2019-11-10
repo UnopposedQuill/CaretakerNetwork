@@ -38,7 +38,7 @@
                   <Component id="jButtonApproveRequest" max="32767" attributes="0"/>
                   <Component id="jButtonDisposeElement" max="32767" attributes="0"/>
                   <Component id="jButtonGoBack" max="32767" attributes="0"/>
-                  <Component id="jButtonRefreshIncoming" pref="125" max="32767" attributes="0"/>
+                  <Component id="jButtonRefresh" pref="125" max="32767" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -69,7 +69,7 @@
                   <Component id="jScrollPane5" pref="250" max="32767" attributes="0"/>
                   <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jButtonRefreshIncoming" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonRefresh" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonGoBack" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -90,7 +90,7 @@
         <Component class="javax.swing.JTree" name="jTreeIncomingRequests">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="Incoming Requests&#xa; New Accounts&#xa;   null&#xa; Subscriptions&#xa;  Nocturne&#xa;    Andr&#xe9;s Eduardo Guti&#xe9;rrez Salas&#xa;  Daily&#xa;    null&#xa;  Monthly&#xa;    null&#xa;  Yearly&#xa;    null"/>
+              <TreeModel code="Incoming Requests&#xa; New Accounts&#xa;   null&#xa; Subscriptions&#xa;  Daily&#xa;  Monthly&#xa;  Yearly"/>
             </Property>
           </Properties>
         </Component>
@@ -106,7 +106,7 @@
         <Component class="javax.swing.JTree" name="jTreeActiveSubscriptions">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code="Active Subscriptions&#xa;  Daily&#xa;    null&#xa;  Monthly&#xa;    null&#xa;  Yealy&#xa;    null&#xa;  Nightcare&#xa;    null"/>
+              <TreeModel code="Active Subscriptions&#xa;  Daily&#xa;&#xa;  Monthly&#xa;  Yealy"/>
             </Property>
           </Properties>
         </Component>
@@ -165,12 +165,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonGoBackActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonRefreshIncoming">
+    <Component class="javax.swing.JButton" name="jButtonRefresh">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Refresh Incoming"/>
+        <Property name="text" type="java.lang.String" value="Refresh"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRefreshIncomingActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRefreshActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

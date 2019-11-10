@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import models.CareService.CareService;
 import models.CareService.ClientRequest;
@@ -52,7 +51,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     jButtonDisposeElement = new javax.swing.JButton();
     jButtonApproveRequest = new javax.swing.JButton();
     jButtonGoBack = new javax.swing.JButton();
-    jButtonRefreshIncoming = new javax.swing.JButton();
+    jButtonRefresh = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Manage Requests");
@@ -68,21 +67,11 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     treeNode2.add(treeNode3);
     treeNode1.add(treeNode2);
     treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Subscriptions");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Nocturne");
-    javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("Andrés Eduardo Gutiérrez Salas");
-    treeNode3.add(treeNode4);
-    treeNode2.add(treeNode3);
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Daily");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
     treeNode2.add(treeNode3);
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Monthly");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
     treeNode2.add(treeNode3);
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Yearly");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
     treeNode2.add(treeNode3);
     treeNode1.add(treeNode2);
     jTreeIncomingRequests.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -90,20 +79,10 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 
     treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Active Subscriptions");
     treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Daily");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode2.add(treeNode3);
     treeNode1.add(treeNode2);
     treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Monthly");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode2.add(treeNode3);
     treeNode1.add(treeNode2);
     treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Yealy");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode2.add(treeNode3);
-    treeNode1.add(treeNode2);
-    treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Nightcare");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode2.add(treeNode3);
     treeNode1.add(treeNode2);
     jTreeActiveSubscriptions.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
     jScrollPane3.setViewportView(jTreeActiveSubscriptions);
@@ -115,7 +94,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Disposed Requests");
     treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("New Accounts");
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Old Age");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
+    javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
     treeNode3.add(treeNode4);
     treeNode2.add(treeNode3);
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Child Caring");
@@ -168,10 +147,10 @@ public class jFrameManageRequests extends javax.swing.JFrame {
       }
     });
 
-    jButtonRefreshIncoming.setText("Refresh Incoming");
-    jButtonRefreshIncoming.addActionListener(new java.awt.event.ActionListener() {
+    jButtonRefresh.setText("Refresh");
+    jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jButtonRefreshIncomingActionPerformed(evt);
+        jButtonRefreshActionPerformed(evt);
       }
     });
 
@@ -189,7 +168,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
           .addComponent(jButtonApproveRequest, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jButtonDisposeElement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
           .addComponent(jButtonGoBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jButtonRefreshIncoming, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+          .addComponent(jButtonRefresh, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,7 +192,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
           .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
           .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
           .addGroup(layout.createSequentialGroup()
-            .addComponent(jButtonRefreshIncoming)
+            .addComponent(jButtonRefresh)
             .addGap(18, 18, 18)
             .addComponent(jButtonGoBack)))
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -237,27 +216,56 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     }
   }//GEN-LAST:event_formWindowClosing
 
-  private void jButtonRefreshIncomingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshIncomingActionPerformed
+  private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
     // Repopulate all the trees
     // Declare database endpoint
     DatabaseNoSQL dbns = database.DatabaseNoSQL.getNoSQLInstance();
-    DefaultTreeModel dtm = new DefaultTreeModel(new DefaultMutableTreeNode("Incoming Requests", true), true);
+    
+    //<editor-fold defaultstate="collapsed" desc="Incoming Requests">
+    DefaultTreeModel dtmIncomingRequests = new DefaultTreeModel(new DefaultMutableTreeNode("Incoming Requests", true), true);
     
     // Incoming Subscriptions
-    dtm.insertNodeInto(new DefaultMutableTreeNode("Subscriptions", true), (DefaultMutableTreeNode)dtm.getRoot(), 0);
-    dbns.getAll(CareService.class).stream().filter((x)->(x.getEstate() == CareService.CareServiceState.AGENDADO)).forEach((x)->{
-      DefaultMutableTreeNode subscriptionNode = new DefaultMutableTreeNode("Subscriptions", true);
-      subscriptionNode.add(new DefaultMutableTreeNode(x.getId(), false));
-      subscriptionNode.add(new DefaultMutableTreeNode(x.getName(), false));
-      subscriptionNode.add(new DefaultMutableTreeNode(x.getUsername(), false));
-      subscriptionNode.add(new DefaultMutableTreeNode(x.getType(), false));
-      subscriptionNode.add(new DefaultMutableTreeNode(x.getDescription(), false));
-      
-      dtm.insertNodeInto(subscriptionNode, (MutableTreeNode)dtm.getChild(dtm.getRoot(), 0), 0);
+    dtmIncomingRequests.insertNodeInto(new DefaultMutableTreeNode("Subscriptions", true), (DefaultMutableTreeNode)dtmIncomingRequests.getRoot(), 0);
+    dbns.getAll(ClientRequest.class)
+        .forEach((client)->{
+          client.getPacient().getSuscriptions().stream()
+              .filter((subscription)->{return subscription.getEstate() == CareService.CareServiceState.AGENDADO;})
+              .forEach((subscription)->{
+                DefaultMutableTreeNode subscriptionsNode = new DefaultMutableTreeNode("Subscriptions", true),
+                    subscriptionDaily = new DefaultMutableTreeNode("Daily", true),
+                    subscriptionMonthly = new DefaultMutableTreeNode("Monthly", true),
+                    subscriptionYearly = new DefaultMutableTreeNode("Yearly", true),
+                    subscriptionNode = new DefaultMutableTreeNode("Subscription", true);
+
+                subscriptionsNode.add(subscriptionDaily);
+                subscriptionsNode.add(subscriptionMonthly);
+                subscriptionsNode.add(subscriptionYearly);
+
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getId(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(client.getPacient().getName(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getType(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getDescription(), false));
+
+                switch(subscription.getType()){
+                  case PORHORA:{
+                    subscriptionDaily.add(subscriptionNode);
+                    break;
+                  }
+                  case PORMES:{
+                    subscriptionMonthly.add(subscriptionNode);
+                    break;
+                  }
+                  case ANIO:{
+                    subscriptionYearly.add(subscriptionNode);
+                    break;
+                  }
+                }
+                dtmIncomingRequests.insertNodeInto(subscriptionsNode, (MutableTreeNode)dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 0), 0);
+              });
     });
     
     //Incoming Requests
-    dtm.insertNodeInto(new DefaultMutableTreeNode("New Accounts", true), (DefaultMutableTreeNode)dtm.getRoot(), 0);
+    dtmIncomingRequests.insertNodeInto(new DefaultMutableTreeNode("New Accounts", true), (DefaultMutableTreeNode)dtmIncomingRequests.getRoot(), 0);
     dbns.getAll(ClientRequest.class).stream().filter((x)->(x.getState() == ClientRequest.StateRequest.ENCURSO)).forEach((x)->{
       DefaultMutableTreeNode clientNode = new DefaultMutableTreeNode("Client", true);
       clientNode.add(new DefaultMutableTreeNode(x.getId(), false));
@@ -270,15 +278,47 @@ public class jFrameManageRequests extends javax.swing.JFrame {
       });
       clientNode.add(diseasesSubnode);
       clientNode.add(new DefaultMutableTreeNode(x.getPacient().getGuardian() == null ? null : x.getPacient().getGuardian().getName(), false));
-      dtm.insertNodeInto(clientNode, (MutableTreeNode)dtm.getChild(dtm.getRoot(), 0), 0);
-      
+      dtmIncomingRequests.insertNodeInto(clientNode, (MutableTreeNode)dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 0), 0);
     });
     
-    
-    
     // Commit Refresh
-    this.jTreeIncomingRequests.setModel(dtm);
-  }//GEN-LAST:event_jButtonRefreshIncomingActionPerformed
+    this.jTreeIncomingRequests.setModel(dtmIncomingRequests);
+    //</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Active Clients">
+    DefaultTreeModel dtmActiveClients = (DefaultTreeModel) this.jTreeActiveClients.getModel();
+    
+    dbns.getAll(ClientRequest.class).stream().filter((x)->x.getState() == ClientRequest.StateRequest.ACEPTADO)
+        .forEach((x)->{
+            DefaultMutableTreeNode clientNode = new DefaultMutableTreeNode("Client", true);
+            clientNode.add(new DefaultMutableTreeNode(x.getId(), false));
+            clientNode.add(new DefaultMutableTreeNode(x.getPacient().getName(), false));
+            clientNode.add(new DefaultMutableTreeNode(x.getPacient().getUsername(), false));
+            clientNode.add(new DefaultMutableTreeNode(x.getPacient().getLocation().getLocation(), false));
+            DefaultMutableTreeNode diseasesSubnode = new DefaultMutableTreeNode("Diseases", true);
+            x.getPacient().getDisease().forEach((y)->{
+              diseasesSubnode.add(new DefaultMutableTreeNode(y.getName(), false));
+            });
+            clientNode.add(diseasesSubnode);
+            clientNode.add(new DefaultMutableTreeNode(x.getPacient().getGuardian() == null ? null : x.getPacient().getGuardian().getName(), false));
+            dtmActiveClients.insertNodeInto(clientNode, (DefaultMutableTreeNode)dtmActiveClients.getRoot(), 0);
+          }
+        );
+    
+    // Commit refresh
+    this.jTreeActiveClients.setModel(dtmActiveClients);
+    //</editor-fold>
+    
+    // @TODO
+    //<editor-fold defaultstate="collapsed" desc="Active Subscriptions">
+    
+    //</editor-fold>
+    
+    // @TODO
+    //<editor-fold defaultstate="collapsed" desc="Disposed Elements">
+    
+    //</editor-fold>
+  }//GEN-LAST:event_jButtonRefreshActionPerformed
 
   private void jButtonApproveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApproveRequestActionPerformed
     if (this.jTreeIncomingRequests.getSelectionCount() > 0) {
@@ -297,8 +337,6 @@ public class jFrameManageRequests extends javax.swing.JFrame {
       
       if (selectedNode.isNodeAncestor(clientsNode)) {
         System.out.println("Moving client request to accepted");
-        // @TODO: Move client request from incoming to active client, then update using its id
-        
         // While I haven't reached to the main node, I need to keep going towards the parent
         while (!selectedNode.toString().equals("Client")) {
           selectedNode = selectedNode.getPreviousNode();
@@ -313,6 +351,39 @@ public class jFrameManageRequests extends javax.swing.JFrame {
       }else if (selectedNode.isNodeAncestor(subscriptionsNode)) {
         // @TODO: Move subscription request from incoming to active subscrition, then update using its id
         System.out.println("Moving subscription request to accepted");
+       
+        DefaultMutableTreeNode dailyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 0),
+            monthlyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 1),
+            yearlyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 2);
+        
+        while (!selectedNode.toString().equals("Subscription")) {
+          selectedNode = selectedNode.getPreviousNode();
+        }
+        
+        // I reached the main node, I move to the active clients
+        // I need to check its ancestor before doing changes
+        if (selectedNode.isNodeAncestor(dailyIncomings)) {
+          System.out.println("Moving daily subscription");
+          //dbns.updateByID(CareService.class, selectedNode.getChildAt(0).toString(), "state", CareService.CareServiceState.ENCURSO);
+        
+          dtmIncomingRequests.removeNodeFromParent(selectedNode);
+          dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 0);
+        } else if (selectedNode.isNodeAncestor(monthlyIncomings)){
+          System.out.println("Moving monthly subscription");
+          //dbns.updateByID(CareService.class, selectedNode.getChildAt(0).toString(), "state", CareService.CareServiceState.ENCURSO);
+        
+          dtmIncomingRequests.removeNodeFromParent(selectedNode);
+          dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 1);
+          
+        } else if (selectedNode.isNodeAncestor(yearlyIncomings)){
+          System.out.println("Moving yearly subscription");
+          //dbns.updateByID(CareService.class, selectedNode.getChildAt(0).toString(), "state", CareService.CareServiceState.ENCURSO);
+        
+          dtmIncomingRequests.removeNodeFromParent(selectedNode);
+          dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 2);
+          
+        }
+        
       }
     }
     else{
@@ -364,7 +435,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
   private javax.swing.JButton jButtonApproveRequest;
   private javax.swing.JButton jButtonDisposeElement;
   private javax.swing.JButton jButtonGoBack;
-  private javax.swing.JButton jButtonRefreshIncoming;
+  private javax.swing.JButton jButtonRefresh;
   private javax.swing.JScrollPane jScrollPane2;
   private javax.swing.JScrollPane jScrollPane3;
   private javax.swing.JScrollPane jScrollPane4;

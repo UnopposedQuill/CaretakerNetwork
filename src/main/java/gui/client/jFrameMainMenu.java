@@ -5,6 +5,8 @@
  */
 package gui.client;
 
+import models.CareService.ClientRequest;
+
 /**
  *
  * @author Esteban
@@ -12,14 +14,16 @@ package gui.client;
 public class jFrameMainMenu extends javax.swing.JFrame {
   
   private jFrameLogin frameLogin;
+  private ClientRequest loggedUser;
 
   /**
    * Creates new form jFrameMainMenu
    * @param frameLogin
    */
-  public jFrameMainMenu(jFrameLogin frameLogin) {
+  public jFrameMainMenu(jFrameLogin frameLogin, ClientRequest pacient) {
     initComponents();
     this.frameLogin = frameLogin;
+    this.loggedUser = pacient;
   }
 
   /**
@@ -100,7 +104,7 @@ public class jFrameMainMenu extends javax.swing.JFrame {
   }//GEN-LAST:event_jButtonManageProfileActionPerformed
 
   private void jButtonSubscriptionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubscriptionsActionPerformed
-    new jFrameSubscriptions().setVisible(true);
+    new jFrameSubscriptions(this.loggedUser).setVisible(true);
   }//GEN-LAST:event_jButtonSubscriptionsActionPerformed
 
   private void jButtonLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLogoutActionPerformed
@@ -148,7 +152,7 @@ public class jFrameMainMenu extends javax.swing.JFrame {
     /* Create and display the form */
     java.awt.EventQueue.invokeLater(new Runnable() {
       public void run() {
-        new jFrameMainMenu(null).setVisible(true);
+        new jFrameMainMenu(null, null).setVisible(true);
       }
     });
   }

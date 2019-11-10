@@ -26,36 +26,36 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" min="-2" pref="453" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jButtonRemoveSubscription" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="654" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jButtonRemoveSubscription" pref="172" max="32767" attributes="0"/>
                   <Component id="jButtonAddSubscription" max="32767" attributes="0"/>
                   <Component id="jButtonCancel" max="32767" attributes="0"/>
                   <Component id="jButtonCommitChanges" max="32767" attributes="0"/>
-                  <Component id="jButtonEndedSubscriptions" max="32767" attributes="0"/>
+                  <Component id="jButtonRefreshData" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="13" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jButtonAddSubscription" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButtonRemoveSubscription" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButtonEndedSubscriptions" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonRefreshData" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonCommitChanges" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" min="-2" pref="341" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" pref="487" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -73,15 +73,16 @@
         <Component class="javax.swing.JTable" name="jTableSubscripciones">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="1">
-                <Column editable="true" title="Subscription Type" type="java.lang.String"/>
+              <Table columnCount="5" rowCount="1">
+                <Column editable="false" title="Subscription Type" type="java.lang.String"/>
                 <Column editable="false" title="Date Requested" type="java.lang.String"/>
-                <Column editable="true" title="Date Accepted" type="java.lang.String"/>
+                <Column editable="false" title="Date Accepted" type="java.lang.String"/>
                 <Column editable="false" title="Price" type="java.lang.Integer"/>
+                <Column editable="false" title="Status" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-              <TableColumnModel selectionModel="0">
+              <TableColumnModel selectionModel="3">
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
@@ -104,8 +105,14 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
               </TableColumnModel>
             </Property>
+            <Property name="columnSelectionAllowed" type="boolean" value="true"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
@@ -117,11 +124,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Subscription"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddSubscriptionActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonRemoveSubscription">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remove Subscription"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoveSubscriptionActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancel">
       <Properties>
@@ -133,10 +146,13 @@
         <Property name="text" type="java.lang.String" value="Commit Changes"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonEndedSubscriptions">
+    <Component class="javax.swing.JButton" name="jButtonRefreshData">
       <Properties>
-        <Property name="text" type="java.lang.String" value="View Finalized Subscriptions"/>
+        <Property name="text" type="java.lang.String" value="Refresh Data"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRefreshDataActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -6,8 +6,9 @@
 package gui.client;
 
 import database.DatabaseNoSQL;
-import javax.swing.JOptionPane;
+import java.util.ArrayList;
 import models.CareService.ClientRequest;
+import models.Pacient;
 
 /**
  *
@@ -126,23 +127,29 @@ public class jFrameLogin extends javax.swing.JFrame {
     DatabaseNoSQL databaseNoSQL = DatabaseNoSQL.getNoSQLInstance();
     
     //Verify login
-    boolean success = databaseNoSQL.getAll(ClientRequest.class).stream().anyMatch(
-      (x)->{
-        // Both username and password match?
-        // I need to check if its a guardian or non guardian pacient
-        
-        return x.getState() == ClientRequest.StateRequest.ACEPTADO && x.getPacient().getGuardian() == null ? 
-            x.getPacient().getUsername().equals(this.jTextFieldUsername.getText()) &&
-            x.getPacient().matchesPassword(String.valueOf(this.jPasswordField.getPassword()))
-            :
-            x.getPacient().getGuardian().getUsername().equals(this.jTextFieldUsername.getText()) &&
-            x.getPacient().getGuardian().matchesPassword(String.valueOf(this.jPasswordField.getPassword()));
-      }
-    );
+    ClientRequest loggedUser = null;
+    ArrayList<ClientRequest> acceptedUsers = new ArrayList<ClientRequest>(databaseNoSQL.getAll(ClientRequest.class).stream().filter((x)->x.getState() == ClientRequest.StateRequest.ACEPTADO).toArray());
     
+        .forEach((x)->{
+          acceptedUsers.add(x);
+        });
+    for (ClientRequest acceptedUser : acceptedUsers) {
+      if (acceptedUser.getPacient().getGuardian() == null) {
+        if (acceptedUser.getPacient().getUsername().equals(this.jTextFieldUsername.getText()) &&
+            acceptedUser.getPacient().matchesPassword(String.valueOf(this.jPasswordField.getPassword()))) {
+          loggedUser = acceptedUser;
+          break;
+        }
+      } else {
+        if (acceptedUser.getPacient().getGuardian().getUsername().equals(this.jTextFieldUsername.getText()) &&
+            acceptedUser.getPacient().getGuardian().matchesPassword(String.valueOf(this.jPasswordField.getPassword()))) {
+          loggedUser = acceptedUser;
+        }
+      }
+    }
     // Something matched, switch ui
-    if (success) {
-      new jFrameMainMenu(this).setVisible(true);
+    if (loggedUser != null) {
+      new jFrameMainMenu(this, loggedUser).setVisible(true);
       this.setVisible(false);
     }
   }//GEN-LAST:event_jButtonLoginActionPerformed
