@@ -282,11 +282,12 @@ public class jFrameAddStaff extends javax.swing.JFrame {
               .addComponent(jLabelFullName)
               .addComponent(jTextFieldFullName))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-              .addComponent(jLabelDateOfBirth)
-              .addComponent(jSpinnerDayBirth)
-              .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jSpinnerYearBirth))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jSpinnerYearBirth, javax.swing.GroupLayout.Alignment.TRAILING)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabelDateOfBirth)
+                .addComponent(jSpinnerDayBirth)
+                .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
             .addGap(18, 18, 18)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jRadioButtonFemale)
@@ -335,7 +336,7 @@ public class jFrameAddStaff extends javax.swing.JFrame {
         clinic.setEmployees(new ArrayList<>());
       }
       if (this.jRadioButtonAdministrator.isSelected()) {
-        clinic.getEmployees().add(new Employee(
+        Employee e = new Employee(
             Employee.Privilegios.ADMINISTRATIVO,
             this.jTextFieldFullName.getText(),
             this.jTextFieldUsername.getText(),
@@ -346,11 +347,13 @@ public class jFrameAddStaff extends javax.swing.JFrame {
             location,
             this.jTextFieldEmail.getText(),
             (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
-            String.valueOf(this.jPasswordField.getPassword()))
-        );
+            String.valueOf(this.jPasswordField.getPassword()));
+        clinic.getEmployees().add(e);
+        
         dnsql.updateByID(Clinic.class, clinic.getId(), "employees", clinic.getEmployees());
+        dnsql.save(e);
       } else if (this.jRadioButtonStaff.isSelected()) {
-        clinic.getEmployees().add(new Employee(
+        Employee e = new Employee(
             Employee.Privilegios.BACKOFFICE,
             this.jTextFieldFullName.getText(),
             this.jTextFieldUsername.getText(),
@@ -361,11 +364,13 @@ public class jFrameAddStaff extends javax.swing.JFrame {
             location,
             this.jTextFieldEmail.getText(),
             (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
-            String.valueOf(this.jPasswordField.getPassword()))
-        );
+            String.valueOf(this.jPasswordField.getPassword()));
+        clinic.getEmployees().add(e);
+        
         dnsql.updateByID(Clinic.class, clinic.getId(), "employees", clinic.getEmployees());
+        dnsql.save(e);
       } else if (this.jRadioButtonCaretaker.isSelected()) {
-        clinic.getEmployees().add(new CareTaker(
+        Employee e = new CareTaker(
             Employee.Privilegios.CARETAKER,
             this.jTextFieldFullName.getText(),
             this.jTextFieldUsername.getText(),
@@ -376,9 +381,11 @@ public class jFrameAddStaff extends javax.swing.JFrame {
             location,
             this.jTextFieldEmail.getText(),
             (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
-            String.valueOf(this.jPasswordField.getPassword()))
-        );
+            String.valueOf(this.jPasswordField.getPassword()));
+        clinic.getEmployees().add(e);
+        
         dnsql.updateByID(Clinic.class, clinic.getId(), "employees", clinic.getEmployees());
+        dnsql.save(e);
       }
       JOptionPane.showMessageDialog(null, "Operation Succesfull, you may close this window");
       

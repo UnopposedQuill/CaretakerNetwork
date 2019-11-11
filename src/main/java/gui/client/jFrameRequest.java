@@ -15,6 +15,8 @@ import models.CareService.ClientRequest;
 import models.CareService.ServiceByHour;
 import models.CareService.ServiceByMonth;
 import models.CareTaker;
+import models.Clinic;
+import models.Employee;
 
 /**
  *
@@ -379,16 +381,6 @@ public class jFrameRequest extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Private methods">
   private void getCaretakers(){
     DatabaseNoSQL databaseNoSQL = DatabaseNoSQL.getNoSQLInstance();
-    List <CareTaker> caretakers = databaseNoSQL.getAll(CareTaker.class);
-    Object [][] data = new Object[caretakers.size()][5];
-    for (int i = 0; i < caretakers.size(); i++) {
-      CareTaker get = caretakers.get(i);
-      data[i][0] = get.getId();
-      data[i][1] = get.getName();
-      data[i][2] = get.getEspecialities() == null ? 1000 : get.getCost();
-      data[i][3] = "N/A";
-      data[i][4] = get.getScores() == null ? "Unrated" : get.getRatingAverage();
-    }
     
     String [] columns = {
       "Id",
@@ -397,6 +389,36 @@ public class jFrameRequest extends javax.swing.JFrame {
       "Clinic",
       "Rating Average"
     };
+    
+    List <Clinic> clinics = databaseNoSQL.getAll(Clinic.class);
+    int clinicCareTakerCount = clinics.stream()
+        .mapToInt(clinic->{
+          if (clinic.getEmployees() == null) {
+            return 0;
+          }
+          return clinic.getEmployees().stream().mapToInt(employee->{
+            return employee.getPrivilegio() == Employee.Privilegios.CARETAKER ? 1 : 0;
+          }).sum();
+        }).sum();
+    
+    Object [][] data = new Object[clinicCareTakerCount][columns.length];
+    
+    int insertPosition = 0;
+    for (int i = 0; i < clinics.size(); i++) {
+      Clinic get = clinics.get(i);
+      for (int j = 0; j < (get.getEmployees() == null ? 0 : get.getEmployees().size()); j++) {
+        Employee e = get.getEmployees().get(j);
+        if (e instanceof CareTaker && e.getPrivilegio() == Employee.Privilegios.CARETAKER) {
+          CareTaker careTaker = (CareTaker) e;
+          data[insertPosition][0] = careTaker.getId();
+          data[insertPosition][1] = careTaker.getName();
+          data[insertPosition][2] = careTaker.getEspecialities() == null ? 1000 : careTaker.getCost();
+          data[insertPosition][3] = get.getName();
+          data[insertPosition++][4] = careTaker.getScores() == null ? "Unrated" : careTaker.getRatingAverage();
+        }
+      }
+    }
+    
     
     this.jTableCaretakers.setModel(new DefaultTableModel(data, columns));
   }
