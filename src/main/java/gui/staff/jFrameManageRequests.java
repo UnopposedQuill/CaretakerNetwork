@@ -231,7 +231,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
           client.getPacient().getSuscriptions().stream()
               .filter((subscription)->{return subscription.getEstate() == CareService.CareServiceState.AGENDADO;})
               .forEach((subscription)->{
-                DefaultMutableTreeNode subscriptionsNode = new DefaultMutableTreeNode("Subscriptions", true),
+                DefaultMutableTreeNode subscriptionsNode = (DefaultMutableTreeNode)dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 0),
                     subscriptionDaily = new DefaultMutableTreeNode("Daily", true),
                     subscriptionMonthly = new DefaultMutableTreeNode("Monthly", true),
                     subscriptionYearly = new DefaultMutableTreeNode("Yearly", true),
@@ -248,19 +248,19 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 
                 switch(subscription.getType()){
                   case PORHORA:{
-                    subscriptionDaily.add(subscriptionNode);
+                    dtmIncomingRequests.insertNodeInto(subscriptionNode, subscriptionDaily, 0);
                     break;
                   }
                   case PORMES:{
-                    subscriptionMonthly.add(subscriptionNode);
+                    dtmIncomingRequests.insertNodeInto(subscriptionNode, subscriptionMonthly, 0);
                     break;
                   }
                   case ANIO:{
-                    subscriptionYearly.add(subscriptionNode);
+                    dtmIncomingRequests.insertNodeInto(subscriptionNode, subscriptionYearly, 0);
                     break;
                   }
                 }
-                dtmIncomingRequests.insertNodeInto(subscriptionsNode, (MutableTreeNode)dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 0), 0);
+                dtmIncomingRequests.insertNodeInto(subscriptionsNode, (DefaultMutableTreeNode)dtmIncomingRequests.getRoot(), 0);
               });
     });
     
@@ -349,9 +349,8 @@ public class jFrameManageRequests extends javax.swing.JFrame {
         dtmAcceptedClients.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedClients.getRoot()), 0);
         
       }else if (selectedNode.isNodeAncestor(subscriptionsNode)) {
-        // @TODO: Move subscription request from incoming to active subscrition, then update using its id
         System.out.println("Moving subscription request to accepted");
-       
+        
         DefaultMutableTreeNode dailyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 0),
             monthlyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 1),
             yearlyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 2);
