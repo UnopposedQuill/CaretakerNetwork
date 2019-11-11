@@ -6,9 +6,6 @@
 package gui.staff;
 
 import database.DatabaseNoSQL;
-import dev.morphia.Datastore;
-import dev.morphia.query.Query;
-import dev.morphia.query.UpdateOperations;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -98,39 +95,15 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 
     treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Disposed Requests");
     treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("New Accounts");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Old Age");
-    javax.swing.tree.DefaultMutableTreeNode treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
-    treeNode2.add(treeNode3);
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Child Caring");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
-    treeNode2.add(treeNode3);
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Another");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
-    treeNode2.add(treeNode3);
     treeNode1.add(treeNode2);
     treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Subscriptions");
-    treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("NightCaring");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
-    treeNode2.add(treeNode3);
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Daily");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
     treeNode2.add(treeNode3);
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Weekly");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
     treeNode2.add(treeNode3);
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Monthly");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
     treeNode2.add(treeNode3);
     treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Yearly");
-    treeNode4 = new javax.swing.tree.DefaultMutableTreeNode("null");
-    treeNode3.add(treeNode4);
     treeNode2.add(treeNode3);
     treeNode1.add(treeNode2);
     jTreeDisposedRequests.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -336,14 +309,14 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     DefaultTreeModel dtmIncomingRequests = new DefaultTreeModel(new DefaultMutableTreeNode("Incoming Requests", true), true);
     
     // Incoming Subscriptions
-    DefaultMutableTreeNode subscriptionsNode = new DefaultMutableTreeNode("Subscriptions", true),
-                    subscriptionDaily = new DefaultMutableTreeNode("Daily", true),
-                    subscriptionMonthly = new DefaultMutableTreeNode("Monthly", true),
-                    subscriptionYearly = new DefaultMutableTreeNode("Yearly", true);
-    subscriptionsNode.add(subscriptionDaily);
-    subscriptionsNode.add(subscriptionMonthly);
-    subscriptionsNode.add(subscriptionYearly);
-    dtmIncomingRequests.insertNodeInto(subscriptionsNode, (DefaultMutableTreeNode)dtmIncomingRequests.getRoot(), 0);
+    DefaultMutableTreeNode newSubscriptionsNode = new DefaultMutableTreeNode("Subscriptions", true),
+                    newSubscriptionsDaily = new DefaultMutableTreeNode("Daily", true),
+                    newSubscriptionsMonthly = new DefaultMutableTreeNode("Monthly", true),
+                    newSubscriptionsYearly = new DefaultMutableTreeNode("Yearly", true);
+    newSubscriptionsNode.add(newSubscriptionsDaily);
+    newSubscriptionsNode.add(newSubscriptionsMonthly);
+    newSubscriptionsNode.add(newSubscriptionsYearly);
+    dtmIncomingRequests.insertNodeInto(newSubscriptionsNode, (DefaultMutableTreeNode)dtmIncomingRequests.getRoot(), 0);
     dbns.getAll(ClientRequest.class)
         .forEach((client)->{
           client.getPacient().getSuscriptions().stream()
@@ -359,22 +332,22 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 
                 switch(subscription.getType()){
                   case PORHORA:{
-                    dtmIncomingRequests.insertNodeInto(subscriptionNode, subscriptionDaily, 0);
+                    dtmIncomingRequests.insertNodeInto(subscriptionNode, newSubscriptionsDaily, 0);
                     break;
                   }
                   case PORMES:{
-                    dtmIncomingRequests.insertNodeInto(subscriptionNode, subscriptionMonthly, 0);
+                    dtmIncomingRequests.insertNodeInto(subscriptionNode, newSubscriptionsMonthly, 0);
                     break;
                   }
                   case ANIO:{
-                    dtmIncomingRequests.insertNodeInto(subscriptionNode, subscriptionYearly, 0);
+                    dtmIncomingRequests.insertNodeInto(subscriptionNode, newSubscriptionsYearly, 0);
                     break;
                   }
                 }
               });
     });
     
-    //Incoming Requests
+    //Incoming Accounts
     dtmIncomingRequests.insertNodeInto(new DefaultMutableTreeNode("New Accounts", true), (DefaultMutableTreeNode)dtmIncomingRequests.getRoot(), 0);
     dbns.getAll(ClientRequest.class).stream().filter((x)->(x.getState() == ClientRequest.StateRequest.ENCURSO)).forEach((x)->{
       DefaultMutableTreeNode clientNode = new DefaultMutableTreeNode("Client", true);
@@ -418,15 +391,113 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     // Commit refresh
     this.jTreeActiveClients.setModel(dtmActiveClients);
     //</editor-fold>
-    
-    // @TODO
+
     //<editor-fold defaultstate="collapsed" desc="Active Subscriptions">
+    DefaultTreeModel dtmActiveSubscriptions = new DefaultTreeModel(new DefaultMutableTreeNode("Active Subscriptions", true), true);
     
+    // Active Subscriptions
+    DefaultMutableTreeNode subscriptionsNode = (DefaultMutableTreeNode) dtmActiveSubscriptions.getRoot(),
+              subscriptionDaily = new DefaultMutableTreeNode("Daily", true),
+              subscriptionMonthly = new DefaultMutableTreeNode("Monthly", true),
+              subscriptionYearly = new DefaultMutableTreeNode("Yearly", true);
+    
+    subscriptionsNode.add(subscriptionMonthly);
+    subscriptionsNode.add(subscriptionYearly);
+    dtmActiveSubscriptions.insertNodeInto(subscriptionDaily, subscriptionsNode, 0);
+    dbns.getAll(ClientRequest.class)
+        .forEach((client)->{
+          client.getPacient().getSuscriptions().stream()
+              .filter((subscription)->{return subscription.getEstate() == CareService.CareServiceState.ENCURSO;})
+              .forEach((subscription)->{
+                DefaultMutableTreeNode subscriptionNode = new DefaultMutableTreeNode("Subscription", true);
+
+                subscriptionNode.add(new DefaultMutableTreeNode(client.getId(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getId(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(client.getPacient().getName(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getType(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getDescription(), false));
+
+                switch(subscription.getType()){
+                  case PORHORA:{
+                    dtmActiveSubscriptions.insertNodeInto(subscriptionNode, subscriptionDaily, 0);
+                    break;
+                  }
+                  case PORMES:{
+                    dtmActiveSubscriptions.insertNodeInto(subscriptionNode, subscriptionMonthly, 0);
+                    break;
+                  }
+                  case ANIO:{
+                    dtmActiveSubscriptions.insertNodeInto(subscriptionNode, subscriptionYearly, 0);
+                    break;
+                  }
+                }
+              });
+    });
+    
+    this.jTreeActiveSubscriptions.setModel(dtmActiveSubscriptions);
     //</editor-fold>
     
-    // @TODO
     //<editor-fold defaultstate="collapsed" desc="Disposed Elements">
+    DefaultTreeModel dtmDisposedRequests = new DefaultTreeModel(new DefaultMutableTreeNode("Disposed Requests", true), true);
     
+    // Disposed Subscriptions
+    DefaultMutableTreeNode disposedSubscriptionsNode = new DefaultMutableTreeNode("Subscriptions", true),
+                    disposedSubscriptionsDaily = new DefaultMutableTreeNode("Daily", true),
+                    disposedSubscriptionsMonthly = new DefaultMutableTreeNode("Monthly", true),
+                    disposedSubscriptionsYearly = new DefaultMutableTreeNode("Yearly", true);
+    disposedSubscriptionsNode.add(disposedSubscriptionsDaily);
+    disposedSubscriptionsNode.add(disposedSubscriptionsMonthly);
+    disposedSubscriptionsNode.add(disposedSubscriptionsYearly);
+    dtmDisposedRequests.insertNodeInto(disposedSubscriptionsNode, (DefaultMutableTreeNode)dtmDisposedRequests.getRoot(), 0);
+    dbns.getAll(ClientRequest.class)
+        .forEach((client)->{
+          client.getPacient().getSuscriptions().stream()
+              .filter((subscription)->{return subscription.getEstate() == CareService.CareServiceState.FINALIZADO;})
+              .forEach((subscription)->{
+                DefaultMutableTreeNode subscriptionNode = new DefaultMutableTreeNode("Subscription", true);
+
+                subscriptionNode.add(new DefaultMutableTreeNode(client.getId(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getId(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(client.getPacient().getName(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getType(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getDescription(), false));
+
+                switch(subscription.getType()){
+                  case PORHORA:{
+                    dtmDisposedRequests.insertNodeInto(subscriptionNode, disposedSubscriptionsDaily, 0);
+                    break;
+                  }
+                  case PORMES:{
+                    dtmDisposedRequests.insertNodeInto(subscriptionNode, disposedSubscriptionsMonthly, 0);
+                    break;
+                  }
+                  case ANIO:{
+                    dtmDisposedRequests.insertNodeInto(subscriptionNode, disposedSubscriptionsYearly, 0);
+                    break;
+                  }
+                }
+              });
+    });
+    
+    //Disposed Accounts
+    dtmDisposedRequests.insertNodeInto(new DefaultMutableTreeNode("New Accounts", true), (DefaultMutableTreeNode)dtmDisposedRequests.getRoot(), 0);
+    dbns.getAll(ClientRequest.class).stream().filter((x)->(x.getState() == ClientRequest.StateRequest.RECHAZADO)).forEach((x)->{
+      DefaultMutableTreeNode clientNode = new DefaultMutableTreeNode("Client", true);
+      clientNode.add(new DefaultMutableTreeNode(x.getId(), false));
+      clientNode.add(new DefaultMutableTreeNode(x.getPacient().getName(), false));
+      clientNode.add(new DefaultMutableTreeNode(x.getPacient().getUsername(), false));
+      clientNode.add(new DefaultMutableTreeNode(x.getPacient().getLocation().getLocation(), false));
+      DefaultMutableTreeNode diseasesSubnode = new DefaultMutableTreeNode("Diseases", true);
+      x.getPacient().getDisease().forEach((y)->{
+        diseasesSubnode.add(new DefaultMutableTreeNode(y.getName(), false));
+      });
+      clientNode.add(diseasesSubnode);
+      clientNode.add(new DefaultMutableTreeNode(x.getPacient().getGuardian() == null ? null : x.getPacient().getGuardian().getName(), false));
+      dtmDisposedRequests.insertNodeInto(clientNode, (MutableTreeNode)dtmDisposedRequests.getChild(dtmDisposedRequests.getRoot(), 0), 0);
+    });
+    
+    // Commit Refresh
+    this.jTreeDisposedRequests.setModel(dtmDisposedRequests);
     //</editor-fold>
   }
   //</editor-fold>
