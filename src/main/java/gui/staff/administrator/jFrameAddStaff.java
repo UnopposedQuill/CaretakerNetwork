@@ -314,6 +314,7 @@ public class jFrameAddStaff extends javax.swing.JFrame {
           String.valueOf(this.jPasswordField.getPassword()))
       );
     }
+    JOptionPane.showMessageDialog(null, "Operation Succesfull, you may close this window");
   }//GEN-LAST:event_jButtonAddStaffActionPerformed
 
   private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
