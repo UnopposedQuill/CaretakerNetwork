@@ -73,6 +73,7 @@ public class jFrameRequest extends javax.swing.JFrame {
     jLabelCaretaker = new javax.swing.JLabel();
     jScrollPane1 = new javax.swing.JScrollPane();
     jTableCaretakers = new javax.swing.JTable();
+    jButtonCancel = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Create New Subscription Request");
@@ -88,6 +89,7 @@ public class jFrameRequest extends javax.swing.JFrame {
       }
     });
 
+    jButtonCommitRequest.setBackground(new java.awt.Color(51, 204, 0));
     jButtonCommitRequest.setText("Commit Request");
     jButtonCommitRequest.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +140,14 @@ public class jFrameRequest extends javax.swing.JFrame {
     jScrollPane1.setViewportView(jTableCaretakers);
     jTableCaretakers.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
+    jButtonCancel.setBackground(new java.awt.Color(255, 0, 0));
+    jButtonCancel.setText("Cancel");
+    jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonCancelActionPerformed(evt);
+      }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
@@ -184,7 +194,9 @@ public class jFrameRequest extends javax.swing.JFrame {
         .addComponent(jScrollPane1)
         .addContainerGap())
       .addGroup(layout.createSequentialGroup()
-        .addGap(331, 331, 331)
+        .addGap(240, 240, 240)
+        .addComponent(jButtonCancel)
+        .addGap(18, 18, 18)
         .addComponent(jButtonCommitRequest)
         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
@@ -217,7 +229,9 @@ public class jFrameRequest extends javax.swing.JFrame {
         .addGap(18, 18, 18)
         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(26, 26, 26)
-        .addComponent(jButtonCommitRequest)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jButtonCommitRequest)
+          .addComponent(jButtonCancel))
         .addContainerGap())
     );
 
@@ -351,6 +365,14 @@ public class jFrameRequest extends javax.swing.JFrame {
         break;
     }
   }//GEN-LAST:event_jComboBoxSubscriptionTypeActionPerformed
+
+  private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+    int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to cancel?", "Confirm", JOptionPane.OK_CANCEL_OPTION);
+    //0 OK, 2 Cancel
+    if (option == 0) {
+      this.dispose();
+    }
+  }//GEN-LAST:event_jButtonCancelActionPerformed
   
   //</editor-fold>
   
@@ -411,6 +433,7 @@ public class jFrameRequest extends javax.swing.JFrame {
 
   // <editor-fold defaultstate="collapsed" desc="Private Variables">
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton jButtonCancel;
   private javax.swing.JButton jButtonCommitRequest;
   private javax.swing.JComboBox<String> jComboBoxEndingMonth;
   private javax.swing.JComboBox<String> jComboBoxEndingWeekDay;

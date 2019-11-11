@@ -99,6 +99,7 @@ public class jFrameRegister extends javax.swing.JFrame {
     jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     jLabel3.setText("Password");
 
+    jButtonAcceptRequest.setBackground(new java.awt.Color(0, 204, 0));
     jButtonAcceptRequest.setText("Accept Request");
     jButtonAcceptRequest.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +122,7 @@ public class jFrameRegister extends javax.swing.JFrame {
 
     jLabel4.setText("Reason for Request");
 
+    jButtonCancel.setBackground(new java.awt.Color(255, 51, 51));
     jButtonCancel.setText("Cancel Request");
     jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {

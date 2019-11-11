@@ -93,6 +93,7 @@ public class jFrameAddStaff extends javax.swing.JFrame {
     buttonGroupAccountType.add(jRadioButtonCaretaker);
     jRadioButtonCaretaker.setText("Caretaker");
 
+    jButtonAddStaff.setBackground(new java.awt.Color(102, 204, 0));
     jButtonAddStaff.setText("Create");
     jButtonAddStaff.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +101,7 @@ public class jFrameAddStaff extends javax.swing.JFrame {
       }
     });
 
+    jButtonCancel.setBackground(new java.awt.Color(255, 0, 0));
     jButtonCancel.setText("Cancel");
     jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -109,8 +109,10 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     jTreeDisposedRequests.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
     jScrollPane5.setViewportView(jTreeDisposedRequests);
 
+    jButtonDisposeElement.setBackground(new java.awt.Color(255, 0, 0));
     jButtonDisposeElement.setText("Dispose Element");
 
+    jButtonApproveRequest.setBackground(new java.awt.Color(51, 204, 0));
     jButtonApproveRequest.setText("Approve Request");
     jButtonApproveRequest.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
