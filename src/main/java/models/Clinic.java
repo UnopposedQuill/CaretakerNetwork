@@ -19,6 +19,7 @@ public class Clinic {
   private String name;
   private List<Employee> employees;
   private Location location;
+  private boolean active;
 
   public Clinic() {
   }
@@ -27,8 +28,16 @@ public class Clinic {
     this.name = name;
     this.employees = employees;
     this.location = location;
+    this.active = true;
   }
-  
+
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }  
 
   public String getName() {
     return name;
@@ -53,7 +62,12 @@ public class Clinic {
   public void setLocation(Location location) {
     this.location = location;
   }
-  
-  
-  
+
+  public boolean isActive() {
+    return active;
+  }
+
+  public void setActive(boolean active) {
+    this.active = active;
+  }
 }

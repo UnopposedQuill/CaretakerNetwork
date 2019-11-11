@@ -7,9 +7,13 @@ package gui.staff.administrator;
 
 import database.DatabaseNoSQL;
 import gui.staff.jFrameMainMenu;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import models.CareTaker;
+import models.Clinic;
 import models.Employee;
 import models.Location;
 
@@ -19,7 +23,7 @@ import models.Location;
  */
 public class jFrameAddStaff extends javax.swing.JFrame {
 
-  private jFrameMainMenu frameMainMenu;
+  private final jFrameMainMenu frameMainMenu;
   
   /**
    * Creates new form jFrameAddStaff
@@ -28,6 +32,7 @@ public class jFrameAddStaff extends javax.swing.JFrame {
   public jFrameAddStaff(jFrameMainMenu frameMainMenu) {
     initComponents();
     this.frameMainMenu = frameMainMenu;
+    this.updateTable();
   }
 
   /**
@@ -66,6 +71,9 @@ public class jFrameAddStaff extends javax.swing.JFrame {
     jTextFieldLocation = new javax.swing.JTextField();
     jLabelEmail = new javax.swing.JLabel();
     jTextFieldEmail = new javax.swing.JTextField();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    jTableClinics = new javax.swing.JTable();
+    jLabelAvailableClinics = new javax.swing.JLabel();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Add Staff");
@@ -132,130 +140,168 @@ public class jFrameAddStaff extends javax.swing.JFrame {
 
     jLabelEmail.setText("Email");
 
+    jTableClinics.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null, null, null}
+      },
+      new String [] {
+        "Id", "Name", "Location"
+      }
+    ) {
+      Class[] types = new Class [] {
+        java.lang.String.class, java.lang.String.class, java.lang.String.class
+      };
+      boolean[] canEdit = new boolean [] {
+        false, false, false
+      };
+
+      public Class getColumnClass(int columnIndex) {
+        return types [columnIndex];
+      }
+
+      public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return canEdit [columnIndex];
+      }
+    });
+    jTableClinics.setColumnSelectionAllowed(true);
+    jScrollPane1.setViewportView(jTableClinics);
+    jTableClinics.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+    jLabelAvailableClinics.setText("Available Clinics");
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
           .addGroup(layout.createSequentialGroup()
             .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+              .addComponent(jLabelFullName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jLabelDateOfBirth, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+              .addComponent(jLabelLocation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jSeparator1)
               .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                  .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabelLocation))
-                  .addGroup(layout.createSequentialGroup()
-                    .addGap(69, 69, 69)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(jLabelDateOfBirth, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                      .addComponent(jLabelFullName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSpinnerDayBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                   .addGroup(layout.createSequentialGroup()
+                    .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(jRadioButtonMale)
-                      .addComponent(jSpinnerDayBirth))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(jRadioButtonFemale)
-                      .addComponent(jSpinnerYearBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                  .addComponent(jTextFieldLocation)
+                      .addGroup(layout.createSequentialGroup()
+                        .addComponent(jRadioButtonFemale)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                      .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSpinnerYearBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
                   .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(jLabelPersonalDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                      .addComponent(jTextFieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(95, 95, 95))))
+                    .addGap(44, 44, 44)
+                    .addComponent(jLabelPersonalDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE))))
+              .addComponent(jTextFieldFullName)
+              .addComponent(jTextFieldLocation)
+              .addGroup(layout.createSequentialGroup()
+                .addComponent(jRadioButtonMale)
+                .addGap(0, 0, Short.MAX_VALUE))))
+          .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+              .addGap(79, 79, 79)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                  .addGap(97, 97, 97)
+                  .addComponent(jLabelAccountDetails))
+                .addGroup(layout.createSequentialGroup()
+                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButtonAdministrator)
+                    .addComponent(jLabelAccountType))
+                  .addGap(18, 18, 18)
+                  .addComponent(jRadioButtonStaff)
+                  .addGap(18, 18, 18)
+                  .addComponent(jRadioButtonCaretaker))
+                .addGroup(layout.createSequentialGroup()
+                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabelEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                  .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextFieldUsername)
+                    .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                    .addComponent(jTextFieldEmail)))))
+            .addGroup(layout.createSequentialGroup()
+              .addGap(130, 130, 130)
+              .addComponent(jButtonCancel)
+              .addGap(18, 18, 18)
+              .addComponent(jButtonAddStaff))))
+        .addGap(18, 18, 18)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addGroup(layout.createSequentialGroup()
-                    .addGap(97, 97, 97)
-                    .addComponent(jLabelAccountDetails))
-                  .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                      .addComponent(jRadioButtonAdministrator)
-                      .addComponent(jLabelAccountType))
-                    .addGap(18, 18, 18)
-                    .addComponent(jRadioButtonStaff)
-                    .addGap(18, 18, 18)
-                    .addComponent(jRadioButtonCaretaker))
-                  .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                      .addComponent(jLabelEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                      .addComponent(jLabelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                      .addComponent(jLabelUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                      .addComponent(jTextFieldUsername)
-                      .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                      .addComponent(jTextFieldEmail)))))
-              .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jButtonCancel)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonAddStaff)))
-            .addGap(0, 0, Short.MAX_VALUE)))
-        .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(jLabelAvailableClinics)
+            .addGap(187, 187, 187))))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
         .addContainerGap()
-        .addComponent(jLabelAccountDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(28, 28, 28)
-        .addComponent(jLabelAccountType)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jRadioButtonAdministrator)
-          .addComponent(jRadioButtonStaff)
-          .addComponent(jRadioButtonCaretaker))
-        .addGap(16, 16, 16)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabelUsername))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabelPassword)
-          .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabelEmail)
-          .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(44, 44, 44)
-        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(1, 1, 1)
-        .addComponent(jLabelPersonalDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabelFullName)
-          .addComponent(jTextFieldFullName, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jSpinnerDayBirth, javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(jSpinnerYearBirth, javax.swing.GroupLayout.Alignment.TRAILING)
-          .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(jLabelDateOfBirth)
-            .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        .addGap(18, 18, 18)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jRadioButtonFemale)
-          .addComponent(jRadioButtonMale))
-        .addGap(10, 10, 10)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jLabelLocation)
-          .addComponent(jTextFieldLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(40, 40, 40)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jButtonAddStaff)
-          .addComponent(jButtonCancel))
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabelAccountDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jLabelAvailableClinics))
+            .addGap(28, 28, 28)
+            .addComponent(jLabelAccountType)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jRadioButtonAdministrator)
+              .addComponent(jRadioButtonStaff)
+              .addComponent(jRadioButtonCaretaker))
+            .addGap(16, 16, 16)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jTextFieldUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jLabelUsername))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabelPassword)
+              .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabelEmail)
+              .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(44, 44, 44)
+            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(1, 1, 1)
+            .addComponent(jLabelPersonalDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabelFullName)
+              .addComponent(jTextFieldFullName))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabelDateOfBirth)
+              .addComponent(jSpinnerDayBirth)
+              .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jSpinnerYearBirth))
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jRadioButtonFemale)
+              .addComponent(jRadioButtonMale))
+            .addGap(10, 10, 10)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabelLocation)
+              .addComponent(jTextFieldLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(40, 40, 40)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jButtonAddStaff)
+              .addComponent(jButtonCancel)))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGap(0, 31, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addContainerGap())
     );
 
@@ -274,50 +320,73 @@ public class jFrameAddStaff extends javax.swing.JFrame {
     Location location = new Location();
     location.setLocation(this.jTextFieldLocation.getText());
     
-    if (this.jRadioButtonAdministrator.isSelected()) {
-      dnsql.save(new Employee(
-          Employee.Privilegios.ADMINISTRATIVO,
-          this.jTextFieldFullName.getText(),
-          this.jTextFieldUsername.getText(),
-          new GregorianCalendar(
-                (int)this.jSpinnerYearBirth.getValue(),
-                this.jComboBoxMonthBirth.getSelectedIndex(),
-                (int)this.jSpinnerDayBirth.getValue()).getTime(),
-          location,
-          this.jTextFieldEmail.getText(),
-          (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
-          String.valueOf(this.jPasswordField.getPassword()))
-      );
-    } else if (this.jRadioButtonStaff.isSelected()) {
-      dnsql.save(new Employee(
-          Employee.Privilegios.BACKOFFICE,
-          this.jTextFieldFullName.getText(),
-          this.jTextFieldUsername.getText(),
-          new GregorianCalendar(
-                (int)this.jSpinnerYearBirth.getValue(),
-                this.jComboBoxMonthBirth.getSelectedIndex(),
-                (int)this.jSpinnerDayBirth.getValue()).getTime(),
-          location,
-          this.jTextFieldEmail.getText(),
-          (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
-          String.valueOf(this.jPasswordField.getPassword()))
-      );
-    } else if (this.jRadioButtonCaretaker.isSelected()) {
-      dnsql.save(new CareTaker(
-          Employee.Privilegios.CARETAKER,
-          this.jTextFieldFullName.getText(),
-          this.jTextFieldUsername.getText(),
-          new GregorianCalendar(
-                (int)this.jSpinnerYearBirth.getValue(),
-                this.jComboBoxMonthBirth.getSelectedIndex(),
-                (int)this.jSpinnerDayBirth.getValue()).getTime(),
-          location,
-          this.jTextFieldEmail.getText(),
-          (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
-          String.valueOf(this.jPasswordField.getPassword()))
-      );
+    if (this.jTableClinics.getSelectedRowCount() > 0) {
+      //I'll fetch the clinic information first
+      List <Clinic> clinics = dnsql.getAll(Clinic.class);
+      Clinic clinic = null;
+      for (int i = 0; i < clinics.size(); i++) {
+        Clinic get = clinics.get(i);
+        if (get.getId().equals(this.jTableClinics.getValueAt(this.jTableClinics.getSelectedRows()[0], 0).toString())) {
+          clinic = get;
+          break;
+        }
+      }
+      if (clinic.getEmployees() == null) {
+        clinic.setEmployees(new ArrayList<>());
+      }
+      if (this.jRadioButtonAdministrator.isSelected()) {
+        clinic.getEmployees().add(new Employee(
+            Employee.Privilegios.ADMINISTRATIVO,
+            this.jTextFieldFullName.getText(),
+            this.jTextFieldUsername.getText(),
+            new GregorianCalendar(
+                  (int)this.jSpinnerYearBirth.getValue(),
+                  this.jComboBoxMonthBirth.getSelectedIndex(),
+                  (int)this.jSpinnerDayBirth.getValue()).getTime(),
+            location,
+            this.jTextFieldEmail.getText(),
+            (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
+            String.valueOf(this.jPasswordField.getPassword()))
+        );
+        dnsql.updateByID(Clinic.class, clinic.getId(), "employees", clinic.getEmployees());
+      } else if (this.jRadioButtonStaff.isSelected()) {
+        clinic.getEmployees().add(new Employee(
+            Employee.Privilegios.BACKOFFICE,
+            this.jTextFieldFullName.getText(),
+            this.jTextFieldUsername.getText(),
+            new GregorianCalendar(
+                  (int)this.jSpinnerYearBirth.getValue(),
+                  this.jComboBoxMonthBirth.getSelectedIndex(),
+                  (int)this.jSpinnerDayBirth.getValue()).getTime(),
+            location,
+            this.jTextFieldEmail.getText(),
+            (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
+            String.valueOf(this.jPasswordField.getPassword()))
+        );
+        dnsql.updateByID(Clinic.class, clinic.getId(), "employees", clinic.getEmployees());
+      } else if (this.jRadioButtonCaretaker.isSelected()) {
+        clinic.getEmployees().add(new CareTaker(
+            Employee.Privilegios.CARETAKER,
+            this.jTextFieldFullName.getText(),
+            this.jTextFieldUsername.getText(),
+            new GregorianCalendar(
+                  (int)this.jSpinnerYearBirth.getValue(),
+                  this.jComboBoxMonthBirth.getSelectedIndex(),
+                  (int)this.jSpinnerDayBirth.getValue()).getTime(),
+            location,
+            this.jTextFieldEmail.getText(),
+            (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
+            String.valueOf(this.jPasswordField.getPassword()))
+        );
+        dnsql.updateByID(Clinic.class, clinic.getId(), "employees", clinic.getEmployees());
+      }
+      JOptionPane.showMessageDialog(null, "Operation Succesfull, you may close this window");
+      
     }
-    JOptionPane.showMessageDialog(null, "Operation Succesfull, you may close this window");
+    else{
+      JOptionPane.showMessageDialog(null, "Please select one clinic");
+    }
+    
   }//GEN-LAST:event_jButtonAddStaffActionPerformed
 
   private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
@@ -329,6 +398,39 @@ public class jFrameAddStaff extends javax.swing.JFrame {
   }//GEN-LAST:event_jButtonCancelActionPerformed
 
   // </editor-fold>
+  
+  //<editor-fold defaultstate="collapsed" desc="Private methods">
+  private void updateTable(){
+    
+    DatabaseNoSQL dnsql = DatabaseNoSQL.getNoSQLInstance();
+    String[] columns = {
+      "Id",
+      "Name",
+      "Location",
+    };
+    List <Clinic> clinics = dnsql.getAll(Clinic.class);
+    ArrayList<Clinic> clinicsFiltered = new ArrayList<>();
+    
+    for (int i = 0; i < clinics.size(); i++) {
+      Clinic get = clinics.get(i);
+      if (get.isActive()) {
+        clinicsFiltered.add(get);
+      }
+      
+    }
+    Object [][] data = new Object[clinicsFiltered.size()][columns.length];
+    for (int i = 0; i < clinicsFiltered.size(); i++) {
+      Clinic clinic = clinicsFiltered.get(i);
+      if (clinic.isActive()) {
+        data[i][0] = clinic.getId();
+        data[i][1] = clinic.getName();
+        data[i][2] = clinic.getLocation().getLocation();
+      }
+    }
+    
+    this.jTableClinics.setModel(new DefaultTableModel(data, columns));
+  }
+  //</editor-fold>
   
   /**
    * @param args the command line arguments
@@ -346,22 +448,14 @@ public class jFrameAddStaff extends javax.swing.JFrame {
           break;
         }
       }
-    } catch (ClassNotFoundException ex) {
-      java.util.logging.Logger.getLogger(jFrameAddStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-      java.util.logging.Logger.getLogger(jFrameAddStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-      java.util.logging.Logger.getLogger(jFrameAddStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
       java.util.logging.Logger.getLogger(jFrameAddStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
     //</editor-fold>
 
     /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        new jFrameAddStaff(null).setVisible(true);
-      }
+    java.awt.EventQueue.invokeLater(() -> {
+      new jFrameAddStaff(null).setVisible(true);
     });
   }
 
@@ -373,6 +467,7 @@ public class jFrameAddStaff extends javax.swing.JFrame {
   private javax.swing.JComboBox<String> jComboBoxMonthBirth;
   private javax.swing.JLabel jLabelAccountDetails;
   private javax.swing.JLabel jLabelAccountType;
+  private javax.swing.JLabel jLabelAvailableClinics;
   private javax.swing.JLabel jLabelDateOfBirth;
   private javax.swing.JLabel jLabelEmail;
   private javax.swing.JLabel jLabelFullName;
@@ -386,9 +481,11 @@ public class jFrameAddStaff extends javax.swing.JFrame {
   private javax.swing.JRadioButton jRadioButtonFemale;
   private javax.swing.JRadioButton jRadioButtonMale;
   private javax.swing.JRadioButton jRadioButtonStaff;
+  private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JSeparator jSeparator1;
   private javax.swing.JSpinner jSpinnerDayBirth;
   private javax.swing.JSpinner jSpinnerYearBirth;
+  private javax.swing.JTable jTableClinics;
   private javax.swing.JTextField jTextFieldEmail;
   private javax.swing.JTextField jTextFieldFullName;
   private javax.swing.JTextField jTextFieldLocation;

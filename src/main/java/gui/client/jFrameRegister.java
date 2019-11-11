@@ -93,6 +93,10 @@ public class jFrameRegister extends javax.swing.JFrame {
       }
     });
 
+    jPasswordField.setNextFocusableComponent(jPasswordFieldConfirm);
+
+    jTextFieldEmail.setNextFocusableComponent(jTextFieldUsername);
+
     jLabelEmail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     jLabelEmail.setText("Email");
 
@@ -101,13 +105,18 @@ public class jFrameRegister extends javax.swing.JFrame {
 
     jButtonAcceptRequest.setBackground(new java.awt.Color(0, 204, 0));
     jButtonAcceptRequest.setText("Accept Request");
+    jButtonAcceptRequest.setNextFocusableComponent(jButtonCancel);
     jButtonAcceptRequest.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButtonAcceptRequestActionPerformed(evt);
       }
     });
 
+    jPasswordFieldConfirm.setNextFocusableComponent(jCheckBoxBehalf);
+
     jLabel5.setText("Confirm Password");
+
+    jTextFieldUsername.setNextFocusableComponent(jPasswordField);
 
     jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     jLabel6.setText("Username");
@@ -115,10 +124,13 @@ public class jFrameRegister extends javax.swing.JFrame {
     jLabelDateOfBirth.setText("Date of Birth");
 
     jComboBoxMonthBirth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+    jComboBoxMonthBirth.setNextFocusableComponent(jSpinnerYearBirth);
 
     jSpinnerDayBirth.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+    jSpinnerDayBirth.setNextFocusableComponent(jComboBoxMonthBirth);
 
     jSpinnerYearBirth.setModel(new javax.swing.SpinnerNumberModel(2019, 1900, 2019, 1));
+    jSpinnerYearBirth.setNextFocusableComponent(jRadioButtonMale);
 
     jLabel4.setText("Reason for Request");
 
@@ -129,6 +141,9 @@ public class jFrameRegister extends javax.swing.JFrame {
         jButtonCancelActionPerformed(evt);
       }
     });
+
+    jTextFieldFullName.setFocusCycleRoot(true);
+    jTextFieldFullName.setNextFocusableComponent(jSpinnerDayBirth);
 
     jLabelFullName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     jLabelFullName.setText("Full Name");
@@ -141,6 +156,7 @@ public class jFrameRegister extends javax.swing.JFrame {
 
     jCheckBoxBehalf.setSelected(true);
     jCheckBoxBehalf.setText("This account is on behalf of:");
+    jCheckBoxBehalf.setNextFocusableComponent(jTextFieldFullNameBehalf);
     jCheckBoxBehalf.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jCheckBoxBehalfActionPerformed(evt);
@@ -148,8 +164,10 @@ public class jFrameRegister extends javax.swing.JFrame {
     });
 
     jSpinnerYearBirthBehalf.setModel(new javax.swing.SpinnerNumberModel(2019, 1900, 2019, 1));
+    jSpinnerYearBirthBehalf.setNextFocusableComponent(jRadioButtonMaleBehalf);
 
     jTextFieldFullNameBehalf.setEnabled(jCheckBoxBehalf.isSelected());
+    jTextFieldFullNameBehalf.setNextFocusableComponent(jSpinnerDayBirthBehalf);
 
     jLabelFullNameBehalf.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
     jLabelFullNameBehalf.setText("Full Name");
@@ -157,9 +175,11 @@ public class jFrameRegister extends javax.swing.JFrame {
     jLabelDateOfBirthBehalf.setText("Date of Birth");
 
     jComboBoxMonthBirthBehalf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+    jComboBoxMonthBirthBehalf.setNextFocusableComponent(jSpinnerYearBirthBehalf);
 
     jSpinnerDayBirthBehalf.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
     jSpinnerDayBirthBehalf.setEnabled(jCheckBoxBehalf.isSelected());
+    jSpinnerDayBirthBehalf.setNextFocusableComponent(jComboBoxMonthBirthBehalf);
 
     jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -168,25 +188,26 @@ public class jFrameRegister extends javax.swing.JFrame {
     buttonGroupGender.add(jRadioButtonMale);
     jRadioButtonMale.setSelected(true);
     jRadioButtonMale.setText("Male");
+    jRadioButtonMale.setNextFocusableComponent(jRadioButtonFemale);
 
     buttonGroupGender.add(jRadioButtonFemale);
     jRadioButtonFemale.setText("Female");
+    jRadioButtonFemale.setNextFocusableComponent(jTextFieldLocation);
 
     buttonGroupGenderBehalf.add(jRadioButtonMaleBehalf);
     jRadioButtonMaleBehalf.setSelected(true);
     jRadioButtonMaleBehalf.setText("Male");
     jRadioButtonMaleBehalf.setEnabled(jCheckBoxBehalf.isSelected());
+    jRadioButtonMaleBehalf.setNextFocusableComponent(jRadioButtonFemaleBehalf);
 
     buttonGroupGenderBehalf.add(jRadioButtonFemaleBehalf);
     jRadioButtonFemaleBehalf.setText("Female");
     jRadioButtonFemaleBehalf.setEnabled(jCheckBoxBehalf.isSelected());
+    jRadioButtonFemaleBehalf.setNextFocusableComponent(jButtonAddDisease);
 
     jTableDiseases.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-        {null},
-        {null},
-        {null},
-        {null}
+        {""}
       },
       new String [] {
         "Disease"
@@ -205,6 +226,7 @@ public class jFrameRegister extends javax.swing.JFrame {
     jTableDiseases.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
     jButtonRemoveDisease.setText("Remove Disease");
+    jButtonRemoveDisease.setNextFocusableComponent(jButtonAcceptRequest);
     jButtonRemoveDisease.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButtonRemoveDiseaseActionPerformed(evt);
@@ -212,6 +234,7 @@ public class jFrameRegister extends javax.swing.JFrame {
     });
 
     jButtonAddDisease.setText("Add Disease");
+    jButtonAddDisease.setNextFocusableComponent(jButtonRemoveDisease);
     jButtonAddDisease.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
         jButtonAddDiseaseActionPerformed(evt);
@@ -219,6 +242,8 @@ public class jFrameRegister extends javax.swing.JFrame {
     });
 
     jLabelLocation.setText("Location");
+
+    jTextFieldLocation.setNextFocusableComponent(jTextFieldEmail);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -371,7 +396,7 @@ public class jFrameRegister extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jLabel5)
               .addComponent(jPasswordFieldConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()

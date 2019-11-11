@@ -38,6 +38,8 @@ public class jFrameMainMenu extends javax.swing.JFrame {
     jButtonManageRequests = new javax.swing.JButton();
     jButtonAddStaff = new javax.swing.JButton();
     jButtonReports = new javax.swing.JButton();
+    jButtonManageClinics = new javax.swing.JButton();
+    jButtonManageActivities = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Main Menu");
@@ -75,32 +77,43 @@ public class jFrameMainMenu extends javax.swing.JFrame {
       }
     });
 
+    jButtonManageClinics.setText("Manage Clinics");
+
+    jButtonManageActivities.setText("Manage Activities");
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addGap(131, 131, 131)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-          .addComponent(jButtonAddStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jButtonManageRequests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-          .addComponent(jButtonReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        .addContainerGap(101, Short.MAX_VALUE))
-      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap())
+        .addContainerGap(120, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(jButtonLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap())
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(jButtonAddStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jButtonManageRequests, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jButtonReports, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jButtonManageClinics, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jButtonManageActivities, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(112, 112, 112))))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-        .addContainerGap(92, Short.MAX_VALUE)
+        .addContainerGap()
         .addComponent(jButtonManageRequests)
         .addGap(18, 18, 18)
         .addComponent(jButtonReports)
         .addGap(18, 18, 18)
         .addComponent(jButtonAddStaff)
-        .addGap(61, 61, 61)
+        .addGap(18, 18, 18)
+        .addComponent(jButtonManageClinics)
+        .addGap(18, 18, 18)
+        .addComponent(jButtonManageActivities)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
         .addComponent(jButtonLogout)
         .addContainerGap())
     );
@@ -176,6 +189,8 @@ public class jFrameMainMenu extends javax.swing.JFrame {
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddStaff;
   private javax.swing.JButton jButtonLogout;
+  private javax.swing.JButton jButtonManageActivities;
+  private javax.swing.JButton jButtonManageClinics;
   private javax.swing.JButton jButtonManageRequests;
   private javax.swing.JButton jButtonReports;
   // End of variables declaration//GEN-END:variables

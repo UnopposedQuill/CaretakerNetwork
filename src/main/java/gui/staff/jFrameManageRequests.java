@@ -542,7 +542,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 		});
 	}
 
-  //<editor-fold defaultstate="">
+  //<editor-fold defaultstate="collapsed" desc="Private variables">
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonApproveRequest;
   private javax.swing.JButton jButtonDisposeElement;
@@ -557,4 +557,6 @@ public class jFrameManageRequests extends javax.swing.JFrame {
   private javax.swing.JTree jTreeDisposedRequests;
   private javax.swing.JTree jTreeIncomingRequests;
   // End of variables declaration//GEN-END:variables
+  
+  //</editor-fold>
 }
