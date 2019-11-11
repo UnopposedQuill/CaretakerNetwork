@@ -19,6 +19,8 @@ import models.Clinic;
 import models.Employee;
 import models.Location;
 import models.Pacient;
+import models.Schedules.Schedule;
+import models.Schedules.ScheduleManager;
 import models.User;
 import models.report.BuilderReport;
 import models.report.Report;
@@ -32,7 +34,7 @@ public class Main {
   public static void main(String[] args) {
 
     
-    // DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
+     DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
         
 //    BuilderReport reportBuilder = new BuilderReport();
 //    Calendar calendar = Calendar.getInstance();
@@ -44,8 +46,22 @@ public class Main {
     
 
       Employee e = new Employee(Employee.Privilegios.ADMINISTRATIVO, "Lucia Fernanda", "lucifer", new Date(), new Location("Turrialba"), "k@a.com", "Masculino", "1234");
+      Schedule s = new Schedule(3, 22, Schedule.Days.LUNES);
+      Schedule s2 = new Schedule(2, 10, Schedule.Days.MARTES);
+     
+      ScheduleManager mana = new ScheduleManager();
+      mana.addScheduale(s);
+      mana.addScheduale(s2);
+     // System.out.println(mana.isAvalibleSchedule(s2, Schedule.Days.MARTES, 4, 9));
+     
+      e.setScheduleManager(mana);
+      System.out.println("isAvalible"+e.getScheduleManager().isAvalible(Schedule.Days.MARTES, 3, 4));
+//      System.out.println(e);
+//      database.save(e);
 
-//    List<Disease> diseases = new ArrayList<>();
+      
+      
+
 //    Disease d = new Disease("Alefdgsdgrgia");
 //    Pacient pacient = new Pacient(diseases, new User("SiGsdfgsdfguardian", new Date()), "aaaarto", "Usernameiojqwij", new Date(), new Location(),"asdff@asdasdf.com" , "Mujer", "1234");
 //    

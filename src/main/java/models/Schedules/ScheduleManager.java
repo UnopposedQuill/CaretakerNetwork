@@ -21,7 +21,6 @@ public class ScheduleManager {
 
   public ScheduleManager(List<Schedule> schedulues) {
     this.schedulues = schedulues;
-
   }
 
   public ScheduleManager(List<Schedule> schedulues, List<Activity> activities) {
@@ -33,7 +32,15 @@ public class ScheduleManager {
   public ScheduleManager() {
     this.schedulues = new ArrayList<>();
   }
-
+  public String getHorario() {
+    String horario = "";
+    for (Schedule schedulue : schedulues) {
+      horario+= schedulue.getDay()+"-"+schedulue.getInitHour()+"-"+schedulue.getEndHour();
+    }
+    
+    return horario;
+  }
+  
   public boolean addScheduale(Schedule schedule) {
     for (Schedule schedulueL : schedulues) {
       if(schedule.getDay() == schedulueL.getDay()) {
@@ -50,27 +57,40 @@ public class ScheduleManager {
   }
   
   public boolean isAvalible(Schedule.Days dayAvalible, int start, int end) {
+    boolean isAvalible = false;
     for (Schedule schedule : schedulues) {
-      if(!isAvalibleSchedule(schedule, dayAvalible, start, end)) { return false; }
-    }
-    for (Activity activity : activities) {
-      for (Schedule schedule : activity.getScheduleManager().getSchedulues()) {
-        if(!isAvalibleSchedule(schedule, dayAvalible, start, end)) { return false; }
+      System.out.println("ssss "+schedule.getDay() +"---" + dayAvalible);
+      if(schedule.getDay() == dayAvalible) {
+        if(!isAvalibleSchedule(schedule, dayAvalible, start, end)) { 
+          return false;
+        }
       }
     }
-    
     return true;
+//    for (Activity activity : activities) {
+//      for (Schedule schedule : activity.getScheduleManager().getSchedulues()) {        
+//        System.out.println("Acti "+!isAvalibleSchedule(schedule, dayAvalible, start, end));
+//        if(!isAvalibleSchedule(schedule, dayAvalible, start, end)) { 
+//          return false; 
+//        }
+//      }
+//    }    
   }
 
-  private boolean isAvalibleSchedule(Schedule schedule, Schedule.Days dayAvalible, int start, int end) {
-    if (schedule.getDay() == dayAvalible) {
-      if (schedule.getInitHour() > start && schedule.getEndHour() < end) {
-        return true;
+  public boolean isAvalibleSchedule(Schedule schedule, Schedule.Days dayAvalible, int start, int end) {
+    if(schedule.getDay().equals(dayAvalible)) {
+      if(schedule.getInitHour()< start) {
+        if(schedule.getEndHour() > end) {
+          return true;
+        }
       }
     }
     return false;
-  }  
-
+  }
+  
+  public boolean range(int min,int max,int value) {
+    return value >= min && value <= max;
+  }
   public List<Schedule> getSchedulues() {
     return schedulues;
   }

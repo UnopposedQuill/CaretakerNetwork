@@ -19,7 +19,7 @@ public class Schedule {
   private int initHour;
   private Days day;
 
-  public Schedule(int endHour, int initHour, Days day) {
+  public Schedule(int initHour, int endHour, Days day) {
     this.endHour = endHour;
     this.initHour = initHour;
     this.day = day;
