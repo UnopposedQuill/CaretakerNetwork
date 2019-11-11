@@ -45,7 +45,7 @@ public class jFrameManageClinics extends javax.swing.JFrame {
     jButtonAddClinic = new javax.swing.JButton();
     jSeparator1 = new javax.swing.JSeparator();
     jButtonViewEmployees = new javax.swing.JButton();
-    jButtonRemoveClinic = new javax.swing.JButton();
+    jButtonDisableClinic = new javax.swing.JButton();
     jButtonUpdate = new javax.swing.JButton();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,6 +83,7 @@ public class jFrameManageClinics extends javax.swing.JFrame {
 
     jLabelLocation.setText("Location");
 
+    jButtonAddClinic.setBackground(new java.awt.Color(51, 204, 0));
     jButtonAddClinic.setText("Add");
     jButtonAddClinic.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,10 +93,11 @@ public class jFrameManageClinics extends javax.swing.JFrame {
 
     jButtonViewEmployees.setText("View Employees");
 
-    jButtonRemoveClinic.setText("Remove Clinic");
-    jButtonRemoveClinic.addActionListener(new java.awt.event.ActionListener() {
+    jButtonDisableClinic.setBackground(new java.awt.Color(255, 0, 0));
+    jButtonDisableClinic.setText("Disable Clinic");
+    jButtonDisableClinic.addActionListener(new java.awt.event.ActionListener() {
       public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jButtonRemoveClinicActionPerformed(evt);
+        jButtonDisableClinicActionPerformed(evt);
       }
     });
 
@@ -131,7 +133,7 @@ public class jFrameManageClinics extends javax.swing.JFrame {
                   .addComponent(jButtonUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                   .addComponent(jButtonViewEmployees, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonRemoveClinic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addComponent(jButtonDisableClinic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
           .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,7 +168,7 @@ public class jFrameManageClinics extends javax.swing.JFrame {
             .addGap(18, 18, 18)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
               .addComponent(jButtonViewEmployees)
-              .addComponent(jButtonRemoveClinic))
+              .addComponent(jButtonDisableClinic))
             .addGap(18, 18, 18)
             .addComponent(jButtonUpdate)
             .addGap(0, 0, Short.MAX_VALUE)))
@@ -183,7 +185,7 @@ public class jFrameManageClinics extends javax.swing.JFrame {
     this.updateTable();
   }//GEN-LAST:event_jButtonAddClinicActionPerformed
 
-  private void jButtonRemoveClinicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveClinicActionPerformed
+  private void jButtonDisableClinicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDisableClinicActionPerformed
     DatabaseNoSQL dnsql = DatabaseNoSQL.getNoSQLInstance();
     
     int [] selectedRows = this.jTableClinics.getSelectedRows();
@@ -192,7 +194,7 @@ public class jFrameManageClinics extends javax.swing.JFrame {
       dnsql.updateByID(Clinic.class, this.jTableClinics.getValueAt(selectedRow, 0).toString(), "active", false);
     }
     this.updateTable();
-  }//GEN-LAST:event_jButtonRemoveClinicActionPerformed
+  }//GEN-LAST:event_jButtonDisableClinicActionPerformed
 
   private void jButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpdateActionPerformed
     this.updateTable();
@@ -260,7 +262,7 @@ public class jFrameManageClinics extends javax.swing.JFrame {
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonAddClinic;
-  private javax.swing.JButton jButtonRemoveClinic;
+  private javax.swing.JButton jButtonDisableClinic;
   private javax.swing.JButton jButtonUpdate;
   private javax.swing.JButton jButtonViewEmployees;
   private javax.swing.JLabel jLabelClinicName;

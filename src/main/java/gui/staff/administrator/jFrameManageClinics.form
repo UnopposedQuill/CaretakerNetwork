@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -48,7 +48,7 @@
                                   <Component id="jButtonViewEmployees" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButtonRemoveClinic" max="32767" attributes="0"/>
+                              <Component id="jButtonDisableClinic" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -95,7 +95,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonViewEmployees" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonRemoveClinic" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonDisableClinic" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButtonUpdate" min="-2" max="-2" attributes="0"/>
@@ -172,6 +172,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonAddClinic">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="cc" red="33" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Add"/>
       </Properties>
       <Events>
@@ -185,12 +188,15 @@
         <Property name="text" type="java.lang.String" value="View Employees"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButtonRemoveClinic">
+    <Component class="javax.swing.JButton" name="jButtonDisableClinic">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Remove Clinic"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Disable Clinic"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoveClinicActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDisableClinicActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonUpdate">
