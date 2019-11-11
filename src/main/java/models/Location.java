@@ -19,6 +19,19 @@ public class Location {
   private String country;
   private String region;
 
+  public Location() {
+  }
+
+  public Location(String location) {
+    this.location = location;
+  }
+
+  public Location(String location, String country, String region) {
+    this.location = location;
+    this.country = country;
+    this.region = region;
+  }
+
   public String getId() {
     return id;
   }

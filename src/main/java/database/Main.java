@@ -5,11 +5,14 @@
  */
 package database;
 
+import dev.morphia.Datastore;
+import dev.morphia.query.Query;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import models.CareService.CareService;
+import models.CareService.ClientRequest;
 import models.CareService.Disease;
 import models.CareService.ServiceByHour;
 import models.Clinic;
@@ -28,20 +31,19 @@ public class Main {
 
   public static void main(String[] args) {
 
-    // DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
-    /*
-    Employee e = new Employee(Employee.Privilegios.ADMINISTRATIVO, "AAAAaaa", "huiqdnqwbname", new Date(), new Location(), "asdfasf", "Hombre", "123f132");
-    database.save(e);
-        
-    BuilderReport reportBuilder = new BuilderReport();
-    Calendar calendar = Calendar.getInstance();
-    calendar.set(2017, 11, 17);
-    Calendar calendar2 = Calendar.getInstance();
-    calendar2.set(2021, 07, 07);
     
-    Report report = reportBuilder.setByEmployee("aaa").setByPacient("rto").
-        setDateRange(calendar.getTime(), calendar2.getTime()).build();
-    */
+    // DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
+        
+//    BuilderReport reportBuilder = new BuilderReport();
+//    Calendar calendar = Calendar.getInstance();
+//    calendar.set(2017, 11, 17);
+//    Calendar calendar2 = Calendar.getInstance();
+//    calendar2.set(2021, 07, 07);
+//    
+//    Report report = reportBuilder.setTypeService("PORHORA").setDateRange(calendar.getTime(), calendar2.getTime()).build();
+    
+
+      Employee e = new Employee(Employee.Privilegios.ADMINISTRATIVO, "Lucia Fernanda", "lucifer", new Date(), new Location("Turrialba"), "k@a.com", "Masculino", "1234");
 
 //    List<Disease> diseases = new ArrayList<>();
 //    Disease d = new Disease("Alefdgsdgrgia");
