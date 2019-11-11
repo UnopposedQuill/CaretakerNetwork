@@ -36,29 +36,19 @@ public class Main {
     
      DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
         
-//    BuilderReport reportBuilder = new BuilderReport();
-//    Calendar calendar = Calendar.getInstance();
-//    calendar.set(2017, 11, 17);
-//    Calendar calendar2 = Calendar.getInstance();
-//    calendar2.set(2021, 07, 07);
-//    
-//    Report report = reportBuilder.setTypeService("PORHORA").setDateRange(calendar.getTime(), calendar2.getTime()).build();
+    BuilderReport reportBuilder = new BuilderReport();
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(2017, 11, 17);
+    Calendar calendar2 = Calendar.getInstance();
+    calendar2.set(2021, 07, 07);
     
-
-      Employee e = new Employee(Employee.Privilegios.ADMINISTRATIVO, "Lucia Fernanda", "lucifer", new Date(), new Location("Turrialba"), "k@a.com", "Masculino", "1234");
-      Schedule s = new Schedule(3, 22, Schedule.Days.LUNES);
-      Schedule s2 = new Schedule(2, 10, Schedule.Days.MARTES);
+    Report report = reportBuilder.setTypeService("PORHORA").setDateRange(calendar.getTime(), calendar2.getTime()).build();
+    
+    Object[][] a = report.getRows();
+    for (int i = 0; i < a.length; i++) {
+      System.out.println(a.toString());
+    }
      
-      ScheduleManager mana = new ScheduleManager();
-      mana.addScheduale(s);
-      mana.addScheduale(s2);
-     // System.out.println(mana.isAvalibleSchedule(s2, Schedule.Days.MARTES, 4, 9));
-     
-      e.setScheduleManager(mana);
-      System.out.println("isAvalible"+e.getScheduleManager().isAvalible(Schedule.Days.MARTES, 3, 4));
-//      System.out.println(e);
-//      database.save(e);
-
       
       
 

@@ -6,6 +6,13 @@
 package gui.staff.administrator;
 
 import gui.staff.jFrameMainMenu;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import models.report.BuilderReport;
+import models.report.Report;
 
 /**
  *
@@ -33,13 +40,24 @@ public class jFrameReporter extends javax.swing.JFrame {
   // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
   private void initComponents() {
 
+    jTextFieldClient = new javax.swing.JTextField();
+    jTextFieldCareTaker = new javax.swing.JTextField();
+    jTextFieldPerson = new javax.swing.JTextField();
+    jButton1 = new javax.swing.JButton();
+    jLabel1 = new javax.swing.JLabel();
+    jLabel2 = new javax.swing.JLabel();
+    jLabel3 = new javax.swing.JLabel();
+    jTextFieldInicialDate = new javax.swing.JTextField();
+    jTextFieldEndDate = new javax.swing.JTextField();
+    jLabel4 = new javax.swing.JLabel();
+    jLabel5 = new javax.swing.JLabel();
+    jLabel6 = new javax.swing.JLabel();
+    jLabel7 = new javax.swing.JLabel();
+    jTextFieldTypeSuscription = new javax.swing.JTextField();
+    jLabel8 = new javax.swing.JLabel();
     jScrollPane1 = new javax.swing.JScrollPane();
     jTable1 = new javax.swing.JTable();
     jMenuBar1 = new javax.swing.JMenuBar();
-    jMenuTipoReporte = new javax.swing.JMenu();
-    jMenuReportPerPerson = new javax.swing.JMenu();
-    jSeparator1 = new javax.swing.JPopupMenu.Separator();
-    jMenuItemUpdateData = new javax.swing.JMenuItem();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Reports");
@@ -49,35 +67,71 @@ public class jFrameReporter extends javax.swing.JFrame {
       }
     });
 
+    jTextFieldClient.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jTextFieldClientActionPerformed(evt);
+      }
+    });
+
+    jTextFieldCareTaker.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jTextFieldCareTakerActionPerformed(evt);
+      }
+    });
+
+    jTextFieldPerson.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jTextFieldPersonActionPerformed(evt);
+      }
+    });
+
+    jButton1.setText("Search");
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1ActionPerformed(evt);
+      }
+    });
+
+    jLabel1.setText("Person Name");
+
+    jLabel2.setText("CareTaker Name");
+
+    jLabel3.setText("Client Name");
+
+    jTextFieldEndDate.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jTextFieldEndDateActionPerformed(evt);
+      }
+    });
+
+    jLabel4.setText("End Date");
+
+    jLabel5.setText("Incial Date");
+
+    jLabel6.setText("Ej : 27/08/2019 -- DD/MM/YYYY");
+
+    jLabel7.setText("Reports of services by names, dates with the price and total services");
+
+    jTextFieldTypeSuscription.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jTextFieldTypeSuscriptionActionPerformed(evt);
+      }
+    });
+
+    jLabel8.setText("Type Suscription");
+
     jTable1.setModel(new javax.swing.table.DefaultTableModel(
       new Object [][] {
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null},
-        {null, null, null, null}
+        {},
+        {},
+        {},
+        {}
       },
       new String [] {
-        "Title 1", "Title 2", "Title 3", "Title 4"
+
       }
     ));
     jScrollPane1.setViewportView(jTable1);
-
-    jMenuTipoReporte.setText("Report");
-
-    jMenuReportPerPerson.setText("Report per Person");
-    jMenuTipoReporte.add(jMenuReportPerPerson);
-    jMenuTipoReporte.add(jSeparator1);
-
-    jMenuItemUpdateData.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
-    jMenuItemUpdateData.setText("Update Data");
-    jMenuItemUpdateData.addActionListener(new java.awt.event.ActionListener() {
-      public void actionPerformed(java.awt.event.ActionEvent evt) {
-        jMenuItemUpdateDataActionPerformed(evt);
-      }
-    });
-    jMenuTipoReporte.add(jMenuItemUpdateData);
-
-    jMenuBar1.add(jMenuTipoReporte);
 
     setJMenuBar(jMenuBar1);
 
@@ -86,16 +140,100 @@ public class jFrameReporter extends javax.swing.JFrame {
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-        .addContainerGap())
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addGap(25, 25, 25)
+            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE))
+          .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jTextFieldClient, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel3)
+                .addGap(12, 12, 12)))
+            .addGap(29, 29, 29)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jTextFieldCareTaker, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(jTextFieldPerson, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+              .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel1)))))
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jLabel6)
+            .addGap(33, 33, 33))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jTextFieldInicialDate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addGap(23, 23, 23)))
+            .addGap(43, 43, 43)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addComponent(jTextFieldEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel4)))))
+        .addGap(18, 18, 18)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addComponent(jTextFieldTypeSuscription, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+          .addComponent(jLabel8))
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        .addContainerGap(27, Short.MAX_VALUE)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(49, 49, 49))
+          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(70, 70, 70))))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-      .addGroup(layout.createSequentialGroup()
-        .addContainerGap()
-        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+          .addGroup(layout.createSequentialGroup()
+            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel2)
+                .addComponent(jLabel3))
+              .addComponent(jLabel1))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jTextFieldClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jTextFieldCareTaker, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jTextFieldPerson, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE))
+          .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jLabel4)
+              .addComponent(jLabel5)
+              .addComponent(jLabel8))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+              .addComponent(jTextFieldInicialDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jTextFieldEndDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jTextFieldTypeSuscription, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)))))
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(25, 25, 25))
     );
 
     pack();
@@ -109,9 +247,76 @@ public class jFrameReporter extends javax.swing.JFrame {
     }
   }//GEN-LAST:event_formWindowClosing
 
-  private void jMenuItemUpdateDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUpdateDataActionPerformed
-    // TODO Refresh all the data in the table using the database
-  }//GEN-LAST:event_jMenuItemUpdateDataActionPerformed
+  private void jTextFieldPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPersonActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jTextFieldPersonActionPerformed
+
+  private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    
+    BuilderReport reportBuilder = new BuilderReport();
+    
+    
+    String type = this.jTextFieldTypeSuscription.getText().isEmpty() ? null:this.jTextFieldTypeSuscription.getText();
+    String pacientName = this.jTextFieldClient.getText().isEmpty() ? null:this.jTextFieldClient.getText();
+    String personName = this.jTextFieldPerson.getText().isEmpty()?null:this.jTextFieldPerson.getText();
+    String employeeName = this.jTextFieldCareTaker.getText().isEmpty()? null:this.jTextFieldCareTaker.getText();
+    String inicialDate = this.jTextFieldInicialDate.getText().isEmpty()? null:this.jTextFieldInicialDate.getText();
+    String endDate = this.jTextFieldEndDate.getText().isEmpty()? null:this.jTextFieldEndDate.getText();
+    
+    Date inicialDateD; 
+    Date endDateD;
+    try {
+          String[] a = inicialDate.split("/");
+          Calendar calendar = Calendar.getInstance();
+          calendar.set(Integer.parseInt(a[2]), Integer.parseInt(a[1]), Integer.parseInt(a[0]));
+    
+          String[] b = endDate.split("/");
+          Calendar calendar2 = Calendar.getInstance();
+          calendar2.set(Integer.parseInt(b[2]), Integer.parseInt(b[1]), Integer.parseInt(a[0]));
+          inicialDateD = calendar.getTime();
+          endDateD = calendar2.getTime();
+          
+    } catch (Exception e) {
+      inicialDateD = null;
+      endDateD = null;
+    }
+    
+    Report report = reportBuilder
+        .setTypeService(type).
+        setByEmployee(employeeName)
+        .setByPacient(pacientName)
+        .setPersonName(personName)
+        .setDateRange(inicialDateD, endDateD)
+        .build();
+    for (int i = 0; i < report.getColumns().length; i++) {
+      System.out.println(report.getColumns()[i]);
+    }
+
+    for (int i = 0; i < report.getRows().length; i++) {
+      System.out.println("Nuevo");
+      for (int j = 0; j < report.getRows()[0].length; j++) {
+        System.out.println(report.getRows()[i][j]);        
+      }
+    }
+    this.jTable1.setModel(new DefaultTableModel(report.getRows(), report.getColumns()));
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jButton1ActionPerformed
+
+  private void jTextFieldClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldClientActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jTextFieldClientActionPerformed
+
+  private void jTextFieldEndDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEndDateActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jTextFieldEndDateActionPerformed
+
+  private void jTextFieldCareTakerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCareTakerActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jTextFieldCareTakerActionPerformed
+
+  private void jTextFieldTypeSuscriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTypeSuscriptionActionPerformed
+    // TODO add your handling code here:
+  }//GEN-LAST:event_jTextFieldTypeSuscriptionActionPerformed
 
   //</editor-fold>
   
@@ -151,12 +356,23 @@ public class jFrameReporter extends javax.swing.JFrame {
   }
 
   // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JButton jButton1;
+  private javax.swing.JLabel jLabel1;
+  private javax.swing.JLabel jLabel2;
+  private javax.swing.JLabel jLabel3;
+  private javax.swing.JLabel jLabel4;
+  private javax.swing.JLabel jLabel5;
+  private javax.swing.JLabel jLabel6;
+  private javax.swing.JLabel jLabel7;
+  private javax.swing.JLabel jLabel8;
   private javax.swing.JMenuBar jMenuBar1;
-  private javax.swing.JMenuItem jMenuItemUpdateData;
-  private javax.swing.JMenu jMenuReportPerPerson;
-  private javax.swing.JMenu jMenuTipoReporte;
   private javax.swing.JScrollPane jScrollPane1;
-  private javax.swing.JPopupMenu.Separator jSeparator1;
   private javax.swing.JTable jTable1;
+  private javax.swing.JTextField jTextFieldCareTaker;
+  private javax.swing.JTextField jTextFieldClient;
+  private javax.swing.JTextField jTextFieldEndDate;
+  private javax.swing.JTextField jTextFieldInicialDate;
+  private javax.swing.JTextField jTextFieldPerson;
+  private javax.swing.JTextField jTextFieldTypeSuscription;
   // End of variables declaration//GEN-END:variables
 }
