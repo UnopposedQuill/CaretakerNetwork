@@ -22,8 +22,8 @@ public class Report {
     private String employyeSelected;
     private String clientSelected;
     private String nombreCentro;
-    private List<String> columns;
-    private List<String> rows;
+    private String[] columns;
+    private String[][] rows;
 
   public boolean isInputPrice() {
     return inputPrice;
@@ -91,19 +91,19 @@ public class Report {
     this.nombreCentro = nombreCentro;
   }
 
-  public List<String> getColumns() {
+  public String[] getColumns() {
     return columns;
   }
 
-  public void setColumns(List<String> columns) {
+  public void setColumns(String[] columns) {
     this.columns = columns;
   }
 
-  public List<String> getRows() {
+  public String[][] getRows() {
     return rows;
   }
 
-  public void setRows(List<String> rows) {
+  public void setRows(String[][] rows) {
     this.rows = rows;
   }
 

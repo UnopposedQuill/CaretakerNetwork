@@ -19,6 +19,8 @@ import models.Clinic;
 import models.Employee;
 import models.Location;
 import models.Pacient;
+import models.Schedules.Schedule;
+import models.Schedules.ScheduleManager;
 import models.User;
 import models.report.BuilderReport;
 import models.report.Report;
@@ -32,20 +34,24 @@ public class Main {
   public static void main(String[] args) {
 
     
-    // DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
+     DatabaseNoSQL database = DatabaseNoSQL.getNoSQLInstance();
         
-//    BuilderReport reportBuilder = new BuilderReport();
-//    Calendar calendar = Calendar.getInstance();
-//    calendar.set(2017, 11, 17);
-//    Calendar calendar2 = Calendar.getInstance();
-//    calendar2.set(2021, 07, 07);
-//    
-//    Report report = reportBuilder.setTypeService("PORHORA").setDateRange(calendar.getTime(), calendar2.getTime()).build();
+    BuilderReport reportBuilder = new BuilderReport();
+    Calendar calendar = Calendar.getInstance();
+    calendar.set(2017, 11, 17);
+    Calendar calendar2 = Calendar.getInstance();
+    calendar2.set(2021, 07, 07);
     
+    Report report = reportBuilder.setTypeService("PORHORA").setDateRange(calendar.getTime(), calendar2.getTime()).build();
+    
+    Object[][] a = report.getRows();
+    for (int i = 0; i < a.length; i++) {
+      System.out.println(a.toString());
+    }
+     
+      
+      
 
-      Employee e = new Employee(Employee.Privilegios.ADMINISTRATIVO, "Lucia Fernanda", "lucifer", new Date(), new Location("Turrialba"), "k@a.com", "Masculino", "1234");
-
-//    List<Disease> diseases = new ArrayList<>();
 //    Disease d = new Disease("Alefdgsdgrgia");
 //    Pacient pacient = new Pacient(diseases, new User("SiGsdfgsdfguardian", new Date()), "aaaarto", "Usernameiojqwij", new Date(), new Location(),"asdff@asdasdf.com" , "Mujer", "1234");
 //    

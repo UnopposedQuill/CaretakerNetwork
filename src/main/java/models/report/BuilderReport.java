@@ -25,10 +25,15 @@ public class BuilderReport {
     
   private Report report;
 
+  
   public BuilderReport() {
     report = new Report();
   }
-  
+  public BuilderReport setPersonName(String name) {
+    this.setByPacient(name);
+    this.setByEmployee(name);
+    return this;
+  }
   public BuilderReport setDateRange(Date inicialDate, Date endDate) {
     this.report.setFechaIncial(inicialDate);
     this.report.setFechaFinal(endDate);
@@ -36,7 +41,12 @@ public class BuilderReport {
   }
     
   public BuilderReport setTypeService(String name) {
-    this.report.setTipoServicio(CareService.CareServiceType.valueOf(name));
+    CareService.CareServiceType care= null;
+    try {
+      care = CareService.CareServiceType.valueOf(name);
+    } catch (Exception e) {
+    }
+    this.report.setTipoServicio(care);
     return this;
   }
   
@@ -71,7 +81,6 @@ public class BuilderReport {
     Datastore datastore = instance.getDataStore();
     
     Query<ClientRequest> pacients= datastore.createQuery(ClientRequest.class);
-    System.out.println(this.report.toString());
     //Tipo
     if(report.getTipoServicio() != null){
       pacients.field("pacient.suscriptions.type").equal(report.getTipoServicio());
@@ -93,11 +102,24 @@ public class BuilderReport {
     }
     
     List<ClientRequest> p = pacients.asList();
-    System.out.println("Builder");
-    for (ClientRequest clientRequest : p) {
-      System.out.println(clientRequest.getPacient().toString());
+    
+    String[] nothingSelected = {"Price","Type","CareTaker","ClientName","InicialDate","EndDate"};
+    String[][] data = new String[p.size()][6]; 
+    for (int i = 0; i < p.size(); i++) {
+      List<CareService> suscriptions = p.get(i).getPacient().getSuscriptions();
+      for (int j = 0; j < suscriptions.size(); j++) {
+        data[i][0] = suscriptions.get(j).getPrice()+"";
+        data[i][1] = suscriptions.get(j).getType().toString();
+        data[i][2] = suscriptions.get(j).getCareTaker().getId();
+        data[i][3] = p.get(i).getPacient().getName();
+        data[i][4] = suscriptions.get(j).getInicialDate().toString();
+        data[i][5] = suscriptions.get(j).getEndDate().toString();
+      }
     }
-    System.out.println(p.size());
+    report.setColumns(nothingSelected);
+    report.setRows(data);
+    System.out.println(this.report.toString());
+    
     return report;
   }
   
