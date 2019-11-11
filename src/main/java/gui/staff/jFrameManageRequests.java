@@ -33,6 +33,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 	public jFrameManageRequests(jFrameMainMenu frameMainMenu) {
 		initComponents();
     this.frameMainMenu = frameMainMenu;
+    this.repopulateTree();
 	}
 
 	/**
@@ -221,6 +222,112 @@ public class jFrameManageRequests extends javax.swing.JFrame {
   }//GEN-LAST:event_formWindowClosing
 
   private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
+    this.repopulateTree();
+  }//GEN-LAST:event_jButtonRefreshActionPerformed
+
+  private void jButtonApproveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApproveRequestActionPerformed
+    if (this.jTreeIncomingRequests.getSelectionCount() > 0) {
+      
+      // Declare database endpoint
+      DatabaseNoSQL dbns = database.DatabaseNoSQL.getNoSQLInstance();
+      // I need to check if the request selected is a client or a subscription
+      DefaultTreeModel dtmIncomingRequests =  (DefaultTreeModel)this.jTreeIncomingRequests.getModel(),
+          dtmAcceptedClients = (DefaultTreeModel) this.jTreeActiveClients.getModel(),
+          dtmAcceptedSubscriptions = (DefaultTreeModel) this.jTreeActiveSubscriptions.getModel();
+      
+      TreePath currentSelectionPath = this.jTreeIncomingRequests.getSelectionPath();
+      DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) currentSelectionPath.getLastPathComponent(),
+          clientsNode = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 0),
+          subscriptionsNode = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 1);
+      
+      if (selectedNode.isNodeAncestor(clientsNode)) {
+        System.out.println("Moving client request to accepted");
+        // While I haven't reached to the main node, I need to keep going towards the parent
+        while (!selectedNode.toString().equals("Client")) {
+          selectedNode = selectedNode.getPreviousNode();
+        }
+        
+        // I reached the main node, I move to the active clients
+        dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "state", ClientRequest.StateRequest.ACEPTADO);
+        
+        dtmIncomingRequests.removeNodeFromParent(selectedNode);
+        dtmAcceptedClients.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedClients.getRoot()), 0);
+        
+      }else if (selectedNode.isNodeAncestor(subscriptionsNode)) {
+        System.out.println("Moving subscription request to accepted");
+        
+        DefaultMutableTreeNode dailyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 0),
+            monthlyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 1),
+            yearlyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 2);
+        
+        while (!selectedNode.toString().equals("Subscription")) {
+          selectedNode = selectedNode.getPreviousNode();
+        }
+        
+        // I reached the main node, I move to the active clients
+        // I need to check its ancestor before doing changes
+        if (selectedNode.isNodeAncestor(dailyIncomings)) {
+          System.out.println("Moving daily subscription");
+    
+          List <ClientRequest> clients = dbns.getAll(ClientRequest.class);
+          for (ClientRequest client : clients) {
+            if (client.getId().equals(selectedNode.getChildAt(0).toString())) {
+              for (CareService careService : client.getPacient().getSuscriptions()) {
+                if (careService.getId().equals(selectedNode.getChildAt(1).toString())) {
+                  careService.setEstate(CareService.CareServiceState.ENCURSO);
+                  dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "pacient.suscriptions", client.getPacient().getSuscriptions());
+                }
+              }
+            }
+          }
+          dtmIncomingRequests.removeNodeFromParent(selectedNode);
+          dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 0);
+          
+        } else if (selectedNode.isNodeAncestor(monthlyIncomings)){
+          System.out.println("Moving monthly subscription");
+          
+          List <ClientRequest> clients = dbns.getAll(ClientRequest.class);
+          for (ClientRequest client : clients) {
+            if (client.getId().equals(selectedNode.getChildAt(0).toString())) {
+              for (CareService careService : client.getPacient().getSuscriptions()) {
+                if (careService.getId().equals(selectedNode.getChildAt(1).toString())) {
+                  careService.setEstate(CareService.CareServiceState.ENCURSO);
+                  dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "pacient.suscriptions", client.getPacient().getSuscriptions());
+                }
+              }
+            }
+          }
+          dtmIncomingRequests.removeNodeFromParent(selectedNode);
+          dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 1);
+          
+        } else if (selectedNode.isNodeAncestor(yearlyIncomings)){
+          System.out.println("Moving yearly subscription");
+          
+          List <ClientRequest> clients = dbns.getAll(ClientRequest.class);
+          for (ClientRequest client : clients) {
+            if (client.getId().equals(selectedNode.getChildAt(0).toString())) {
+              for (CareService careService : client.getPacient().getSuscriptions()) {
+                if (careService.getId().equals(selectedNode.getChildAt(1).toString())) {
+                  careService.setEstate(CareService.CareServiceState.ENCURSO);
+                  dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "pacient.suscriptions", client.getPacient().getSuscriptions());
+                }
+              }
+            }
+          }
+          dtmIncomingRequests.removeNodeFromParent(selectedNode);
+          dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 2);
+        }
+      }
+    }
+    else{
+      JOptionPane.showMessageDialog(null, "Please select at least 1 element");
+    }
+  }//GEN-LAST:event_jButtonApproveRequestActionPerformed
+
+  //</editor-fold>
+  
+  //<editor-fold defaultstate="collapsed" desc="Private methods">
+  private void repopulateTree(){
     // Repopulate all the trees
     // Declare database endpoint
     DatabaseNoSQL dbns = database.DatabaseNoSQL.getNoSQLInstance();
@@ -321,114 +428,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     //<editor-fold defaultstate="collapsed" desc="Disposed Elements">
     
     //</editor-fold>
-  }//GEN-LAST:event_jButtonRefreshActionPerformed
-
-  private void jButtonApproveRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApproveRequestActionPerformed
-    if (this.jTreeIncomingRequests.getSelectionCount() > 0) {
-      
-      // Declare database endpoint
-      DatabaseNoSQL dbns = database.DatabaseNoSQL.getNoSQLInstance();
-      // I need to check if the request selected is a client or a subscription
-      DefaultTreeModel dtmIncomingRequests =  (DefaultTreeModel)this.jTreeIncomingRequests.getModel(),
-          dtmAcceptedClients = (DefaultTreeModel) this.jTreeActiveClients.getModel(),
-          dtmAcceptedSubscriptions = (DefaultTreeModel) this.jTreeActiveSubscriptions.getModel();
-      
-      TreePath currentSelectionPath = this.jTreeIncomingRequests.getSelectionPath();
-      DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) currentSelectionPath.getLastPathComponent(),
-          clientsNode = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 0),
-          subscriptionsNode = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 1);
-      
-      if (selectedNode.isNodeAncestor(clientsNode)) {
-        System.out.println("Moving client request to accepted");
-        // While I haven't reached to the main node, I need to keep going towards the parent
-        while (!selectedNode.toString().equals("Client")) {
-          selectedNode = selectedNode.getPreviousNode();
-        }
-        
-        // I reached the main node, I move to the active clients
-        dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "state", ClientRequest.StateRequest.ACEPTADO);
-        
-        dtmIncomingRequests.removeNodeFromParent(selectedNode);
-        dtmAcceptedClients.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedClients.getRoot()), 0);
-        
-      }else if (selectedNode.isNodeAncestor(subscriptionsNode)) {
-        System.out.println("Moving subscription request to accepted");
-        
-        DefaultMutableTreeNode dailyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 0),
-            monthlyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 1),
-            yearlyIncomings = (DefaultMutableTreeNode) dtmIncomingRequests.getChild(subscriptionsNode, 2);
-        
-        while (!selectedNode.toString().equals("Subscription")) {
-          selectedNode = selectedNode.getPreviousNode();
-        }
-        
-        // I reached the main node, I move to the active clients
-        // I need to check its ancestor before doing changes
-        if (selectedNode.isNodeAncestor(dailyIncomings)) {
-          System.out.println("Moving daily subscription");
-    
-          List <ClientRequest> clients = dbns.getAll(ClientRequest.class);
-          for (ClientRequest client : clients) {
-            if (client.getId().equals(selectedNode.getChildAt(0).toString())) {
-              for (CareService careService : client.getPacient().getSuscriptions()) {
-                if (careService.getId().equals(selectedNode.getChildAt(1).toString())) {
-                  careService.setEstate(CareService.CareServiceState.ENCURSO);
-                  dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "pacient.suscriptions", client.getPacient().getSuscriptions());
-                }
-              }
-            }
-          }
-        
-          dtmIncomingRequests.removeNodeFromParent(selectedNode);
-          dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 0);
-          
-        } else if (selectedNode.isNodeAncestor(monthlyIncomings)){
-          System.out.println("Moving monthly subscription");
-          
-          List <ClientRequest> clients = dbns.getAll(ClientRequest.class);
-          for (ClientRequest client : clients) {
-            if (client.getId().equals(selectedNode.getChildAt(0).toString())) {
-              for (CareService careService : client.getPacient().getSuscriptions()) {
-                if (careService.getId().equals(selectedNode.getChildAt(1).toString())) {
-                  careService.setEstate(CareService.CareServiceState.ENCURSO);
-                  dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "pacient.suscriptions", client.getPacient().getSuscriptions());
-                }
-              }
-            }
-          }
-        
-          dtmIncomingRequests.removeNodeFromParent(selectedNode);
-          dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 1);
-          
-        } else if (selectedNode.isNodeAncestor(yearlyIncomings)){
-          System.out.println("Moving yearly subscription");
-          
-          List <ClientRequest> clients = dbns.getAll(ClientRequest.class);
-          for (ClientRequest client : clients) {
-            if (client.getId().equals(selectedNode.getChildAt(0).toString())) {
-              for (CareService careService : client.getPacient().getSuscriptions()) {
-                if (careService.getId().equals(selectedNode.getChildAt(1).toString())) {
-                  careService.setEstate(CareService.CareServiceState.ENCURSO);
-                  dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "pacient.suscriptions", client.getPacient().getSuscriptions());
-                }
-              }
-            }
-          }
-        
-          dtmIncomingRequests.removeNodeFromParent(selectedNode);
-          dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 2);
-          
-        }
-        
-      }
-    }
-    else{
-      JOptionPane.showMessageDialog(null, "Please select at least 1 element");
-    }
-    
-    
-  }//GEN-LAST:event_jButtonApproveRequestActionPerformed
-
+  }
   //</editor-fold>
   
 	/**
