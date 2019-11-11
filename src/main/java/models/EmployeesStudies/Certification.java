@@ -14,11 +14,11 @@ import models.CareService.CareService;
 public class Certification extends Qualification{
 
   public int getPrecio() {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    return 1000;
   }
 
   public CareService.CareServiceType getCategoria() {
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    return CareService.CareServiceType.NINOS;
   }
     
 }

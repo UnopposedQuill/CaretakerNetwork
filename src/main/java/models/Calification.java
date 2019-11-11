@@ -16,12 +16,12 @@ public class Calification {
   @Id
   private String id = ObjectId.get().toString();
   private String comment;
-  private String calification;
+  private int calification;
 
   public Calification() {
   }
 
-  public Calification(String comment, String calification) {
+  public Calification(String comment, int calification) {
     this.comment = comment;
     this.calification = calification;
   }
@@ -42,11 +42,11 @@ public class Calification {
     this.comment = comment;
   }
 
-  public String getCalification() {
+  public int getCalification() {
     return calification;
   }
 
-  public void setCalification(String calification) {
+  public void setCalification(int calification) {
     this.calification = calification;
   }
   

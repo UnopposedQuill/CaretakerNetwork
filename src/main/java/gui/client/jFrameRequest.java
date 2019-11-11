@@ -7,8 +7,9 @@ package gui.client;
 
 import database.DatabaseNoSQL;
 import java.util.Calendar;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import models.CareService.CareService;
 import models.CareService.ClientRequest;
 import models.CareService.ServiceByHour;
@@ -21,8 +22,8 @@ import models.CareTaker;
  */
 public class jFrameRequest extends javax.swing.JFrame {
 
-  private jFrameSubscriptions frameSubscriptions;
-  private ClientRequest loggedUser;
+  private final jFrameSubscriptions frameSubscriptions;
+  private final ClientRequest loggedUser;
   
   /**
    * Creates new form jFramePeticionCuido
@@ -33,6 +34,8 @@ public class jFrameRequest extends javax.swing.JFrame {
     initComponents();
     this.frameSubscriptions = frameSubscriptions;
     this.loggedUser = patient;
+    
+    this.getCaretakers();
     
     this.jSpinnerInitialHour.setEnabled(true);
     this.jSpinnerEndingHour.setEnabled(true);
@@ -67,10 +70,9 @@ public class jFrameRequest extends javax.swing.JFrame {
     jSpinnerEndingHour = new javax.swing.JSpinner();
     jComboBoxInitialWeekDay = new javax.swing.JComboBox<>();
     jComboBoxEndingWeekDay = new javax.swing.JComboBox<>();
-    jComboBoxCaretaker = new javax.swing.JComboBox<>();
-    jLabelCosto = new javax.swing.JLabel();
-    jTextFieldCost = new javax.swing.JTextField();
     jLabelCaretaker = new javax.swing.JLabel();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    jTableCaretakers = new javax.swing.JTable();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Create New Subscription Request");
@@ -113,20 +115,38 @@ public class jFrameRequest extends javax.swing.JFrame {
 
     jComboBoxEndingWeekDay.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", " " }));
 
-    jComboBoxCaretaker.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+    jLabelCaretaker.setText("Caretaker");
 
-    jLabelCosto.setText("Current Cost: ");
+    jTableCaretakers.setModel(new javax.swing.table.DefaultTableModel(
+      new Object [][] {
+        {null, null, null, null, null},
+        {null, null, null, null, null}
+      },
+      new String [] {
+        "ID", "Name", "Price", "Clinic", "Rating Average"
+      }
+    ) {
+      boolean[] canEdit = new boolean [] {
+        false, false, false, false, false
+      };
 
-    jLabelCaretaker.setText("Caretaker:");
+      public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return canEdit [columnIndex];
+      }
+    });
+    jTableCaretakers.setColumnSelectionAllowed(true);
+    jScrollPane1.setViewportView(jTableCaretakers);
+    jTableCaretakers.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
     layout.setHorizontalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
       .addGroup(layout.createSequentialGroup()
+        .addGap(133, 133, 133)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addGroup(layout.createSequentialGroup()
-            .addGap(125, 125, 125)
+            .addGap(113, 113, 113)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addGroup(layout.createSequentialGroup()
                 .addGap(92, 92, 92)
@@ -136,43 +156,37 @@ public class jFrameRequest extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBoxSubscriptionType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
           .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(jLabeEndingDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jLabelInitialDate, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(jSpinnerEndingHour)
+              .addComponent(jSpinnerInitialHour, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(18, 18, 18)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+              .addComponent(jComboBoxEndingWeekDay, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+              .addComponent(jComboBoxInitialWeekDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addComponent(jLabeEndingDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                  .addComponent(jLabelInitialDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addComponent(jSpinnerEndingHour, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
-                  .addComponent(jSpinnerInitialHour))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addComponent(jComboBoxEndingWeekDay, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                  .addComponent(jComboBoxInitialWeekDay, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-              .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabelCosto)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextFieldCost, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+              .addComponent(jSpinnerEndingDay, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jSpinnerInitialDay, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-              .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jLabelCaretaker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxCaretaker, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-              .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jSpinnerEndingDay, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jSpinnerInitialDay, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                  .addComponent(jComboBoxEndingMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addComponent(jComboBoxInitialMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+              .addComponent(jComboBoxEndingMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+              .addComponent(jComboBoxInitialMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
           .addGroup(layout.createSequentialGroup()
-            .addGap(181, 181, 181)
-            .addComponent(jButtonCommitRequest)))
-        .addContainerGap(131, Short.MAX_VALUE))
+            .addGap(213, 213, 213)
+            .addComponent(jLabelCaretaker, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        .addGap(0, 244, Short.MAX_VALUE))
+      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+        .addContainerGap()
+        .addComponent(jScrollPane1)
+        .addContainerGap())
+      .addGroup(layout.createSequentialGroup()
+        .addGap(331, 331, 331)
+        .addComponent(jButtonCommitRequest)
+        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
       layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +197,7 @@ public class jFrameRequest extends javax.swing.JFrame {
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelSubscriptionType)
           .addComponent(jComboBoxSubscriptionType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(35, 35, 35)
+        .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
           .addComponent(jLabelInitialDate, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -198,13 +212,11 @@ public class jFrameRequest extends javax.swing.JFrame {
           .addComponent(jSpinnerEndingDay, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jComboBoxEndingWeekDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
           .addComponent(jComboBoxEndingMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(35, 35, 35)
-        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-          .addComponent(jComboBoxCaretaker, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabelCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jTextFieldCost, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-          .addComponent(jLabelCaretaker, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        .addGap(18, 18, 18)
+        .addComponent(jLabelCaretaker, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(18, 18, 18)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+        .addGap(26, 26, 26)
         .addComponent(jButtonCommitRequest)
         .addContainerGap())
     );
@@ -214,71 +226,92 @@ public class jFrameRequest extends javax.swing.JFrame {
 
   //<editor-fold defaultstate="collapsed" desc="Event Handlers">
   private void jButtonCommitRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCommitRequestActionPerformed
-    // I need to push the new request to the database
-    DatabaseNoSQL dbns = DatabaseNoSQL.getNoSQLInstance();
-    Calendar initialDate = Calendar.getInstance(),
-            endingDate = Calendar.getInstance();
-    switch(this.jComboBoxSubscriptionType.getSelectedItem().toString()){
-      case "Daily":{
-        initialDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerInitialHour.getValue());
-        initialDate.set(Calendar.DAY_OF_WEEK, this.jComboBoxInitialWeekDay.getSelectedIndex());
-        
-        endingDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerEndingHour.getValue());
-        endingDate.set(Calendar.DAY_OF_WEEK, this.jComboBoxEndingWeekDay.getSelectedIndex());
-        this.loggedUser.getPacient().getSuscriptions().add(
-            new ServiceByHour(Calendar.getInstance().getTime(),
-                initialDate.getTime(),
-                endingDate.getTime(),
-                CareService.CareServiceState.AGENDADO,
-                "N/A",
-                500,
-                null));
-        break;
+    
+    if (this.jTableCaretakers.getSelectedRowCount()> 0) {
+      // I need to push the new request to the database
+      DatabaseNoSQL dbns = DatabaseNoSQL.getNoSQLInstance();
+      Calendar initialDate = Calendar.getInstance(),
+              endingDate = Calendar.getInstance();
+      List <CareTaker> careTakers = dbns.getAll(CareTaker.class);
+      CareTaker careTaker = null;
+      String selectedID = this.jTableCaretakers.getModel().getValueAt(this.jTableCaretakers.getSelectedRows()[0], 0).toString();
+      for (CareTaker careTaker1 : careTakers) {
+        if (careTaker1.getId().equals(selectedID)) {
+          careTaker = careTaker1;
+        }
       }
-      case "Monthly":{
-        initialDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerInitialHour.getValue());
-        initialDate.set(Calendar.DAY_OF_MONTH, (int)this.jSpinnerInitialDay.getValue());
-        
-        endingDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerEndingHour.getValue());
-        endingDate.set(Calendar.DAY_OF_MONTH, (int)this.jSpinnerEndingHour.getValue());
-        this.loggedUser.getPacient().getSuscriptions().add(
-            new ServiceByMonth(Calendar.getInstance().getTime(),
-                initialDate.getTime(),
-                endingDate.getTime(),
-                CareService.CareServiceState.AGENDADO,
-                "N/A",
-                500,
-                null));
-        break;
+      
+      switch(this.jComboBoxSubscriptionType.getSelectedItem().toString()){
+        case "Daily":{
+          initialDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerInitialHour.getValue());
+          initialDate.set(Calendar.DAY_OF_WEEK, this.jComboBoxInitialWeekDay.getSelectedIndex());
+
+          endingDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerEndingHour.getValue());
+          endingDate.set(Calendar.DAY_OF_WEEK, this.jComboBoxEndingWeekDay.getSelectedIndex());
+          this.loggedUser.getPacient().getSuscriptions().add(
+              new ServiceByHour(Calendar.getInstance().getTime(),
+                  initialDate.getTime(),
+                  endingDate.getTime(),
+                  CareService.CareServiceState.AGENDADO,
+                  "N/A",
+                  500,
+                  null,
+                  careTaker
+              ));
+          break;
+        }
+        case "Monthly":{
+          initialDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerInitialHour.getValue());
+          initialDate.set(Calendar.DAY_OF_MONTH, (int)this.jSpinnerInitialDay.getValue());
+
+          endingDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerEndingHour.getValue());
+          endingDate.set(Calendar.DAY_OF_MONTH, (int)this.jSpinnerEndingHour.getValue());
+          this.loggedUser.getPacient().getSuscriptions().add(
+              new ServiceByMonth(Calendar.getInstance().getTime(),
+                  initialDate.getTime(),
+                  endingDate.getTime(),
+                  CareService.CareServiceState.AGENDADO,
+                  "N/A",
+                  500,
+                  null,
+                  careTaker
+              ));
+          break;
+        }
+        case "Yearly":{
+          initialDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerInitialHour.getValue());
+          initialDate.set(Calendar.DAY_OF_MONTH, (int)this.jSpinnerInitialDay.getValue());
+          initialDate.set(Calendar.MONTH, this.jComboBoxInitialMonth.getSelectedIndex());
+
+          endingDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerEndingHour.getValue());
+          endingDate.set(Calendar.DAY_OF_MONTH, (int)this.jSpinnerEndingHour.getValue());
+          endingDate.set(Calendar.MONTH, this.jComboBoxEndingMonth.getSelectedIndex());
+          this.loggedUser.getPacient().getSuscriptions().add(
+              new ServiceByMonth(Calendar.getInstance().getTime(),
+                  initialDate.getTime(),
+                  endingDate.getTime(),
+                  CareService.CareServiceState.AGENDADO,
+                  "N/A",
+                  500,
+                  null,
+                  careTaker
+              ));
+          break;
+        }
+        default:{
+          break;
+        }
       }
-      case "Yearly":{
-        initialDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerInitialHour.getValue());
-        initialDate.set(Calendar.DAY_OF_MONTH, (int)this.jSpinnerInitialDay.getValue());
-        initialDate.set(Calendar.MONTH, this.jComboBoxInitialMonth.getSelectedIndex());
-        
-        endingDate.set(Calendar.HOUR_OF_DAY, (int)this.jSpinnerEndingHour.getValue());
-        endingDate.set(Calendar.DAY_OF_MONTH, (int)this.jSpinnerEndingHour.getValue());
-        endingDate.set(Calendar.MONTH, this.jComboBoxEndingMonth.getSelectedIndex());
-        this.loggedUser.getPacient().getSuscriptions().add(
-            new ServiceByMonth(Calendar.getInstance().getTime(),
-                initialDate.getTime(),
-                endingDate.getTime(),
-                CareService.CareServiceState.AGENDADO,
-                "N/A",
-                500,
-                null));
-        break;
-      }
-      default:{
-        break;
+      System.out.println(this.loggedUser.getPacient().getSuscriptions());
+      dbns.updateByID(ClientRequest.class, this.loggedUser.getId(), "pacient.suscriptions", this.loggedUser.getPacient().getSuscriptions());
+
+      // I need to add it to the subscriptions Frame
+      if (this.frameSubscriptions != null) {
+        this.frameSubscriptions.updateSubscriptionData();
       }
     }
-    System.out.println(this.loggedUser.getPacient().getSuscriptions());
-    dbns.updateByID(ClientRequest.class, this.loggedUser.getId(), "pacient.suscriptions", this.loggedUser.getPacient().getSuscriptions());
-    
-    // I need to add it to the subscriptions Frame
-    if (this.frameSubscriptions != null) {
-      this.frameSubscriptions.updateSubscriptionData();
+    else{
+      JOptionPane.showMessageDialog(null, "Please select a CareTaker");
     }
   }//GEN-LAST:event_jButtonCommitRequestActionPerformed
 
@@ -322,27 +355,28 @@ public class jFrameRequest extends javax.swing.JFrame {
   //</editor-fold>
   
   // <editor-fold defaultstate="collapsed" desc="Private methods">
-  /**
-   * This method builds a new editor for the subscription column based on a 
-   * combobox
-   * @return A new cell editor based on the combobox editor
-   */
-  private DefaultCellEditor getSubscriptionCellEditor(){
-    //@TODO: Build subscriptions on actual database data
-//    DatabaseNoSQL databaseNoSQL = DatabaseNoSQL.getNoSQLInstance();
-//    Object [] subscriptions = databaseNoSQL.getAll(CareTaker.class).toArray();
-
-    //First I need to build an array on the subscription types
-    Object [] subscriptions = {
-      "Daily",
-      "Weekly",
-      "Monthly",
-      "Nocturnal"
+  private void getCaretakers(){
+    DatabaseNoSQL databaseNoSQL = DatabaseNoSQL.getNoSQLInstance();
+    List <CareTaker> caretakers = databaseNoSQL.getAll(CareTaker.class);
+    Object [][] data = new Object[caretakers.size()][5];
+    for (int i = 0; i < caretakers.size(); i++) {
+      CareTaker get = caretakers.get(i);
+      data[i][0] = get.getId();
+      data[i][1] = get.getName();
+      data[i][2] = get.getEspecialities() == null ? 1000 : get.getCost();
+      data[i][3] = "N/A";
+      data[i][4] = get.getScores() == null ? "Unrated" : get.getRatingAverage();
+    }
+    
+    String [] columns = {
+      "Id",
+      "Name",
+      "Price",
+      "Clinic",
+      "Rating Average"
     };
-    //Then I build a new ComboBox, which will be use to edit this column
-    JComboBox subscriptionComboBox = new JComboBox(subscriptions);
-
-    return new DefaultCellEditor(subscriptionComboBox);
+    
+    this.jTableCaretakers.setModel(new DefaultTableModel(data, columns));
   }
   // </editor-fold>
   
@@ -362,29 +396,22 @@ public class jFrameRequest extends javax.swing.JFrame {
           break;
         }
       }
-    } catch (ClassNotFoundException ex) {
-      java.util.logging.Logger.getLogger(jFrameRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-      java.util.logging.Logger.getLogger(jFrameRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-      java.util.logging.Logger.getLogger(jFrameRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
       java.util.logging.Logger.getLogger(jFrameRequest.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     }
     //</editor-fold>
+    
+    //</editor-fold>
 
     /* Create and display the form */
-    java.awt.EventQueue.invokeLater(new Runnable() {
-      public void run() {
-        new jFrameRequest(null, null).setVisible(true);
-      }
+    java.awt.EventQueue.invokeLater(() -> {
+      new jFrameRequest(null, null).setVisible(true);
     });
   }
 
   // <editor-fold defaultstate="collapsed" desc="Private Variables">
   // Variables declaration - do not modify//GEN-BEGIN:variables
   private javax.swing.JButton jButtonCommitRequest;
-  private javax.swing.JComboBox<String> jComboBoxCaretaker;
   private javax.swing.JComboBox<String> jComboBoxEndingMonth;
   private javax.swing.JComboBox<String> jComboBoxEndingWeekDay;
   private javax.swing.JComboBox<String> jComboBoxInitialMonth;
@@ -392,15 +419,15 @@ public class jFrameRequest extends javax.swing.JFrame {
   private javax.swing.JComboBox<String> jComboBoxSubscriptionType;
   private javax.swing.JLabel jLabeEndingDate;
   private javax.swing.JLabel jLabelCaretaker;
-  private javax.swing.JLabel jLabelCosto;
   private javax.swing.JLabel jLabelInitialDate;
   private javax.swing.JLabel jLabelSubscriptionType;
   private javax.swing.JLabel jLabelTitle;
+  private javax.swing.JScrollPane jScrollPane1;
   private javax.swing.JSpinner jSpinnerEndingDay;
   private javax.swing.JSpinner jSpinnerEndingHour;
   private javax.swing.JSpinner jSpinnerInitialDay;
   private javax.swing.JSpinner jSpinnerInitialHour;
-  private javax.swing.JTextField jTextFieldCost;
+  private javax.swing.JTable jTableCaretakers;
   // End of variables declaration//GEN-END:variables
   
   //</editor-fold>

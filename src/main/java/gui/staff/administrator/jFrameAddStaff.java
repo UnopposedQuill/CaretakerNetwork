@@ -302,6 +302,7 @@ public class jFrameAddStaff extends javax.swing.JFrame {
       );
     } else if (this.jRadioButtonCaretaker.isSelected()) {
       dnsql.save(new CareTaker(
+          Employee.Privilegios.CARETAKER,
           this.jTextFieldFullName.getText(),
           this.jTextFieldUsername.getText(),
           new GregorianCalendar(

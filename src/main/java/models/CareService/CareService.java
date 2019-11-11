@@ -39,7 +39,7 @@ public abstract class CareService {
 
   }
 
-  public CareService(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
+  public CareService(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic, CareTaker careTaker) {
     this.initDate = initDate;
     this.initialDate = initialDate;
     this.endDate = endDate;
@@ -47,6 +47,7 @@ public abstract class CareService {
     this.description = description;
     this.price = price;
     this.clinic = clinic;
+    this.careTaker = careTaker;
   }
   
   public boolean suscribe() {

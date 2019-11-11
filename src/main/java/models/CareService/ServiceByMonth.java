@@ -6,6 +6,7 @@
 package models.CareService;
 
 import java.util.Date;
+import models.CareTaker;
 import models.Clinic;
 
 /**
@@ -17,8 +18,8 @@ public class ServiceByMonth extends CareService{
   public ServiceByMonth() {
   }
   
-  public ServiceByMonth(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
-    super(initDate, initialDate, endDate, estate, description, price, clinic);
+  public ServiceByMonth(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic, CareTaker careTaker) {
+    super(initDate, initialDate, endDate, estate, description, price, clinic, careTaker);
     super.setType(CareServiceType.PORMES);
   }
 

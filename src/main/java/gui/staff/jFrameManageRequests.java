@@ -326,6 +326,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 
                 subscriptionNode.add(new DefaultMutableTreeNode(client.getId(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getId(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getCareTaker(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(client.getPacient().getName(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getType(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getDescription(), false));
@@ -413,6 +414,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 
                 subscriptionNode.add(new DefaultMutableTreeNode(client.getId(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getId(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getCareTaker(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(client.getPacient().getName(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getType(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getDescription(), false));
@@ -458,6 +460,7 @@ public class jFrameManageRequests extends javax.swing.JFrame {
 
                 subscriptionNode.add(new DefaultMutableTreeNode(client.getId(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getId(), false));
+                subscriptionNode.add(new DefaultMutableTreeNode(subscription.getCareTaker(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(client.getPacient().getName(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getType(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getDescription(), false));

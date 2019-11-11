@@ -5,6 +5,7 @@
  */
 package models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import models.CareService.CareService;
@@ -15,7 +16,7 @@ import org.bson.types.ObjectId;
  *
  * @author rober2
  */
-public class CareTaker extends User{
+public class CareTaker extends Employee{
 
   private String id = ObjectId.get().toString();
   private String careTakerOverview;
@@ -26,8 +27,13 @@ public class CareTaker extends User{
   public CareTaker() {
   }
 
-  public CareTaker(String name, String username, Date birthday, Location location, String email, String gender, String password) {
-    super(name, username, birthday, location, email, gender, password);
+  
+  public CareTaker(Privilegios privilege, String name, String username, Date birthday, Location location, String email, String gender, String password) {
+    super(Privilegios.CARETAKER, name, username, birthday, location, gender, gender, password);
+    this.scores = new ArrayList<>();
+    this.especialities = new ArrayList<>();
+    this.careServices = new ArrayList<>();
+    this.careTakerOverview = "";
   }
 
   public Qualification categorize() {
@@ -52,10 +58,13 @@ public class CareTaker extends User{
     this.careServices = careServices;
   }
   
+  public int getCost(){
+    return 0 + this.especialities.stream().mapToInt(e->e.getPrice()).sum();
+  }
   
-  
-  
-
+  public int getRatingAverage(){
+    return (100+this.scores.stream().mapToInt(e->e.getCalification()).sum())/this.scores.size()+1;
+  }
 
   public String getCareTakerOverview() {
     return careTakerOverview;

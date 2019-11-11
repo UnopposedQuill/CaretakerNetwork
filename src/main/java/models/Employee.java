@@ -23,7 +23,7 @@ public class Employee extends User{
     private Privilegios privilegio;
     private ScheduleManager scheduleManager;
     public static enum Privilegios{
-      ADMINISTRATIVO, BACKOFFICE
+      ADMINISTRATIVO, BACKOFFICE, CARETAKER
     }
 
   public Employee() {

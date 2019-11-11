@@ -6,6 +6,7 @@
 package models.CareService;
 
 import java.util.Date;
+import models.CareTaker;
 import models.Clinic;
 
 /**
@@ -17,19 +18,13 @@ public class ServiceByHour extends CareService{
   public ServiceByHour() {
   }
   
-  public ServiceByHour(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
-    super(initDate, initialDate, endDate, estate, description, price, clinic);
+  public ServiceByHour(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic, CareTaker caretaker) {
+    super(initDate, initialDate, endDate, estate, description, price, clinic, caretaker);
     super.setType(CareServiceType.PORHORA);
   }
-
-  
-
-  
   
   @Override
   public boolean suscribe() {
     return super.suscribe(); //To change body of generated methods, choose Tools | Templates.
   }
-  
-  
 }

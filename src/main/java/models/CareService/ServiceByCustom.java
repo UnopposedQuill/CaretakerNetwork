@@ -6,6 +6,7 @@
 package models.CareService;
 
 import java.util.Date;
+import models.CareTaker;
 import models.Clinic;
 
 /**
@@ -21,8 +22,8 @@ public class ServiceByCustom extends CareService{
     
   }
 
-  public ServiceByCustom(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic) {
-    super(initDate, initialDate, endDate, estate, description, price, clinic);
+  public ServiceByCustom(Date initDate, Date initialDate, Date endDate, CareServiceState estate, String description, int price, Clinic clinic, CareTaker careTaker) {
+    super(initDate, initialDate, endDate, estate, description, price, clinic, careTaker);
     super.setType(CareServiceType.PERSONALIZADO);
   }
 
