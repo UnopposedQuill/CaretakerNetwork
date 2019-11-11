@@ -5,8 +5,7 @@
  */
 package models;
 
-import dev.morphia.annotations.Id;
-import java.rmi.StubNotFoundException;
+import java.util.Date;
 import java.util.List;
 import models.CareService.CareService;
 import models.EmployeesStudies.Qualification;
@@ -16,9 +15,8 @@ import org.bson.types.ObjectId;
  *
  * @author rober2
  */
-public class CareTaker {
+public class CareTaker extends User{
 
-  @Id
   private String id = ObjectId.get().toString();
   private String careTakerOverview;
   private List<Calification> scores;
@@ -28,14 +26,20 @@ public class CareTaker {
   public CareTaker() {
   }
 
+  public CareTaker(String name, String username, Date birthday, Location location, String email, String gender, String password) {
+    super(name, username, birthday, location, email, gender, password);
+  }
+
   public Qualification categorize() {
     return null;
   }
 
+  @Override
   public String getId() {
     return id;
   }
 
+  @Override
   public void setId(String id) {
     this.id = id;
   }

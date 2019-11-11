@@ -5,7 +5,13 @@
  */
 package gui.staff.administrator;
 
+import database.DatabaseNoSQL;
 import gui.staff.jFrameMainMenu;
+import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
+import models.CareTaker;
+import models.Employee;
+import models.Location;
 
 /**
  *
@@ -51,11 +57,15 @@ public class jFrameAddStaff extends javax.swing.JFrame {
     jTextFieldFullName = new javax.swing.JTextField();
     jLabelPersonalDetails = new javax.swing.JLabel();
     jLabelDateOfBirth = new javax.swing.JLabel();
-    jSpinnerDayBirthBehalf = new javax.swing.JSpinner();
-    jComboBoxMonthBirthBehalf = new javax.swing.JComboBox<>();
-    jSpinnerYearBirthBehalf = new javax.swing.JSpinner();
+    jSpinnerDayBirth = new javax.swing.JSpinner();
+    jComboBoxMonthBirth = new javax.swing.JComboBox<>();
+    jSpinnerYearBirth = new javax.swing.JSpinner();
     jRadioButtonMale = new javax.swing.JRadioButton();
     jRadioButtonFemale = new javax.swing.JRadioButton();
+    jLabelLocation = new javax.swing.JLabel();
+    jTextFieldLocation = new javax.swing.JTextField();
+    jLabelEmail = new javax.swing.JLabel();
+    jTextFieldEmail = new javax.swing.JTextField();
 
     setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     setTitle("Add Staff");
@@ -84,8 +94,18 @@ public class jFrameAddStaff extends javax.swing.JFrame {
     jRadioButtonCaretaker.setText("Caretaker");
 
     jButtonAddStaff.setText("Create");
+    jButtonAddStaff.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonAddStaffActionPerformed(evt);
+      }
+    });
 
     jButtonCancel.setText("Cancel");
+    jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+      public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonCancelActionPerformed(evt);
+      }
+    });
 
     jLabelFullName.setText("Full Name");
 
@@ -93,11 +113,11 @@ public class jFrameAddStaff extends javax.swing.JFrame {
 
     jLabelDateOfBirth.setText("Date of Birth");
 
-    jSpinnerDayBirthBehalf.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
+    jSpinnerDayBirth.setModel(new javax.swing.SpinnerNumberModel(1, 1, 31, 1));
 
-    jComboBoxMonthBirthBehalf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
+    jComboBoxMonthBirth.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
 
-    jSpinnerYearBirthBehalf.setModel(new javax.swing.SpinnerNumberModel(2019, 1900, 2019, 1));
+    jSpinnerYearBirth.setModel(new javax.swing.SpinnerNumberModel(2019, 1900, 2019, 1));
 
     buttonGroupGender.add(jRadioButtonMale);
     jRadioButtonMale.setSelected(true);
@@ -105,6 +125,10 @@ public class jFrameAddStaff extends javax.swing.JFrame {
 
     buttonGroupGender.add(jRadioButtonFemale);
     jRadioButtonFemale.setText("Female");
+
+    jLabelLocation.setText("Location");
+
+    jLabelEmail.setText("Email");
 
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
     getContentPane().setLayout(layout);
@@ -117,16 +141,39 @@ public class jFrameAddStaff extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
               .addComponent(jSeparator1)
               .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                  .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabelLocation))
+                  .addGroup(layout.createSequentialGroup()
+                    .addGap(69, 69, 69)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jLabelDateOfBirth, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                      .addComponent(jLabelFullName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                   .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                      .addComponent(jLabelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                      .addComponent(jLabelUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jRadioButtonMale)
+                      .addComponent(jSpinnerDayBirth))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                      .addComponent(jTextFieldUsername)
-                      .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jRadioButtonFemale)
+                      .addComponent(jSpinnerYearBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                  .addComponent(jTextFieldLocation)
+                  .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                      .addComponent(jLabelPersonalDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                      .addComponent(jTextFieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(95, 95, 95))))
+          .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+              .addGroup(layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                   .addGroup(layout.createSequentialGroup()
                     .addGap(97, 97, 97)
                     .addComponent(jLabelAccountDetails))
@@ -137,34 +184,23 @@ public class jFrameAddStaff extends javax.swing.JFrame {
                     .addGap(18, 18, 18)
                     .addComponent(jRadioButtonStaff)
                     .addGap(18, 18, 18)
-                    .addComponent(jRadioButtonCaretaker)))
-                .addGap(0, 0, Short.MAX_VALUE))))
-          .addGroup(layout.createSequentialGroup()
-            .addGap(130, 130, 130)
-            .addComponent(jButtonCancel)
-            .addGap(18, 18, 18)
-            .addComponent(jButtonAddStaff)
-            .addGap(0, 0, Short.MAX_VALUE))
-          .addGroup(layout.createSequentialGroup()
-            .addGap(81, 81, 81)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-              .addComponent(jLabelDateOfBirth, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-              .addComponent(jLabelFullName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButtonCaretaker))
+                  .addGroup(layout.createSequentialGroup()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                      .addComponent(jLabelEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                      .addComponent(jLabelPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                      .addComponent(jLabelUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                      .addComponent(jTextFieldUsername)
+                      .addComponent(jPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                      .addComponent(jTextFieldEmail)))))
               .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jRadioButtonMale)
-                  .addComponent(jSpinnerDayBirthBehalf))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxMonthBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(jRadioButtonFemale)
-                  .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-              .addComponent(jLabelPersonalDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-              .addComponent(jTextFieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(95, 95, 95)))
+                .addGap(130, 130, 130)
+                .addComponent(jButtonCancel)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonAddStaff)))
+            .addGap(0, 0, Short.MAX_VALUE)))
         .addContainerGap())
     );
     layout.setVerticalGroup(
@@ -187,26 +223,34 @@ public class jFrameAddStaff extends javax.swing.JFrame {
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelPassword)
           .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addGap(15, 15, 15)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabelEmail)
+          .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(44, 44, 44)
         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
         .addGap(1, 1, 1)
         .addComponent(jLabelPersonalDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-        .addGap(18, 18, 18)
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jLabelFullName)
-          .addComponent(jTextFieldFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+          .addComponent(jTextFieldFullName, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE))
+        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-          .addComponent(jSpinnerDayBirthBehalf, javax.swing.GroupLayout.Alignment.TRAILING)
-          .addComponent(jSpinnerYearBirthBehalf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+          .addComponent(jSpinnerDayBirth, javax.swing.GroupLayout.Alignment.TRAILING)
+          .addComponent(jSpinnerYearBirth, javax.swing.GroupLayout.Alignment.TRAILING)
           .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
             .addComponent(jLabelDateOfBirth)
-            .addComponent(jComboBoxMonthBirthBehalf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addComponent(jComboBoxMonthBirth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         .addGap(18, 18, 18)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jRadioButtonFemale)
           .addComponent(jRadioButtonMale))
-        .addGap(127, 127, 127)
+        .addGap(10, 10, 10)
+        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+          .addComponent(jLabelLocation)
+          .addComponent(jTextFieldLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGap(40, 40, 40)
         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
           .addComponent(jButtonAddStaff)
           .addComponent(jButtonCancel))
@@ -222,6 +266,63 @@ public class jFrameAddStaff extends javax.swing.JFrame {
       this.frameMainMenu.setVisible(true);
     }
   }//GEN-LAST:event_formWindowClosing
+
+  private void jButtonAddStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddStaffActionPerformed
+    DatabaseNoSQL dnsql = DatabaseNoSQL.getNoSQLInstance();
+    Location location = new Location();
+    location.setLocation(this.jTextFieldLocation.getText());
+    
+    if (this.jRadioButtonAdministrator.isSelected()) {
+      dnsql.save(new Employee(
+          Employee.Privilegios.ADMINISTRATIVO,
+          this.jTextFieldFullName.getText(),
+          this.jTextFieldUsername.getText(),
+          new GregorianCalendar(
+                (int)this.jSpinnerYearBirth.getValue(),
+                this.jComboBoxMonthBirth.getSelectedIndex(),
+                (int)this.jSpinnerDayBirth.getValue()).getTime(),
+          location,
+          this.jTextFieldEmail.getText(),
+          (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
+          String.valueOf(this.jPasswordField.getPassword()))
+      );
+    } else if (this.jRadioButtonStaff.isSelected()) {
+      dnsql.save(new Employee(
+          Employee.Privilegios.BACKOFFICE,
+          this.jTextFieldFullName.getText(),
+          this.jTextFieldUsername.getText(),
+          new GregorianCalendar(
+                (int)this.jSpinnerYearBirth.getValue(),
+                this.jComboBoxMonthBirth.getSelectedIndex(),
+                (int)this.jSpinnerDayBirth.getValue()).getTime(),
+          location,
+          this.jTextFieldEmail.getText(),
+          (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
+          String.valueOf(this.jPasswordField.getPassword()))
+      );
+    } else if (this.jRadioButtonCaretaker.isSelected()) {
+      dnsql.save(new CareTaker(
+          this.jTextFieldFullName.getText(),
+          this.jTextFieldUsername.getText(),
+          new GregorianCalendar(
+                (int)this.jSpinnerYearBirth.getValue(),
+                this.jComboBoxMonthBirth.getSelectedIndex(),
+                (int)this.jSpinnerDayBirth.getValue()).getTime(),
+          location,
+          this.jTextFieldEmail.getText(),
+          (this.jRadioButtonMale.isSelected() ? "Male" : "Female"),
+          String.valueOf(this.jPasswordField.getPassword()))
+      );
+    }
+  }//GEN-LAST:event_jButtonAddStaffActionPerformed
+
+  private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+    int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to cancel?", "Confirm", JOptionPane.OK_CANCEL_OPTION);
+    //0 OK, 2 Cancel
+    if (option == 0) {
+      this.dispose();
+    }
+  }//GEN-LAST:event_jButtonCancelActionPerformed
 
   // </editor-fold>
   
@@ -265,11 +366,13 @@ public class jFrameAddStaff extends javax.swing.JFrame {
   private javax.swing.ButtonGroup buttonGroupGender;
   private javax.swing.JButton jButtonAddStaff;
   private javax.swing.JButton jButtonCancel;
-  private javax.swing.JComboBox<String> jComboBoxMonthBirthBehalf;
+  private javax.swing.JComboBox<String> jComboBoxMonthBirth;
   private javax.swing.JLabel jLabelAccountDetails;
   private javax.swing.JLabel jLabelAccountType;
   private javax.swing.JLabel jLabelDateOfBirth;
+  private javax.swing.JLabel jLabelEmail;
   private javax.swing.JLabel jLabelFullName;
+  private javax.swing.JLabel jLabelLocation;
   private javax.swing.JLabel jLabelPassword;
   private javax.swing.JLabel jLabelPersonalDetails;
   private javax.swing.JLabel jLabelUsername;
@@ -280,9 +383,11 @@ public class jFrameAddStaff extends javax.swing.JFrame {
   private javax.swing.JRadioButton jRadioButtonMale;
   private javax.swing.JRadioButton jRadioButtonStaff;
   private javax.swing.JSeparator jSeparator1;
-  private javax.swing.JSpinner jSpinnerDayBirthBehalf;
-  private javax.swing.JSpinner jSpinnerYearBirthBehalf;
+  private javax.swing.JSpinner jSpinnerDayBirth;
+  private javax.swing.JSpinner jSpinnerYearBirth;
+  private javax.swing.JTextField jTextFieldEmail;
   private javax.swing.JTextField jTextFieldFullName;
+  private javax.swing.JTextField jTextFieldLocation;
   private javax.swing.JTextField jTextFieldUsername;
   // End of variables declaration//GEN-END:variables
 }
