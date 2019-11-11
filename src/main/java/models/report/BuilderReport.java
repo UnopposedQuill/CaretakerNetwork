@@ -12,6 +12,7 @@ import dev.morphia.query.Query;
 import java.util.Date;
 import java.util.List;
 import models.CareService.CareService;
+import models.CareService.ClientRequest;
 import models.CareService.ServiceByHour;
 import models.Employee;
 import models.Pacient;
@@ -33,17 +34,9 @@ public class BuilderReport {
     this.report.setFechaFinal(endDate);
     return this;
   }
-  
-  public BuilderReport setCountServices() {
     
-    return this;
-  }
-  
-  public BuilderReport setPriceServices() {
-    return this;
-  }
-  
-  public BuilderReport setTypeService() {
+  public BuilderReport setTypeService(String name) {
+    this.report.setTipoServicio(CareService.CareServiceType.valueOf(name));
     return this;
   }
   
@@ -53,6 +46,7 @@ public class BuilderReport {
   }
   
   public BuilderReport setByEmployee(String employeeName) {
+    this.report.setEmployyeSelected(employeeName);
     return this;
   }
 
@@ -75,32 +69,35 @@ public class BuilderReport {
     */    
     DatabaseNoSQL instance = DatabaseNoSQL.getNoSQLInstance();
     Datastore datastore = instance.getDataStore();
-    Query<Pacient> pacients= datastore.createQuery(Pacient.class);
+    
+    Query<ClientRequest> pacients= datastore.createQuery(ClientRequest.class);
     System.out.println(this.report.toString());
     //Tipo
     if(report.getTipoServicio() != null){
-      pacients.field("suscriptions.type").equal(report.getTipoServicio());
+      pacients.field("pacient.suscriptions.type").equal(report.getTipoServicio());
     }
     //Persona
     if(report.getEmployyeSelected() != null){
-      pacients.field("suscriptions.careTaker").equal(report.getEmployyeSelected());
+      pacients.field("pacient.suscriptions.careTaker").equal(report.getEmployyeSelected());
     }
     //Cliente
     if(report.getClientSelected() != null) {
-      pacients.field("name").equal(this.report.getClientSelected());
+      pacients.field("pacient.name").equal(this.report.getClientSelected());
     }
     //Fechas
+    if(report.getFechaIncial() != null) {
+      pacients.field("pacient.suscriptions.initDate").greaterThanOrEq(this.report.getFechaIncial());
+    }
+    if(report.getFechaFinal() != null) {
+      pacients.field("pacient.suscriptions.endDate").lessThanOrEq(this.report.getFechaFinal());
+    }
     
-    pacients.field("suscriptions.initDate").greaterThanOrEq(this.report.getFechaIncial());
-    pacients.field("suscriptions.endDate").lessThan(this.report.getFechaFinal());    
-
-    List<Pacient> p = pacients.asList();
+    List<ClientRequest> p = pacients.asList();
     System.out.println("Builder");
-    p.forEach((t) -> {
-    System.out.println(t.toString());
-
-    });
-    
+    for (ClientRequest clientRequest : p) {
+      System.out.println(clientRequest.getPacient().toString());
+    }
+    System.out.println(p.size());
     return report;
   }
   

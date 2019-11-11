@@ -16,8 +16,8 @@ import models.EmployeeActivities.Activity;
  */
 public class ScheduleManager {
 
-  private List<Schedule> schedulues;
-  private List<Activity> activities;
+  private List<Schedule> schedulues = new ArrayList<>();
+  private List<Activity> activities = new ArrayList<>();
 
   public ScheduleManager(List<Schedule> schedulues) {
     this.schedulues = schedulues;
@@ -34,10 +34,21 @@ public class ScheduleManager {
     this.schedulues = new ArrayList<>();
   }
 
-  public void addScheduale(Schedule schedule) {
+  public boolean addScheduale(Schedule schedule) {
+    for (Schedule schedulueL : schedulues) {
+      if(schedule.getDay() == schedulueL.getDay()) {
+        if(schedule.getInitHour()> schedulueL.getInitHour()) {
+          if(schedule.getEndHour()< schedulueL.getEndHour()) {
+            return false;
+          } 
+        }
+      }
+      
+    }
     this.schedulues.add(schedule);
+    return true;
   }
-
+  
   public boolean isAvalible(Schedule.Days dayAvalible, int start, int end) {
     for (Schedule schedule : schedulues) {
       if(!isAvalibleSchedule(schedule, dayAvalible, start, end)) { return false; }
