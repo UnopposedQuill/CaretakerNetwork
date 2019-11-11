@@ -71,7 +71,7 @@ public class DatabaseNoSQL implements DatabaseInterface {
     Query<T> query = datastore.createQuery(type).field("_id").equal(id);
     UpdateOperations<T> ops = datastore.createUpdateOperations(type).set(field, value);
     
-    datastore.update(query, ops, true);
+    datastore.update(query, ops);
     return true;
   }
   
