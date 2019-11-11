@@ -6,6 +6,10 @@
 package gui.staff;
 
 import database.DatabaseNoSQL;
+import dev.morphia.Datastore;
+import dev.morphia.query.Query;
+import dev.morphia.query.UpdateOperations;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -225,22 +229,22 @@ public class jFrameManageRequests extends javax.swing.JFrame {
     DefaultTreeModel dtmIncomingRequests = new DefaultTreeModel(new DefaultMutableTreeNode("Incoming Requests", true), true);
     
     // Incoming Subscriptions
-    dtmIncomingRequests.insertNodeInto(new DefaultMutableTreeNode("Subscriptions", true), (DefaultMutableTreeNode)dtmIncomingRequests.getRoot(), 0);
+    DefaultMutableTreeNode subscriptionsNode = new DefaultMutableTreeNode("Subscriptions", true),
+                    subscriptionDaily = new DefaultMutableTreeNode("Daily", true),
+                    subscriptionMonthly = new DefaultMutableTreeNode("Monthly", true),
+                    subscriptionYearly = new DefaultMutableTreeNode("Yearly", true);
+    subscriptionsNode.add(subscriptionDaily);
+    subscriptionsNode.add(subscriptionMonthly);
+    subscriptionsNode.add(subscriptionYearly);
+    dtmIncomingRequests.insertNodeInto(subscriptionsNode, (DefaultMutableTreeNode)dtmIncomingRequests.getRoot(), 0);
     dbns.getAll(ClientRequest.class)
         .forEach((client)->{
           client.getPacient().getSuscriptions().stream()
               .filter((subscription)->{return subscription.getEstate() == CareService.CareServiceState.AGENDADO;})
               .forEach((subscription)->{
-                DefaultMutableTreeNode subscriptionsNode = (DefaultMutableTreeNode)dtmIncomingRequests.getChild(dtmIncomingRequests.getRoot(), 0),
-                    subscriptionDaily = new DefaultMutableTreeNode("Daily", true),
-                    subscriptionMonthly = new DefaultMutableTreeNode("Monthly", true),
-                    subscriptionYearly = new DefaultMutableTreeNode("Yearly", true),
-                    subscriptionNode = new DefaultMutableTreeNode("Subscription", true);
+                DefaultMutableTreeNode subscriptionNode = new DefaultMutableTreeNode("Subscription", true);
 
-                subscriptionsNode.add(subscriptionDaily);
-                subscriptionsNode.add(subscriptionMonthly);
-                subscriptionsNode.add(subscriptionYearly);
-
+                subscriptionNode.add(new DefaultMutableTreeNode(client.getId(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getId(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(client.getPacient().getName(), false));
                 subscriptionNode.add(new DefaultMutableTreeNode(subscription.getType(), false));
@@ -260,7 +264,6 @@ public class jFrameManageRequests extends javax.swing.JFrame {
                     break;
                   }
                 }
-                dtmIncomingRequests.insertNodeInto(subscriptionsNode, (DefaultMutableTreeNode)dtmIncomingRequests.getRoot(), 0);
               });
     });
     
@@ -363,20 +366,39 @@ public class jFrameManageRequests extends javax.swing.JFrame {
         // I need to check its ancestor before doing changes
         if (selectedNode.isNodeAncestor(dailyIncomings)) {
           System.out.println("Moving daily subscription");
-          //dbns.updateByID(CareService.class, selectedNode.getChildAt(0).toString(), "state", CareService.CareServiceState.ENCURSO);
+          
+          
+          Datastore datastore = dbns.getDataStore();
+          System.out.println("Client ID-----");
+          System.out.println(selectedNode.getChildAt(0).toString());
+          System.out.println("Subscription ID-----");
+          System.out.println(selectedNode.getChildAt(1).toString());
+    
+          List <ClientRequest> clients = dbns.getAll(ClientRequest.class);
+          for (ClientRequest client : clients) {
+            if (client.getId().equals(selectedNode.getChildAt(0).toString())) {
+              for (CareService careService : client.getPacient().getSuscriptions()) {
+                if (careService.getId().equals(selectedNode.getChildAt(1).toString())) {
+                  careService.setEstate(CareService.CareServiceState.ENCURSO);
+                  dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "pacient.suscriptions", client.getPacient().getSuscriptions());
+                }
+              }
+            }
+          }
         
           dtmIncomingRequests.removeNodeFromParent(selectedNode);
           dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 0);
+          
         } else if (selectedNode.isNodeAncestor(monthlyIncomings)){
           System.out.println("Moving monthly subscription");
-          //dbns.updateByID(CareService.class, selectedNode.getChildAt(0).toString(), "state", CareService.CareServiceState.ENCURSO);
+          dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "state", CareService.CareServiceState.ENCURSO);
         
           dtmIncomingRequests.removeNodeFromParent(selectedNode);
           dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 1);
           
         } else if (selectedNode.isNodeAncestor(yearlyIncomings)){
           System.out.println("Moving yearly subscription");
-          //dbns.updateByID(CareService.class, selectedNode.getChildAt(0).toString(), "state", CareService.CareServiceState.ENCURSO);
+          dbns.updateByID(ClientRequest.class, selectedNode.getChildAt(0).toString(), "state", CareService.CareServiceState.ENCURSO);
         
           dtmIncomingRequests.removeNodeFromParent(selectedNode);
           dtmAcceptedSubscriptions.insertNodeInto(selectedNode, ((DefaultMutableTreeNode)dtmAcceptedSubscriptions.getRoot()), 2);
